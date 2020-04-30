@@ -37,6 +37,8 @@ namespace idp
                 .AddInMemoryApiResources(Config.Apis)
                 .AddInMemoryClients(Config.Clients);
 
+            builder.AddProfileService<LocalUserProfileService>();
+
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
         }
