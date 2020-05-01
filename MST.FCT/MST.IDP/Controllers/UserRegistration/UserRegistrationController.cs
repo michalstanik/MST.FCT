@@ -74,7 +74,7 @@ namespace MST.IDP.Controllers.UserRegistration
                 Value = model.FamilyName
             });
 
-            _localUserService.AddUser(userToCreate);
+            _localUserService.AddUser(userToCreate, model.Password);
             await _localUserService.SaveChangesAsync();
 
             //// log the user in
