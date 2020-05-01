@@ -1,7 +1,5 @@
 ﻿using IdentityModel;
 using IdentityServer4.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MST.IDP.Domain;
 using MST.IDP.Services;

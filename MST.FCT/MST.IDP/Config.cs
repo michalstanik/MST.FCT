@@ -11,17 +11,17 @@ namespace idp
     {
         public static IEnumerable<IdentityResource> Ids =>
             new IdentityResource[]
-            { 
+            {
                 new IdentityResources.OpenId()
             };
 
         public static IEnumerable<ApiResource> Apis =>
-            new ApiResource[] 
+            new ApiResource[]
             { };
-        
+
         public static IEnumerable<Client> Clients =>
-            new Client[] 
+            new Client[]
             { };
-        
+
     }
 }

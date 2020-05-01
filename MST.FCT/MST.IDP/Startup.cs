@@ -27,8 +27,8 @@ namespace idp
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
-            services.AddDbContext<IdentityDbContext>(options => 
-            { 
+            services.AddDbContext<IdentityDbContext>(options =>
+            {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 

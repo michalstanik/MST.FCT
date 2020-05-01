@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MST.IDP.Domain
 {
-    public  class UserClaim : IConcurrencyAware
+    public class UserClaim : IConcurrencyAware
     {
         [Key]
         public Guid Id { get; set; }

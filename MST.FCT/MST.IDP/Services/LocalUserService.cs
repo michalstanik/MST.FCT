@@ -19,9 +19,9 @@ namespace MST.IDP.Services
             IdentityDbContext context,
             IPasswordHasher<User> passwordHasher)
         {
-            _context = context 
+            _context = context
                 ?? throw new ArgumentNullException(nameof(context));
-            _passwordHasher = passwordHasher 
+            _passwordHasher = passwordHasher
                 ?? throw new ArgumentNullException(nameof(passwordHasher));
         }
 
