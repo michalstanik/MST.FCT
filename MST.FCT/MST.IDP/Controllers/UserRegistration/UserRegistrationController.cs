@@ -1,8 +1,11 @@
 ﻿using IdentityModel;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using MST.IDP.Configuration.Interfaces;
 using MST.IDP.Domain;
-using MST.IDP.Services;
+using MST.IDP.Services.EmailService;
+using MST.IDP.UserService.Services;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -13,15 +16,28 @@ namespace MST.IDP.Controllers.UserRegistration
     {
         private readonly ILocalUserService _localUserService;
         private readonly IIdentityServerInteractionService _interaction;
+        private readonly IConfiguration _configuration;
+        private readonly IRootConfiguration _rootConfiguration;
+        private readonly IEmailService _emailService;
 
         public UserRegistrationController(
             ILocalUserService localUserService,
-            IIdentityServerInteractionService interaction)
+            IIdentityServerInteractionService interaction,
+            IConfiguration configuration,
+            IRootConfiguration rootConfiguration,
+            IEmailService emailService
+            )
         {
             _localUserService = localUserService ??
                 throw new ArgumentNullException(nameof(localUserService));
             _interaction = interaction ??
                 throw new ArgumentNullException(nameof(interaction));
+            _configuration = configuration ??
+                throw new ArgumentNullException(nameof(configuration));
+            _rootConfiguration = rootConfiguration ??
+                throw new ArgumentNullException(nameof(rootConfiguration));
+            _emailService = emailService ??
+                throw new ArgumentNullException(nameof(emailService));
         }
 
         [HttpGet]
@@ -99,8 +115,22 @@ namespace MST.IDP.Controllers.UserRegistration
             var link = Url.ActionLink("ActivateUser", "UserRegistration",
                 new { securityCode = userToCreate.SecurityCode });
 
-            //TODO: Implement Sending and e-mails
-            Debug.WriteLine(link);
+            if(_rootConfiguration.EmailConfiguration.Active == false)
+            {
+                Console.WriteLine(link);
+            }
+            else
+            {
+                //TODO: Remove before production deploy
+                Console.WriteLine("Sending email: " + link);       
+                Console.WriteLine("Email adress: " + _rootConfiguration.EmailConfiguration.Email);
+                Console.WriteLine("Port: " + _rootConfiguration.EmailConfiguration.Port);
+                Console.WriteLine("Host: " + _rootConfiguration.EmailConfiguration.Host);
+                
+                await _emailService.SendEmail(model.Email,
+                    "Yourr activation link for FCT portal",
+                    "Your activation link: " + link);
+            }
 
             return View("ActivationCodeSent");
         }

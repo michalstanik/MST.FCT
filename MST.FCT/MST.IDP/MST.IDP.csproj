@@ -19,4 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\MST.IDP.Data\MST.IDP.Data.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="Properties\launchSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

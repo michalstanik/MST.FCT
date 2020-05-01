@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace MST.IDP.Services
+namespace MST.IDP.UserService.Services
 {
     public class LocalUserService : ILocalUserService
     {

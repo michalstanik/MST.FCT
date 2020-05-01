@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MST.IDP.Services;
+using MST.IDP.UserService.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

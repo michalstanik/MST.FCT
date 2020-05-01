@@ -5,9 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MST.IDP.Configuration;
+using MST.IDP.Configuration.Interfaces;
 using MST.IDP.Data;
 using MST.IDP.Domain;
-using MST.IDP.Services;
+using MST.IDP.Helpers;
+using MST.IDP.Services.EmailService;
+using MST.IDP.UserService.Services;
 
 namespace idp
 {
@@ -24,6 +28,7 @@ namespace idp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureRootConfiguration(Configuration);
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
@@ -32,8 +37,10 @@ namespace idp
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddScoped<IRootConfiguration, RootConfiguration>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped<ILocalUserService, LocalUserService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(Config.Ids)

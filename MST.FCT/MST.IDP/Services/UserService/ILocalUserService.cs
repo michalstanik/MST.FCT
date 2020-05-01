@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MST.IDP.Services
+namespace MST.IDP.UserService.Services
 {
     public interface ILocalUserService
     {
