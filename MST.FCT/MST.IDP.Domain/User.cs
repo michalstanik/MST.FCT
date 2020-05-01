@@ -23,6 +23,9 @@ namespace MST.IDP.Domain
         [Required]
         public bool Active { get; set; }
 
+        [MaxLength(200)]
+        public string Email { get; set; }
+
         [ConcurrencyCheck]
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
