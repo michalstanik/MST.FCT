@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MST.IDP.Domain;
 using MST.IDP.Services;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace MST.IDP.Controllers.UserRegistration
@@ -23,6 +24,25 @@ namespace MST.IDP.Controllers.UserRegistration
                 throw new ArgumentNullException(nameof(localUserService));
             _interaction = interaction ??
                 throw new ArgumentNullException(nameof(interaction));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ActivateUser(string securityCode)
+        {
+            if (await _localUserService.ActivateUser(securityCode))
+            {
+                ViewData["Message"] = "Your account was successfully activated.  " +
+                    "Navigate to your client application to log in.";
+            }
+            else
+            {
+                ViewData["Message"] = "Your account couldn't be activated, " +
+                    "please contact your administrator.";
+            }
+
+            await _localUserService.SaveChangesAsync();
+
+            return View();
         }
 
         [HttpGet]
@@ -47,7 +67,7 @@ namespace MST.IDP.Controllers.UserRegistration
                 Username = model.UserName,
                 Subject = Guid.NewGuid().ToString(),
                 Email = model.Email,
-                Active = true
+                Active = false
             };
 
             userToCreate.Claims.Add(new UserClaim()
@@ -77,17 +97,14 @@ namespace MST.IDP.Controllers.UserRegistration
             _localUserService.AddUser(userToCreate, model.Password);
             await _localUserService.SaveChangesAsync();
 
-            //// log the user in
-            await HttpContext.SignInAsync(userToCreate.Subject, userToCreate.Username);
+            // create an activation link
+            var link = Url.ActionLink("ActivateUser", "UserRegistration",
+                new { securityCode = userToCreate.SecurityCode });
 
-            //// continue with the flow     
-            if (_interaction.IsValidReturnUrl(model.ReturnUrl)
-                || Url.IsLocalUrl(model.ReturnUrl))
-            {
-                return Redirect(model.ReturnUrl);
-            }
+            //TODO: Implement Sending and e-mails
+            Debug.WriteLine(link);
 
-            return Redirect("~/");
+            return View("ActivationCodeSent");
         }
     }
 }

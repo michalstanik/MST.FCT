@@ -5,6 +5,7 @@ using MST.IDP.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace MST.IDP.Services
@@ -117,6 +118,22 @@ namespace MST.IDP.Services
                 throw new Exception("Username must be unique");
             }
 
+            if (_context.User.Any(u => u.Email == userToAdd.Email))
+            {
+                // in a real-life scenario you'll probably want to 
+                // return this a a validation issue
+                throw new Exception("Email must be unique");
+            }
+
+            using (var randomNumberGenerator = new RNGCryptoServiceProvider())
+            {
+                var securityCodeData = new byte[128];
+                randomNumberGenerator.GetBytes(securityCodeData);
+                userToAdd.SecurityCode = Convert.ToBase64String(securityCodeData);
+            }
+
+            userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
+
             userToAdd.Password = _passwordHasher.HashPassword(userToAdd, password);
             _context.User.Add(userToAdd);
         }
@@ -160,27 +177,27 @@ namespace MST.IDP.Services
         //    _context.Users.Add(userToAdd);
         //}
 
-        //public async Task<bool> ActivateUser(string securityCode)
-        //{
-        //    if (string.IsNullOrWhiteSpace(securityCode))
-        //    {
-        //        throw new ArgumentNullException(nameof(securityCode));
-        //    }
+        public async Task<bool> ActivateUser(string securityCode)
+        {
+            if (string.IsNullOrWhiteSpace(securityCode))
+            {
+                throw new ArgumentNullException(nameof(securityCode));
+            }
 
-        //    // find an user with this security code as an active security code.  
-        //    var user = await _context.Users.FirstOrDefaultAsync(u => 
-        //        u.SecurityCode == securityCode && 
-        //        u.SecurityCodeExpirationDate >= DateTime.UtcNow);
+            // find an user with this security code as an active security code.  
+            var user = await _context.User.FirstOrDefaultAsync(u =>
+                u.SecurityCode == securityCode &&
+                u.SecurityCodeExpirationDate >= DateTime.UtcNow);
 
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
+            if (user == null)
+            {
+                return false;
+            }
 
-        //    user.Active = true;
-        //    user.SecurityCode = null;
-        //    return true;
-        //}
+            user.Active = true;
+            user.SecurityCode = null;
+            return true;
+        }
 
         //public async Task<bool> AddUserSecret(string subject, string name, string secret)
         //{
