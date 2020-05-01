@@ -138,45 +138,6 @@ namespace MST.IDP.UserService.Services
             _context.User.Add(userToAdd);
         }
 
-        //public void AddUser(User userToAdd, string password)
-        //{
-        //    if (userToAdd == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(userToAdd));
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(password))
-        //    {
-        //        throw new ArgumentNullException(nameof(password));
-        //    }
-
-        //    if (_context.Users.Any(u => u.UserName == userToAdd.UserName))
-        //    {
-        //        // in a real-life scenario you'll probably want to 
-        //        // return this a a validation issue
-        //        throw new Exception("Username must be unique");
-        //    }
-
-        //    if (_context.Users.Any(u => u.Email == userToAdd.Email))
-        //    {
-        //        // in a real-life scenario you'll probably want to 
-        //        // return this a a validation issue
-        //        throw new Exception("Email must be unique");
-        //    }
-
-        //    // hash & salt the password
-        //    userToAdd.Password = _passwordHasher.HashPassword(userToAdd, password);
-
-        //    using (var randomNumberGenerator = new RNGCryptoServiceProvider())
-        //    {
-        //        var securityCodeData = new byte[128];
-        //        randomNumberGenerator.GetBytes(securityCodeData);
-        //        userToAdd.SecurityCode = Convert.ToBase64String(securityCodeData);
-        //    }
-        //    userToAdd.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
-        //    _context.Users.Add(userToAdd);
-        //}
-
         public async Task<bool> ActivateUser(string securityCode)
         {
             if (string.IsNullOrWhiteSpace(securityCode))
@@ -253,58 +214,58 @@ namespace MST.IDP.UserService.Services
         //        .FirstOrDefaultAsync(u => u.User.Subject == subject && u.Name == name);
         //}
 
-        //public async Task<string> InitiatePasswordResetRequest(string email)
-        //{
-        //    if (string.IsNullOrWhiteSpace(email))
-        //    {
-        //        throw new ArgumentNullException(nameof(email));
-        //    }
+        public async Task<string> InitiatePasswordResetRequest(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
 
-        //    var user = await _context.Users.FirstOrDefaultAsync(u =>
-        //      u.Email == email);
+            var user = await _context.User.FirstOrDefaultAsync(u =>
+              u.Email == email);
 
-        //    if (user == null)
-        //    {
-        //        throw new Exception($"User with email address {email} can't be found.");
-        //    }
+            if (user == null)
+            {
+                throw new Exception($"User with email address {email} can't be found.");
+            }
 
-        //    using (var randomNumberGenerator = new RNGCryptoServiceProvider())
-        //    {
-        //        var securityCodeData = new byte[128];
-        //        randomNumberGenerator.GetBytes(securityCodeData);
-        //        user.SecurityCode = Convert.ToBase64String(securityCodeData);
-        //    }
+            using (var randomNumberGenerator = new RNGCryptoServiceProvider())
+            {
+                var securityCodeData = new byte[128];
+                randomNumberGenerator.GetBytes(securityCodeData);
+                user.SecurityCode = Convert.ToBase64String(securityCodeData);
+            }
 
-        //    user.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
-        //    return user.SecurityCode;
-        //}
+            user.SecurityCodeExpirationDate = DateTime.UtcNow.AddHours(1);
+            return user.SecurityCode;
+        }
 
-        //public async Task<bool> SetPassword(string securityCode, string password)
-        //{
-        //    if (string.IsNullOrWhiteSpace(securityCode))
-        //    {
-        //        throw new ArgumentNullException(nameof(securityCode));
-        //    }
+        public async Task<bool> SetPassword(string securityCode, string password)
+        {
+            if (string.IsNullOrWhiteSpace(securityCode))
+            {
+                throw new ArgumentNullException(nameof(securityCode));
+            }
 
-        //    if (string.IsNullOrWhiteSpace(password))
-        //    {
-        //        throw new ArgumentNullException(nameof(password));
-        //    }
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
 
-        //    var user = await _context.Users.FirstOrDefaultAsync(u =>
-        //    u.SecurityCode == securityCode &&
-        //    u.SecurityCodeExpirationDate >= DateTime.UtcNow);
+            var user = await _context.User.FirstOrDefaultAsync(u =>
+            u.SecurityCode == securityCode &&
+            u.SecurityCodeExpirationDate >= DateTime.UtcNow);
 
-        //    if (user == null)
-        //    {
-        //        return false;
-        //    }
+            if (user == null)
+            {
+                return false;
+            }
 
-        //    user.SecurityCode = null;
-        //    // hash & salt the password
-        //    user.Password = _passwordHasher.HashPassword(user, password);
-        //    return true;        
-        //}
+            user.SecurityCode = null;
+            // hash & salt the password
+            user.Password = _passwordHasher.HashPassword(user, password);
+            return true;
+        }
 
         //public async Task<User> GetUserByExternalProvider(
         //    string provider, 
