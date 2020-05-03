@@ -350,4 +350,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/MST.FCT/MST.IDP/wwwroot/dist
