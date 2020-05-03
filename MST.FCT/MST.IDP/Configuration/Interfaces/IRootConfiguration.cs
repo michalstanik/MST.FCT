@@ -4,5 +4,6 @@
     {
         IAppConfiguration AppConfiguration { get; }
         IEmailConfiguration EmailConfiguration { get; }
+        IAppAuthenticationFacebook AppAuthenticationFacebook { get; }
     }
 }

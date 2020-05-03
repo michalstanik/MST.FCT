@@ -31,9 +31,12 @@ namespace MST.IDP.Domain
 
         public DateTime SecurityCodeExpirationDate { get; set; }
 
+        public DateTime LastLoginDate { get; set; }
+
         [ConcurrencyCheck]
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
         public ICollection<UserClaim> Claims { get; set; } = new List<UserClaim>();
+        public ICollection<UserLogin> Logins { get; set; } = new List<UserLogin>();
     }
 }

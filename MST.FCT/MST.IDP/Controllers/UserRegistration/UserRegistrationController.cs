@@ -1,13 +1,14 @@
 ﻿using IdentityModel;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using MST.IDP.Configuration.Interfaces;
 using MST.IDP.Domain;
 using MST.IDP.Services.EmailService;
 using MST.IDP.UserService.Services;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace MST.IDP.Controllers.UserRegistration
@@ -25,7 +26,8 @@ namespace MST.IDP.Controllers.UserRegistration
             IIdentityServerInteractionService interaction,
             IConfiguration configuration,
             IRootConfiguration rootConfiguration,
-            IEmailService emailService
+            IEmailService emailService,
+            IWebHostEnvironment environment
             )
         {
             _localUserService = localUserService ??
@@ -38,7 +40,11 @@ namespace MST.IDP.Controllers.UserRegistration
                 throw new ArgumentNullException(nameof(rootConfiguration));
             _emailService = emailService ??
                 throw new ArgumentNullException(nameof(emailService));
+            Environment = environment ??
+                throw new ArgumentNullException(nameof(environment));
         }
+
+        public IWebHostEnvironment Environment { get; }
 
         [HttpGet]
         public async Task<IActionResult> ActivateUser(string securityCode)
@@ -115,18 +121,21 @@ namespace MST.IDP.Controllers.UserRegistration
             var link = Url.ActionLink("ActivateUser", "UserRegistration",
                 new { securityCode = userToCreate.SecurityCode });
 
-            if(_rootConfiguration.EmailConfiguration.Active == false)
+            if (_rootConfiguration.EmailConfiguration.Active == false)
             {
-                Console.WriteLine(link);
+                if (Environment.IsDevelopment())
+                {
+                    Console.WriteLine(link);
+                }
             }
             else
             {
-                //TODO: Remove before production deploy
-                Console.WriteLine("Sending email: " + link);       
-                Console.WriteLine("Email adress: " + _rootConfiguration.EmailConfiguration.Email);
-                Console.WriteLine("Port: " + _rootConfiguration.EmailConfiguration.Port);
-                Console.WriteLine("Host: " + _rootConfiguration.EmailConfiguration.Host);
-                
+                if (Environment.IsDevelopment())
+                {
+                    Console.WriteLine("Sending email with link: " + link);
+                    Console.WriteLine("Sending Email from: " + _rootConfiguration.EmailConfiguration.Email);
+                }
+                //TODO: Sendong via batter formated html tempalte
                 await _emailService.SendEmail(model.Email,
                     "Yourr activation link for FCT portal",
                     "Your activation link: " + link);

@@ -4,5 +4,6 @@
     {
         public const string AppConfigurationKey = "AppConfiguration";
         public const string EmailConfigurationKey = "EmailConfiguration";
+        public const string AppAuthenticationFacebookKey = "AppAuthentication:Facebook";
     }
 }

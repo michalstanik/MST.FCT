@@ -1,7 +1,9 @@
-﻿namespace MST.IDP.Configuration
+﻿using MST.IDP.Configuration.Interfaces;
+
+namespace MST.IDP.Configuration
 {
-    public class AppConfiguration
+    public class AppConfiguration : IAppConfiguration
     {
-        
+
     }
 }

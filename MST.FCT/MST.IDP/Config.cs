@@ -5,7 +5,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace idp
+namespace IDP
 {
     public static class Config
     {

@@ -13,7 +13,7 @@ using MST.IDP.Helpers;
 using MST.IDP.Services.EmailService;
 using MST.IDP.UserService.Services;
 
-namespace idp
+namespace IDP
 {
     public class Startup
     {
@@ -29,7 +29,12 @@ namespace idp
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureRootConfiguration(Configuration);
-            // uncomment, if you want to add an MVC-based UI
+
+            //TODO: Solve ASP0000 warning from .NET.Core 3.0
+            #pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+            var rootConfiguration = services.BuildServiceProvider().GetService<IRootConfiguration>();
+            #pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+
             services.AddControllersWithViews();
 
             services.AddDbContext<IdentityDbContext>(options =>
@@ -51,6 +56,15 @@ namespace idp
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
+
+            services.AddAuthentication().AddFacebook(
+                "Facebook",
+                options =>
+                {
+                    options.AppId = rootConfiguration.AppAuthenticationFacebook.AppId;
+                    options.AppSecret = rootConfiguration.AppAuthenticationFacebook.AppSecret;
+                    options.SignInScheme = IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                });
         }
 
         public void Configure(IApplicationBuilder app)

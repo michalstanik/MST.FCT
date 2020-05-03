@@ -7,10 +7,14 @@ namespace MST.IDP.Configuration
     {
         public IAppConfiguration AppConfiguration { get; set; }
         public IEmailConfiguration EmailConfiguration { get; set; }
+        public IAppAuthenticationFacebook AppAuthenticationFacebook { get; set; }
 
-        public RootConfiguration(IOptions<EmailConfiguration> emailConfiguration, IOptions<AppConfiguration> appConfiguration)
+        public RootConfiguration(IOptions<EmailConfiguration> emailConfiguration,
+            IOptions<AppConfiguration> appConfiguration,
+            IOptions<AppAuthenticationFacebook> appAuthenticationFacebook)
         {
             EmailConfiguration = emailConfiguration.Value;
+            AppAuthenticationFacebook = appAuthenticationFacebook.Value;
         }
     }
 }

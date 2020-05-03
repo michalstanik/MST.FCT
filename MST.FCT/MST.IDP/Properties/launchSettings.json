@@ -4,9 +4,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "EmailConfiguration__Email": "",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "EmailConfiguration_Password": "",
         "EmailConfiguration__Active": "true"
       },
       "applicationUrl": "https://localhost:5001"

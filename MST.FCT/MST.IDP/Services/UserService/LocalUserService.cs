@@ -5,6 +5,7 @@ using MST.IDP.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
@@ -267,25 +268,25 @@ namespace MST.IDP.UserService.Services
             return true;
         }
 
-        //public async Task<User> GetUserByExternalProvider(
-        //    string provider, 
-        //    string providerIdentityKey)
-        //{
-        //    if (string.IsNullOrWhiteSpace(provider))
-        //    {
-        //        throw new ArgumentNullException(nameof(provider));
-        //    }
+        public async Task<User> GetUserByExternalProvider(
+            string provider,
+            string providerIdentityKey)
+        {
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
 
-        //    if (string.IsNullOrWhiteSpace(providerIdentityKey))
-        //    {
-        //        throw new ArgumentNullException(nameof(providerIdentityKey));
-        //    }
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
 
-        //    var userLogin = await _context.UserLogins.Include(ul => ul.User)
-        //        .FirstOrDefaultAsync(ul => ul.Provider == provider && ul.ProviderIdentityKey == providerIdentityKey);
+            var userLogin = await _context.UserLogin.Include(ul => ul.User)
+                .FirstOrDefaultAsync(ul => ul.Provider == provider && ul.ProviderIdentityKey == providerIdentityKey);
 
-        //    return userLogin?.User;
-        //}
+            return userLogin?.User;
+        }
 
         //public async Task AddExternalProviderToUser(
         //    string subject,
@@ -315,44 +316,44 @@ namespace MST.IDP.UserService.Services
         //    });            
         //}
 
-        //public User ProvisionUserFromExternalIdentity(
-        //    string provider, 
-        //    string providerIdentityKey,
-        //    IEnumerable<Claim> claims)
-        //{
-        //    if (string.IsNullOrWhiteSpace(provider))
-        //    {
-        //        throw new ArgumentNullException(nameof(provider));
-        //    }
+        public User ProvisionUserFromExternalIdentity(
+            string provider,
+            string providerIdentityKey,
+            IEnumerable<Claim> claims)
+        {
+            if (string.IsNullOrWhiteSpace(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
 
-        //    if (string.IsNullOrWhiteSpace(providerIdentityKey))
-        //    {
-        //        throw new ArgumentNullException(nameof(providerIdentityKey));
-        //    }
+            if (string.IsNullOrWhiteSpace(providerIdentityKey))
+            {
+                throw new ArgumentNullException(nameof(providerIdentityKey));
+            }
 
-        //    var user = new User()
-        //    {
-        //        Active = true,
-        //        Subject = Guid.NewGuid().ToString()
-        //    };
-        //    foreach (var claim in claims)
-        //    {
-        //        user.Claims.Add(new UserClaim()
-        //        {
-        //            Type = claim.Type,
-        //            Value = claim.Value
-        //        });
-        //    }
-        //    user.Logins.Add(new UserLogin()
-        //    {
-        //         Provider = provider,
-        //         ProviderIdentityKey = providerIdentityKey
-        //    });
+            var user = new User()
+            {
+                Active = true,
+                Subject = Guid.NewGuid().ToString()
+            };
+            foreach (var claim in claims)
+            {
+                user.Claims.Add(new UserClaim()
+                {
+                    Type = claim.Type,
+                    Value = claim.Value
+                });
+            }
+            user.Logins.Add(new UserLogin()
+            {
+                Provider = provider,
+                ProviderIdentityKey = providerIdentityKey
+            });
 
-        //    _context.Users.Add(user);
+            _context.User.Add(user);
 
-        //    return user;
-        //}
+            return user;
+        }
 
 
 

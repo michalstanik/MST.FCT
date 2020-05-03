@@ -21,6 +21,7 @@ namespace MST.IDP.Helpers
 
             services.Configure<AppConfiguration>(configuration.GetSection(ConfigurationConsts.AppConfigurationKey));
             services.Configure<EmailConfiguration>(configuration.GetSection(ConfigurationConsts.EmailConfigurationKey));
+            services.Configure<AppAuthenticationFacebook>(configuration.GetSection(ConfigurationConsts.AppAuthenticationFacebookKey));
 
             services.TryAddSingleton<IRootConfiguration, RootConfiguration>();
             return services;

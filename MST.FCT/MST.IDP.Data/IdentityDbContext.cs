@@ -12,6 +12,7 @@ namespace MST.IDP.Data
     {
         public DbSet<User> User { get; set; }
         public DbSet<UserClaim> UserClaim { get; set; }
+        public DbSet<UserLogin> UserLogin { get; set; }
 
         public IdentityDbContext(DbContextOptions<IdentityDbContext> options) : base(options)
         {
