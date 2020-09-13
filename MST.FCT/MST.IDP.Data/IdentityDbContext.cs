@@ -35,7 +35,7 @@ namespace MST.IDP.Data
                new User()
                {
                    Id = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                   Password = "AQAAAAEAACcQAAAAEAAP1QAc8J6Ri88b4+01i2M+u9amqIhA8Jo1pvdIWTO0Le3NPqPAyQzrbWYQHSD0WA==",
+                   Password = "Password",
                    Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
                    Email = "frank@gmail.com",
                    Username = "Frank",

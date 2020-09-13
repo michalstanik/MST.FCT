@@ -12,16 +12,36 @@ namespace IDP
         public static IEnumerable<IdentityResource> Ids =>
             new IdentityResource[]
             {
-                new IdentityResources.OpenId()
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                new IdentityResource("country", new [] { "country" })
             };
 
         public static IEnumerable<ApiResource> Apis =>
             new ApiResource[]
-            { };
+            {
+                new ApiResource("fctapi",
+                    "FCT: Flights Countries Travels API",
+                    new [] { "country" })
+            };
 
         public static IEnumerable<Client> Clients =>
             new Client[]
-            { };
+            {
+                new Client
+                {
+                    ClientId = "fctserver",
+                    ClientName = "FCT: Flights Countries Travels App",
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    ClientSecrets = { new Secret("108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0".Sha256()) },
+                    RedirectUris = { "https://localhost:7001/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
+                    AllowOfflineAccess = true,
+                    RequireConsent = false,
+                    AllowedScopes = { "openid", "profile", "email", "fctapi", "country" }
+                }
+            };
 
     }
 }
