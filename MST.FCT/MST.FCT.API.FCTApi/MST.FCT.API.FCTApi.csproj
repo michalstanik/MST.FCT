@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Content Include="..\MCB.Data\LoadData\airports.dat.txt" Link="LoadData\airports.dat.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\MCB.Data\LoadData\countries.json" Link="LoadData\countries.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\MCB.Data\LoadData\WorldHeritage.xml" Link="LoadData\WorldHeritage.xml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  
 </Project>
