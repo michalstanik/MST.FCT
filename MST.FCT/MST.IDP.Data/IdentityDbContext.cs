@@ -34,20 +34,11 @@ namespace MST.IDP.Data
             modelBuilder.Entity<User>().HasData(
                new User()
                {
-                   Id = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                   Password = "Password",
-                   Subject = "d860efca-22d9-47fd-8249-791ba61b07c7",
-                   Email = "frank@gmail.com",
-                   Username = "Frank",
-                   Active = true
-               },
-               new User()
-               {
-                   Id = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                   Password = "AQAAAAEAACcQAAAAEAAP1QAc8J6Ri88b4+01i2M+u9amqIhA8Jo1pvdIWTO0Le3NPqPAyQzrbWYQHSD0WA==",
-                   Subject = "b7539694-97e7-4dfe-84da-b4256e1ff5c7",
-                   Email = "claire@gmail.com",
-                   Username = "Claire",
+                   Id = new Guid("A98AAB29-5807-4487-94F8-08D857FDD95F"),
+                   Password = "AQAAAAEAACcQAAAAELh/TFL1qtIL9+07j1JbNPk7VMrJQ07QMCQD6OdJxvl0l+lXaljbphhlZcfrlNM44w==",
+                   Subject = "2b6803d7-3983-4aae-a0c3-0feb52f699b6",
+                   Email = "michal@gmail.com",
+                   Username = "Michal",
                    Active = true
                });
 
@@ -55,72 +46,23 @@ namespace MST.IDP.Data
              new UserClaim()
              {
                  Id = Guid.NewGuid(),
-                 UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                 UserId = new Guid("A98AAB29-5807-4487-94F8-08D857FDD95F"),
                  Type = "given_name",
-                 Value = "Frank"
+                 Value = "Michal"
              },
              new UserClaim()
              {
                  Id = Guid.NewGuid(),
-                 UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                 UserId = new Guid("A98AAB29-5807-4487-94F8-08D857FDD95F"),
                  Type = "family_name",
-                 Value = "Underwood"
+                 Value = "Stanik"
              },
              new UserClaim()
              {
                  Id = Guid.NewGuid(),
-                 UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                 Type = "address",
-                 Value = "Main Road 1"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                 Type = "subscriptionlevel",
-                 Value = "FreeUser"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
+                 UserId = new Guid("A98AAB29-5807-4487-94F8-08D857FDD95F"),
                  Type = "country",
-                 Value = "nl"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                 Type = "given_name",
-                 Value = "Claire"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                 Type = "family_name",
-                 Value = "Underwood"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                 Type = "address",
-                 Value = "Big Street 2"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                 Type = "subscriptionlevel",
-                 Value = "PayingUser"
-             },
-             new UserClaim()
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                 Type = "country",
-                 Value = "be"
+                 Value = "pl"
              });
         }
 
