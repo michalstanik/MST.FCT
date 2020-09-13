@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.IDP.Shared", "MST.IDP.S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MST.FCT.App", "MST.FCT.App", "{E6A6EAF4-0E8F-4B09-82EA-7905888FF101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MST.FCT.App.Server", "MST.FCT.App.Server\MST.FCT.App.Server.csproj", "{CB175E28-E8E1-4CAD-A90A-CD51DCA66921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MST.FCT.App.Server", "MST.FCT.App.Server\MST.FCT.App.Server.csproj", "{CB175E28-E8E1-4CAD-A90A-CD51DCA66921}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
