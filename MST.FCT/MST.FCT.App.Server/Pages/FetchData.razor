@@ -1,6 +1,7 @@
 ﻿@page "/fetchdata"
 
 @using MST.FCT.App.Server.Data
+@attribute [Authorize]
 @inject WeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
