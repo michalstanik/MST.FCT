@@ -1,15 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MST.IDP.Data;
-using MST.IDP.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-
-namespace MST.IDP.UserService.Services
+﻿namespace MST.IDP.UserService.Services
 {
     public class LocalUserService : ILocalUserService
     {
