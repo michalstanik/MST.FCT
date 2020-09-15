@@ -1,5 +1,10 @@
+using AutoMapper;
+using FCT.Data;
+using FCT.Data.Seeders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +23,22 @@ namespace MST.FCT.API.FCTApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // register an IHttpContextAccessor so we can access the current HttpContext in services by injecting it
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            #region Seeders
+            services.AddTransient<DictionarySeeder>();
+            services.AddTransient<EnsureDB>();
+            #endregion Seeders
+
+            services.AddDbContext<FCTContext>(cfg =>
+            {
+                cfg.UseSqlServer(Configuration.GetConnectionString("FCTConnectionString"));
+            });
+
+
             services.AddControllers();
         }
 
@@ -37,6 +58,16 @@ namespace MST.FCT.API.FCTApi
             {
                 endpoints.MapControllers();
             });
+
+            // Seed the database
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var recreate = scope.ServiceProvider.GetService<EnsureDB>();
+                var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
+
+                recreate.EnsureDeletedAndRecreated();
+                dictionarySeeder.Seed();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FCT.Data.Domain.Aviation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FCT.Data.Domain.Flights
 {
@@ -22,11 +23,11 @@ namespace FCT.Data.Domain.Flights
         public Airport DepartureAirport { get; set; }
         public Airport ArrivalAirport { get; set; }
 
-        public int? CombinedPreviousFlightId { get; set; }
-        public Flight CombinedPreviousFlight { get; set; }
+        //public int? CombinedPreviousFlightId { get; set; }
+        //public Flight CombinedPreviousFlight { get; set; }
 
-        public int? CombinedNextFlightId { get; set; }
-        public Flight CombinedNextFlight { get; set; }
+        //public int? CombinedNextFlightId { get; set; }
+        //public Flight CombinedNextFlight { get; set; }
 
         public long? Distance { get; set; }
         public long? FlightTime { get; set; }
