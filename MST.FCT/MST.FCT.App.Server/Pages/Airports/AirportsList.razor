@@ -1,0 +1,47 @@
+﻿@page "/airports"
+@inherits AirportsListBase
+@attribute [Authorize]
+
+<h2>AirportsList</h2>
+
+@if (Airports == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Airport Name</th>
+                <th>Airport City</th>
+                <th>IATA</th>
+                <th>ICAO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var airport in Airports)
+            {
+            <tr>
+                <td>@airport.Name</td>
+                <td>@airport.City</td>
+                <td>@airport.IATA</td>
+                <td>@airport.ICAO</td>
+                <td>
+                    <a href="@($"airportdetails/{airport.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a href="@($"employeeedit/{airport.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+}

@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MST.FCT.Business", "MST.FCT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCT.Business.Models", "FCT.Business.Models\FCT.Business.Models.csproj", "{15A26B0D-7637-4B33-9FBA-D4D4352F700E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCT.Business.Services", "FCT.Business.Services\FCT.Business.Services.csproj", "{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{15A26B0D-7637-4B33-9FBA-D4D4352F700E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15A26B0D-7637-4B33-9FBA-D4D4352F700E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15A26B0D-7637-4B33-9FBA-D4D4352F700E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{69D28F5D-265D-4991-AE6E-005517C4C61D} = {5C3F430C-99F9-4CB4-9621-FFCF5048AD0E}
 		{0E35E97A-8776-4DBE-997D-21A9C8126914} = {5C3F430C-99F9-4CB4-9621-FFCF5048AD0E}
 		{15A26B0D-7637-4B33-9FBA-D4D4352F700E} = {F4D50166-8042-4F52-BF56-FF8FCC3C1DE6}
+		{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09} = {F4D50166-8042-4F52-BF56-FF8FCC3C1DE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {438A0657-270A-4DC9-8710-FFF0B419B927}
