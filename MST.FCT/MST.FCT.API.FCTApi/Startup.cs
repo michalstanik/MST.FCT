@@ -60,14 +60,12 @@ namespace MST.FCT.API.FCTApi
             });
 
             // Seed the database
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var recreate = scope.ServiceProvider.GetService<EnsureDB>();
-                var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
+            using IServiceScope scope = app.ApplicationServices.CreateScope();
+            var recreate = scope.ServiceProvider.GetService<EnsureDB>();
+            var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
 
-                recreate.EnsureDeletedAndRecreated();
-                dictionarySeeder.Seed();
-            }
+            recreate.EnsureDeletedAndRecreated();
+            dictionarySeeder.Seed();
         }
     }
 }
