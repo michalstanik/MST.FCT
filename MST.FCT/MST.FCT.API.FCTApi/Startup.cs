@@ -1,5 +1,7 @@
 using AutoMapper;
 using FCT.Data;
+using FCT.Data.IRepositories;
+using FCT.Data.Repositories;
 using FCT.Data.Seeders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +35,10 @@ namespace MST.FCT.API.FCTApi
             services.AddTransient<EnsureDB>();
             #endregion Seeders
 
+            #region Repositories
+            services.AddScoped<IAviationRepository, AviationRepository>();
+            # endregion Repositories
+
             services.AddDbContext<FCTContext>(cfg =>
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("FCTConnectionString"));
@@ -60,12 +66,12 @@ namespace MST.FCT.API.FCTApi
             });
 
             // Seed the database
-            using IServiceScope scope = app.ApplicationServices.CreateScope();
-            var recreate = scope.ServiceProvider.GetService<EnsureDB>();
-            var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
+            //using IServiceScope scope = app.ApplicationServices.CreateScope();
+            //var recreate = scope.ServiceProvider.GetService<EnsureDB>();
+            //var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
 
-            recreate.EnsureDeletedAndRecreated();
-            dictionarySeeder.Seed();
+            //recreate.EnsureDeletedAndRecreated();
+            //dictionarySeeder.Seed();
         }
     }
 }
