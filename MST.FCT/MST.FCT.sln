@@ -29,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FCT.Data", "FCT.Data\FCT.Da
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MST.FCT.Business", "MST.FCT.Business", "{F4D50166-8042-4F52-BF56-FF8FCC3C1DE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCT.Business.Models", "FCT.Business.Models\FCT.Business.Models.csproj", "{15A26B0D-7637-4B33-9FBA-D4D4352F700E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FCT.Business.Models", "FCT.Business.Models\FCT.Business.Models.csproj", "{15A26B0D-7637-4B33-9FBA-D4D4352F700E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCT.Business.Services", "FCT.Business.Services\FCT.Business.Services.csproj", "{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FCT.Business.Services", "FCT.Business.Services\FCT.Business.Services.csproj", "{9F6D590F-BEE3-442B-9DFE-2444EF4E5E09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
