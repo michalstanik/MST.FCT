@@ -1,0 +1,53 @@
+/* scaffolding */
+/* ----------- */
+.twitter-typeahead {
+  display: block !important; }
+
+.tt-hint {
+  color: #999; }
+
+.tt-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  float: left;
+  background-clip: padding-box;
+  list-style: none;
+  text-align: left; }
+
+.tt-suggestion {
+  display: block;
+  clear: both;
+  width: 100%;
+  border: 0;
+  background: none;
+  text-align: inherit;
+  white-space: nowrap;
+  cursor: pointer; }
+  .tt-suggestion p {
+    margin: 0; }
+
+.light-style .tt-hint {
+  color: #babbbc; }
+
+.light-style .tt-menu {
+  z-index: 1000;
+  margin: 0.125rem 0;
+  padding: 0.3125rem 0;
+  min-width: 10rem;
+  border: 1px solid rgba(24, 28, 33, 0.05);
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
+  color: #4E5155;
+  font-size: 0.894rem;
+  border-radius: 0.25rem; }
+
+.light-style .tt-suggestion {
+  padding: 0.438rem 1.25rem;
+  color: #4E5155;
+  font-weight: 400; }
+  .light-style .tt-suggestion:hover, .light-style .tt-suggestion:focus {
+    background-color: rgba(24, 28, 33, 0.03);
+    color: #4E5155;
+    text-decoration: none; }

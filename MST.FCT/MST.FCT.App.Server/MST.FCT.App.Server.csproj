@@ -3,7 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  
+  <Target Name="DebugPreCompileTarget" BeforeTargets="Build" Condition="'$(Configuration)'!='Release'">
+    <Exec Command="npm run build" />
+  </Target>
 
+  <Target Name="ReleasePreCompileTarget" BeforeTargets="Build" Condition="'$(Configuration)'=='Release'">
+    <Exec Command="npm run build:prod" />
+  </Target>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.8" />
