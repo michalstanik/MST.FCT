@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div @ref="_gridDivReference" class="ag-theme-balham-dark ag-grid"></div>
+
+@code{ 
+    private ElementReference _gridDivReference;
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _gridDivReference);
+        }
+    }
+}

@@ -4,13 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   
-  <Target Name="DebugPreCompileTarget" BeforeTargets="Build" Condition="'$(Configuration)'!='Release'">
+  <!--<Target Name="DebugPreCompileTarget" BeforeTargets="Build" Condition="'$(Configuration)'!='Release'">
     <Exec Command="npm run build" />
   </Target>
 
   <Target Name="ReleasePreCompileTarget" BeforeTargets="Build" Condition="'$(Configuration)'=='Release'">
     <Exec Command="npm run build:prod" />
-  </Target>
+  </Target>-->
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FCT.Business.Services\FCT.Business.Services.csproj" />
+    <ProjectReference Include="..\MST.FCT.App.GridLibrary\MST.FCT.App.GridLibrary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -78,42 +78,16 @@
         @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
     </app>
     <!-- Core scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
 
-
-    <environment include="Development">
-        <script src="~/vendor/libs/popper/popper.dist.js"></script>
-        <script src="~/vendor/js/bootstrap.dist.js"></script>
-        <script src="~/vendor/js/sidenav.dist.js"></script>
-
-        <!-- Libs -->
-        <!-- `perfect-scrollbar` library required by SideNav plugin -->
-        <script src="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.dist.js"></script>
-
-        <!-- Application javascripts -->
-        <script src="~/js/site.dist.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/vendor/libs/popper/popper.dist.js" asp-append-version="true"></script>
-        <script src="~/vendor/js/bootstrap.dist.js" asp-append-version="true"></script>
-        <script src="~/vendor/js/sidenav.dist.js" asp-append-version="true"></script>
-
-        <!-- Libs -->
-        <!-- `perfect-scrollbar` library required by SideNav plugin -->
-        <script src="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.dist.js" asp-append-version="true"></script>
-
-        <!-- Application javascripts -->
-        <script src="~/js/site.dist.js" asp-append-version="true"></script>
-    </environment>
-
-    <script src="~/vendor/libs/datatables/datatables.dist.js"></script>
-    <script src="~/vendor/js/tables_datatables.dist.js"></script>
     <script src="_framework/blazor.server.js"></script>
-    <!-- Javascript -->
-    <script>
-        $(function () {
-            $('.datatables-demo').dataTable();
-        });</script>
-    <!-- / Javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/vendor/libs/popper/popper.dist.js"></script>
+    <script src="~/vendor/js/bootstrap.dist.js"></script>
+    <script src="~/vendor/js/sidenav.dist.js"></script>
+    <script src="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.dist.js"></script>
+    <script src="~/vendor/libs/datatables/datatables.dist.js"></script>
+    <script src="~/js/tables_datatables.dist.js"></script>
+    <script src="~/js/site.dist.js"></script>
+    <script src="~/js/blazorInterop.dist.js"></script>
 </body>
 </html>

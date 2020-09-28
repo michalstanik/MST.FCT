@@ -1,6 +1,7 @@
 ﻿@page "/airports"
 @inherits AirportsListBase
 @attribute [Authorize]
+@inject IJSRuntime JSRuntime
 
 @if (Airports == null)
 {   <h4>Airports</h4>
@@ -16,13 +17,14 @@ else
             Airports: @(Airports.Count)
         </h6>
         <div class="card-datatable table-responsive">
-            <table class="datatables-demo table table-striped table-bordered">
+            <table @ref="_gridDivReference" class="datatables-demo table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Airport Name</th>
                         <th>Airport City</th>
                         <th>IATA</th>
                         <th>ICAO</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +53,18 @@ else
 }
 
 
-@code {
+@code {        
+
+    private ElementReference _gridDivReference;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //if (firstRender)
+        //{
+        //    await JSRuntime.InvokeVoidAsync("blazorIterop.addDataTable", _gridDivReference);
+        //}
+        await JSRuntime.InvokeVoidAsync("blazorInterop.showAlert");
+    }
+
 
 }

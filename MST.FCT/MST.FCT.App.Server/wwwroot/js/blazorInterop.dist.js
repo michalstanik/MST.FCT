@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./wwwroot/vendor/js/tables_datatables.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./wwwroot/js/blazorInterop.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./wwwroot/vendor/js/tables_datatables.js":
-/*!************************************************!*\
-  !*** ./wwwroot/vendor/js/tables_datatables.js ***!
-  \************************************************/
+/***/ "./wwwroot/js/blazorInterop.js":
+/*!*************************************!*\
+  !*** ./wwwroot/js/blazorInterop.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("$(function () {\n  $('.datatables-demo').dataTable();\n});\n\n//# sourceURL=webpack:///./wwwroot/vendor/js/tables_datatables.js?");
+eval("var blazorInterop = blazorInterop || {};\n\nblazorInterop.showAlert = function () {\n  alert('New message');\n};\n\nwindow.blazorIterop.addDataTable = function () {\n  $('.datatables-demo').dataTable();\n};\n\n//# sourceURL=webpack:///./wwwroot/js/blazorInterop.js?");
 
 /***/ })
 
