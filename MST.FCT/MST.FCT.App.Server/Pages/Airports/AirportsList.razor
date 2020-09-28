@@ -12,59 +12,12 @@
 }
 else
 {
-    <div class="card">
-        <h6 class="card-header">
-            Airports: @(Airports.Count)
-        </h6>
-        <div class="card-datatable table-responsive">
-            <table @ref="_gridDivReference" class="datatables-demo table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Airport Name</th>
-                        <th>Airport City</th>
-                        <th>IATA</th>
-                        <th>ICAO</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var airport in Airports)
-                    {
-                        <tr>
-                            <td>@airport.Name</td>
-                            <td>@airport.City</td>
-                            <td>@airport.IATA</td>
-                            <td>@airport.ICAO</td>
-                            <td>
-                                <a href="@($"airportdetails/{airport.Id}")" class="btn btn-primary table-btn">
-                                    <i class="fas fa-info-circle"></i>
-                                </a>
-                                <a href="@($"employeeedit/{airport.Id}")" class="btn btn-primary table-btn">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-        </div>
-    </div>
+    <BlazorAgGrid RowData="Airports"></BlazorAgGrid>
 }
 
 
 @code {        
 
     private ElementReference _gridDivReference;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        //if (firstRender)
-        //{
-        //    await JSRuntime.InvokeVoidAsync("blazorIterop.addDataTable", _gridDivReference);
-        //}
-        await JSRuntime.InvokeVoidAsync("blazorInterop.showAlert");
-    }
-
 
 }

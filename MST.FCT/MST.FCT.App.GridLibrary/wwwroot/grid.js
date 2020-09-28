@@ -4,16 +4,11 @@
         initialize: function (gridDiv) {
 
             var columnDefs = [
-                { headerName: "Employee ID", field: "employeeId", sortable: true, filter: true },
-                { headerName: "Firstname", field: "firstName", sortable: true, filter: true },
-                { headerName: "Lastname", field: "lastName", sortable: true, filter: true },
-                { headerName: "Email", field: "email", sortable: true, filter: true }
-            ];
-
-            var rowData = [
-                { employeeId: 1, firstName: "Bethany", lastName: "Smith", email: "bethany@bethanyspieshop.com" },
-                { employeeId: 2, firstName: "Julia", lastName: "Developer", email: "julia@thomasclaudiushuber.com" },
-                { employeeId: 3, firstName: "Thomas Claudius", lastName: "Huber", email: "thomas@thomasclaudiushuber.com" }
+                { headerName: "Airport ID", field: "id", sortable: true, filter: true },
+                { headerName: "Name", field: "name", sortable: true, filter: true },
+                { headerName: "City", field: "city", sortable: true, filter: true },
+                { headerName: "IATA", field: "iata", sortable: true, filter: true },
+                { headerName: "ICAO", field: "icao", sortable: true, filter: true }
             ];
 
             function onSelectionChanged() {
@@ -25,7 +20,6 @@
 
             var gridOptions = {
                 columnDefs: columnDefs,
-                rowData: rowData,
                 rowSelection: 'single',
                 onSelectionChanged: onSelectionChanged,
                 pagination: true,
@@ -34,6 +28,11 @@
             };
 
             new agGrid.Grid(gridDiv, gridOptions);
+
+            this.gridOptions = gridOptions;
+        },
+        setRowData: function(rowData) {
+            this.gridOptions.api.setRowData(rowData);
         }
     };
 })();
