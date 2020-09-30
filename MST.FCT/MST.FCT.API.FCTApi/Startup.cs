@@ -65,7 +65,8 @@ namespace MST.FCT.API.FCTApi
                 endpoints.MapControllers();
             });
 
-            // Seed the database
+            //Seed the database
+
             //using IServiceScope scope = app.ApplicationServices.CreateScope();
             //var recreate = scope.ServiceProvider.GetService<EnsureDB>();
             //var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();

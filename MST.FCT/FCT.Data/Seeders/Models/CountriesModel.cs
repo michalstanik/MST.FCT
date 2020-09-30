@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FCT.Data.LoadData
+namespace FCT.Data.Seeders.Models
 {
     public class CountriesModel
     {

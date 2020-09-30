@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using FCT.Data.Domain.Flights;
+using FCT.Data.Domain.Geo;
+using System.Collections.Generic;
 
 namespace FCT.Data.Domain.Aviation
 {
@@ -10,13 +12,11 @@ namespace FCT.Data.Domain.Aviation
         public string ICAO { get; set; }
 
         public int? AirlineCountryId { get; set; }
-        //TODO: Enable countries
-        //public Country AirlineCountry { get; set; }
+        public Country AirlineCountry { get; set; }
 
         public int? AirLineAllianceId { get; set; }
         public AirlineAlliance AirLineAlliance { get; set; }
 
-        //TODO: Enable when flight will avaliable
-        //public List<Flight> Flights { get; set; }
+        public List<Flight> Flights { get; set; }
     }
 }

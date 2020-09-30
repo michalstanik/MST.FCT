@@ -1,4 +1,5 @@
 ﻿using FCT.Data.Domain.Flights;
+using FCT.Data.Domain.Geo;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,7 +25,7 @@ namespace FCT.Data.Domain.Aviation
         public long Longitude { get; set; }
 
         public int? CountryId { get; set; }
-        //public Country Country { get; set; }
+        public Country Country { get; set; }
 
         [InverseProperty("ArrivalAirport")]
         public List<Flight> ArrivalFlights { get; set; }

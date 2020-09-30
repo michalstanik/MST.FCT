@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace FCT.Data.LoadData
+namespace FCT.Data.Seeders.Models
 {
     [XmlRoot(ElementName = "row")]
     public class Row

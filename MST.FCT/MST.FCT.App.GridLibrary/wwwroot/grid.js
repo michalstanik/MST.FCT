@@ -6,6 +6,7 @@
             var columnDefs = [
                 { headerName: "Airport ID", field: "id", sortable: true, filter: true },
                 { headerName: "Name", field: "name", sortable: true, filter: true },
+                { headerName: "Country", field: "countryName", sortable: true, filter: true },
                 { headerName: "City", field: "city", sortable: true, filter: true },
                 { headerName: "IATA", field: "iata", sortable: true, filter: true },
                 { headerName: "ICAO", field: "icao", sortable: true, filter: true }
