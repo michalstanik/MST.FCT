@@ -1,0 +1,19 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div @ref="_gridDivReference" class="ag-theme-balham-dark ag-grid"></div>
+
+@code{ 
+    private ElementReference _gridDivReference;
+
+    [Parameter]
+    public IEnumerable<object> RowData { get; set; }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _gridDivReference);
+        }
+        await JSRuntime.InvokeVoidAsync("blazorAgGrid.setRowData", RowData);
+    }
+}

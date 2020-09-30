@@ -1,0 +1,30 @@
+.flot-overlay ~ .legend > * {
+  right: 0 !important; }
+
+.flot-overlay ~ .legend .legendColorBox {
+  padding-right: 5px; }
+
+.legendLayer {
+  font-size: .95em; }
+  .legendLayer text {
+    -webkit-transform: translateY(2px);
+            transform: translateY(2px); }
+
+.light-style .flot-tick-label,
+.light-style .legendLayer text {
+  font-size: 0.75rem;
+  fill: #4E5155; }
+
+.light-style .flotTip {
+  padding: .25rem .625rem !important;
+  border-color: #46494d !important;
+  border-radius: 0.25rem !important;
+  background-color: #46494d !important;
+  color: #fff !important;
+  font-size: .6875rem !important; }
+
+.light-style .legendLayer {
+  color: #4E5155; }
+
+.light-style .legendLayer .background {
+  fill: #f8f8f8; }

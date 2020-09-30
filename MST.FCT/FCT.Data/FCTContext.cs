@@ -1,5 +1,6 @@
 ﻿using FCT.Data.Domain.Aviation;
 using FCT.Data.Domain.Flights;
+using FCT.Data.Domain.Geo;
 using Microsoft.EntityFrameworkCore;
 
 namespace FCT.Data
@@ -23,6 +24,11 @@ namespace FCT.Data
         public DbSet<Flight> Flight { get; set; }
 
         //Admin
+
+        //Geo
+        public DbSet<Continent> Continent { get; set; }
+        public DbSet<Region> Region { get; set; }
+        public DbSet<Country> Country { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

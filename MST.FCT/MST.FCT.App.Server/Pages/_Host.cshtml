@@ -9,14 +9,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MST.FCT.App.Server</title>
     <base href="~/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link href="css/site.css" rel="stylesheet" />
+    <!-- Main font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet" crossorigin="anonymous" />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <environment include="Development">
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/fontawesome.dist.css" /> -->
+        <link rel="stylesheet" href="~/vendor/fonts/ionicons.dist.css" />
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/linearicons.dist.css" /> -->
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/open-iconic.dist.css" /> -->
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/pe-icon-7-stroke.dist.css" /> -->
+    </environment>
+    <environment exclude="Development">
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/fontawesome.dist.css" asp-append-version="true" /> -->
+        <link rel="stylesheet" href="~/vendor/fonts/ionicons.dist.css" asp-append-version="true" />
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/linearicons.dist.css" asp-append-version="true" /> -->
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/open-iconic.dist.css" asp-append-version="true" /> -->
+        <!-- <link rel="stylesheet" href="~/vendor/fonts/pe-icon-7-stroke.dist.css" asp-append-version="true" /> -->
+    </environment>
+
+    <!-- Core stylesheets -->
+    <environment include="Development">
+        <link rel="stylesheet" href="~/vendor/css/bootstrap.dist.css" />
+        <link rel="stylesheet" href="~/vendor/css/appwork.dist.css" />
+        <link rel="stylesheet" href="~/vendor/css/theme-corporate.dist.css" />
+        <link rel="stylesheet" href="~/vendor/css/colors.dist.css" />
+        <link rel="stylesheet" href="~/vendor/css/uikit.dist.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/vendor/css/bootstrap.dist.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/vendor/css/appwork.dist.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/vendor/css/theme-corporate.dist.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/vendor/css/colors.dist.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/vendor/css/uikit.dist.css" asp-append-version="true" />
+    </environment>
+
+    <!-- Load polyfills -->
+    <environment include="Development">
+        <script src="~/vendor/js/polyfills.dist.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/vendor/js/polyfills.dist.js" asp-append-version="true"></script>
+    </environment>
+    <script>document['documentMode'] === 10 && document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.~locale.en"><\/script>')</script>
+
+    <!-- Layout helpers -->
+    <environment include="Development">
+        <script src="~/vendor/js/layout-helpers.dist.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/vendor/js/layout-helpers.dist.js" asp-append-version="true"></script>
+    </environment>
+
+    <!-- Libs -->
+    <!-- `perfect-scrollbar` library required by SideNav plugin -->
+    <environment include="Development"><link rel="stylesheet" href="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.dist.css" /></environment>
+    <environment exclude="Development"><link rel="stylesheet" href="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.dist.css" asp-append-version="true" /></environment>
+
+    <!-- Application stylesheets -->
+    <environment include="Development"><link rel="stylesheet" href="~/css/site.dist.css" /></environment>
+    <environment exclude="Development"><link rel="stylesheet" href="~/css/site.dist.css" asp-append-version="true" /></environment>
+
+    <link href="~/vendor/libs/spinkit/spinkit.dist.css" rel="stylesheet" />
+    <link href="_content/MST.FCT.App.GridLibrary/styles.css" rel="stylesheet" />
 </head>
 <body>
     <app>
         @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
     </app>
+    <!-- Core scripts -->
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/vendor/libs/popper/popper.dist.js"></script>
+    <script src="~/vendor/js/bootstrap.dist.js"></script>
+    <script src="~/vendor/js/sidenav.dist.js"></script>
+    <script src="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.dist.js"></script>
+
+    <script src="_content/MST.FCT.App.GridLibrary/ag-grid/ag-grid-community.min.js"></script>
+    <script src="_content/MST.FCT.App.GridLibrary/grid.js"></script>
+
+    <script src="~/js/site.dist.js"></script>
+    <script src="~/js/blazorInterop.dist.js"></script>
 </body>
 </html>

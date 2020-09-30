@@ -1,15 +1,29 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-1 layout-without-sidenav">
+    <div class="layout-inner">
+        <!-- Layout navbar -->
+            <NavBar/>
+        <!-- Layout container -->
+        <div class="layout-container">
+            <!-- Layout content -->
+            <div class="layout-content">
+                <!-- Layout sidenav -->
+                    <NavMenu/>
+                <!-- Content -->
+                    <div class="container-fluid flex-grow-1 container-p-y">
+                        @Body
+                    </div>
+                <!-- / Content -->
+                <!-- Layout footer -->
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/en-us/aspnet/" target="_blank">About</a>
-    </div>
 
-    <div class="content px-4">
-        @Body
+
+            </div>
+            <!-- Layout content -->
+        </div>
+        <!-- / Layout container -->
     </div>
 </div>
+<!-- / Layout wrapper -->

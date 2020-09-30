@@ -54,6 +54,8 @@ namespace FCT.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AircraftFactoryCountryId");
+
                     b.ToTable("AircraftFactory");
                 });
 
@@ -102,6 +104,8 @@ namespace FCT.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AirLineAllianceId");
+
+                    b.HasIndex("AirlineCountryId");
 
                     b.ToTable("Airline");
                 });
@@ -156,6 +160,8 @@ namespace FCT.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Airport");
                 });
@@ -217,11 +223,109 @@ namespace FCT.Data.Migrations
                     b.ToTable("Flight");
                 });
 
+            modelBuilder.Entity("FCT.Data.Domain.Geo.Continent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CountryCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Continent");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Geo.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Alpha2Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Alpha3Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Area")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfficialName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RegionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
+
+                    b.ToTable("Country");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Geo.Region", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ContinentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CountriesCount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("MaxLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MaxLongitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MinLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MinLongitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContinentId");
+
+                    b.ToTable("Region");
+                });
+
             modelBuilder.Entity("FCT.Data.Domain.Aviation.Aircraft", b =>
                 {
                     b.HasOne("FCT.Data.Domain.Aviation.AircraftModel", "AircraftModel")
                         .WithMany("Aircrafts")
                         .HasForeignKey("AircraftModelId");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Aviation.AircraftFactory", b =>
+                {
+                    b.HasOne("FCT.Data.Domain.Geo.Country", "AircraftFactoryCountry")
+                        .WithMany()
+                        .HasForeignKey("AircraftFactoryCountryId");
                 });
 
             modelBuilder.Entity("FCT.Data.Domain.Aviation.AircraftModel", b =>
@@ -236,6 +340,17 @@ namespace FCT.Data.Migrations
                     b.HasOne("FCT.Data.Domain.Aviation.AirlineAlliance", "AirLineAlliance")
                         .WithMany("Airlines")
                         .HasForeignKey("AirLineAllianceId");
+
+                    b.HasOne("FCT.Data.Domain.Geo.Country", "AirlineCountry")
+                        .WithMany()
+                        .HasForeignKey("AirlineCountryId");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Aviation.Airport", b =>
+                {
+                    b.HasOne("FCT.Data.Domain.Geo.Country", "Country")
+                        .WithMany("Airports")
+                        .HasForeignKey("CountryId");
                 });
 
             modelBuilder.Entity("FCT.Data.Domain.Flights.Flight", b =>
@@ -245,7 +360,7 @@ namespace FCT.Data.Migrations
                         .HasForeignKey("AircraftId");
 
                     b.HasOne("FCT.Data.Domain.Aviation.Airline", "Airline")
-                        .WithMany()
+                        .WithMany("Flights")
                         .HasForeignKey("AirlineId");
 
                     b.HasOne("FCT.Data.Domain.Aviation.Airport", "ArrivalAirport")
@@ -255,6 +370,20 @@ namespace FCT.Data.Migrations
                     b.HasOne("FCT.Data.Domain.Aviation.Airport", "DepartureAirport")
                         .WithMany("DepartureFlights")
                         .HasForeignKey("DepartureAirportId");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Geo.Country", b =>
+                {
+                    b.HasOne("FCT.Data.Domain.Geo.Region", "Region")
+                        .WithMany("Countries")
+                        .HasForeignKey("RegionId");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Geo.Region", b =>
+                {
+                    b.HasOne("FCT.Data.Domain.Geo.Continent", "Continent")
+                        .WithMany("Regions")
+                        .HasForeignKey("ContinentId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,37 +1,37 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">MST.FCT.App.Server</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
+﻿<!-- Layout sidenav -->
+<div id="layout-sidenav" class="layout-sidenav-horizontal sidenav-horizontal container-p-x flex-grow-0 sidenav bg-sidenav-theme">
+    <!-- Inner -->
+    <ul class="sidenav-inner py-1">
         <AuthorizeView>
             <NotAuthorized>
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="LoginIDP">
+                <li class="sidenav-item">
+                    <NavLink class="sidenav-link" href="LoginIDP">
+                        <i class="sidenav-icon ion ion-ios-contact"></i>
                         <span class="oi oi-list-rich" aria-hidden="true"></span> Log in
                     </NavLink>
-                 </li>
+                </li>
             </NotAuthorized>
             <Authorized>
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="airports">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Airports 
+                <li class="sidenav-item">
+                    <NavLink class="sidenav-link" href="airports">
+                        <i class="sidenav-icon ion ion-ios-contact"></i>
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Airports
                     </NavLink>
                 </li>
-                <li class="nav-item px-3">
-                    <NavLink class="nav-link" href="LogoutIDP">
+                <li class="sidenav-item">
+                    <NavLink class="sidenav-link" href="LogoutIDP">
+                        <i class="sidenav-icon ion ion-ios-contact"></i>
                         <span class="oi oi-list-rich" aria-hidden="true"></span> Log out
                         (@context.User.Claims.FirstOrDefault(c => c.Type == "given_name")?.Value)
+
                     </NavLink>
                 </li>
             </Authorized>
         </AuthorizeView>
     </ul>
+</div>
+<!-- / Layout sidenav -->
 
-    </div>
 
 @code {
     bool collapseNavMenu = true;
@@ -42,4 +42,4 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-    }
+}
