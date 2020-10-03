@@ -1,5 +1,7 @@
 ﻿using FCT.Data.Seeders.Dictionaries;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace FCT.Data.Seeders
 {
@@ -14,8 +16,8 @@ namespace FCT.Data.Seeders
         {
             _context.Database.Migrate();
 
-            CountriesSeeder.SeedCountries(_context);
-            AirportsSeeder.SeedAirports(_context);        
+            CountriesSeederJson.SeedCountries(_context);
+            AirportsSeederJson.SeedAirports(_context);   
         }
     }
 }

@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\FCT.Data\LoadData\airports.dat.txt" Link="LoadData\airports.dat.txt" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\FCT.Data\LoadData\countries.json" Link="LoadData\countries.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\FCT.Data\LoadData\WorldHeritage.xml" Link="LoadData\WorldHeritage.xml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\FCT.Data\LoadData\airports.json" Link="LoadData\airports.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

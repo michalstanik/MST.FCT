@@ -132,17 +132,17 @@ namespace FCT.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AirportId")
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
+                    b.Property<string>("CountryCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CountryName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Elevation")
+                        .HasColumnType("int");
 
                     b.Property<string>("IATA")
                         .HasColumnType("nvarchar(max)");
@@ -150,13 +150,16 @@ namespace FCT.Data.Migrations
                     b.Property<string>("ICAO")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Latitude")
-                        .HasColumnType("bigint");
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
 
-                    b.Property<long>("Longitude")
-                        .HasColumnType("bigint");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

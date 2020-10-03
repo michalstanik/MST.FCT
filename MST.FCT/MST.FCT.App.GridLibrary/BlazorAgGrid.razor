@@ -4,6 +4,7 @@
 
 @code{ 
     private ElementReference _gridDivReference;
+    private string _componentId = Guid.NewGuid().ToString();
 
     [Parameter]
     public IEnumerable<object> RowData { get; set; }
@@ -12,8 +13,8 @@
     {
         if(firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _gridDivReference);
+            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _componentId, _gridDivReference);
         }
-        await JSRuntime.InvokeVoidAsync("blazorAgGrid.setRowData", RowData);
+        await JSRuntime.InvokeVoidAsync("blazorAgGrid.setRowData", _componentId, RowData);
     }
 }
