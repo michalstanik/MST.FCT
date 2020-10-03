@@ -36,6 +36,9 @@
         },
         setRowData: function (componentId, rowData) {
             this.gridOptionsByComponentId[componentId].api.setRowData(rowData);
+        },
+        dispose: function (componentId) {
+            delete this.gridOptionsByComponentId[componentId];
         }
     };
 })();
