@@ -14,15 +14,22 @@ namespace MST.FCT.App.Server.Pages.Airports
 
         public List<AirportModel> Airports { get; set; }
 
+
         public AirportModel SelectedAirport { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             Airports = (await AirportDataService.GetAllAirports()).ToList();
+            Airports = Airports.Where(c => !string.IsNullOrWhiteSpace(c.IATA)).ToList();
         }
         private void GridSelectionChanged(AirportModel airport)
         {
             SelectedAirport = airport;
+        }
+
+        private void IncludeIcao()
+        {
+
         }
     }
 }

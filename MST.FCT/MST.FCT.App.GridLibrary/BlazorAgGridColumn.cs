@@ -12,6 +12,14 @@ namespace MST.FCT.App.GridLibrary
         [Parameter] public bool Sortable { get; set; }
         [Parameter] public bool Filter { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            _columnDef.HeaderName = HeaderName;
+            _columnDef.Field = Field;
+            _columnDef.Sortable = Sortable;
+            _columnDef.Filter = Filter;
+        }
+
         [CascadingParameter]
         public IBlazorAgGrid ParentGrid { get; set; }
 

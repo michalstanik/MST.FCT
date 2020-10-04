@@ -12,15 +12,35 @@
 }
 else
 {
-<BlazorAgGrid TRow="AirportModel"
-              AutoGenerateColumns="true"
-              RowData="Airports"
-              OnSelectionChanged="GridSelectionChanged">
-    @*<BlazorAgGridColumn HeaderName="Name" Field="Name"
-                        Sortable="true" Filter="true"></BlazorAgGridColumn>
-    <BlazorAgGridColumn HeaderName="ICAO" Field="ICAO"
-                        Sortable="true" Filter="true"></BlazorAgGridColumn>*@
-</BlazorAgGrid>
+    <div class="card-body">
+        <div class="text-light small font-weight-semibold mb-3">Data options:</div>
+
+        <label class="switcher">
+            <input type="checkbox" class="switcher-input" @onselectionchange="IncludeIcao">
+            <span class="switcher-indicator">
+                <span class="switcher-yes">
+                    <span class="ion ion-md-checkmark"></span>
+                </span>
+                <span class="switcher-no">
+                    <span class="ion ion-md-close"></span>
+                </span>
+            </span>
+            <span class="switcher-label">Include non ICAO airports</span>
+        </label>
+    </div>
+    <BlazorAgGrid TRow="AirportModel"
+                  AutoGenerateColumns="false"
+                  RowData="Airports"
+                  OnSelectionChanged="GridSelectionChanged">
+        <BlazorAgGridColumn HeaderName="Name" Field="Name"
+                            Sortable="true" Filter="true"></BlazorAgGridColumn>
+        <BlazorAgGridColumn HeaderName="Country" Field="CountryName"
+                            Sortable="true" Filter="true"></BlazorAgGridColumn>
+        <BlazorAgGridColumn HeaderName="ICAO" Field="Icao"
+                            Sortable="true" Filter="true"></BlazorAgGridColumn>
+        <BlazorAgGridColumn HeaderName="IATA" Field="Iata"
+                            Sortable="true" Filter="true"></BlazorAgGridColumn>
+    </BlazorAgGrid>
     @if (SelectedAirport != null)
     {
         <div class="card">
