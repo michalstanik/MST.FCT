@@ -4,9 +4,10 @@
 
 <div @ref="_gridDivReference" class="ag-theme-balham-dark ag-grid"></div>
 
-@code{ 
+@code{
     private ElementReference _gridDivReference;
     private string _componentId = Guid.NewGuid().ToString();
+    private bool _inSelectionChangedEvent;
 
     [Parameter]
     public IEnumerable<TRow> RowData { get; set; }
@@ -15,7 +16,7 @@
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
-        if(firstRender)
+        if (firstRender)
         {
             await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _componentId, _gridDivReference, DotNetObjectReference.Create(this));
         }
@@ -23,12 +24,25 @@
             _componentId, RowData);
     }
 
+    protected override bool ShouldRender()
+    {
+        return !_inSelectionChangedEvent;
+    }
+
     [JSInvokable]
     public async Task RaiseSelectionChangedAysnc(TRow row)
     {
-        if(OnSelectionChanged.HasDelegate)
+        try
         {
-            await OnSelectionChanged.InvokeAsync(row);
+            _inSelectionChangedEvent = true;
+            if (OnSelectionChanged.HasDelegate)
+            {
+                await OnSelectionChanged.InvokeAsync(row);
+            }
+        }
+        finally
+        {
+            _inSelectionChangedEvent = false;
         }
     }
 
@@ -38,7 +52,7 @@
         {
             await JSRuntime.InvokeVoidAsync("blazorAgGrid.dispose", _componentId);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex.Message);
         }
