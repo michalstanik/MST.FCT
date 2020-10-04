@@ -12,10 +12,15 @@
 }
 else
 {
-    <BlazorAgGrid TRow="AirportModel"
-                  RowData="Airports"
-                  OnSelectionChanged="GridSelectionChanged">
-    </BlazorAgGrid>
+<BlazorAgGrid TRow="AirportModel"
+              AutoGenerateColumns="true"
+              RowData="Airports"
+              OnSelectionChanged="GridSelectionChanged">
+    @*<BlazorAgGridColumn HeaderName="Name" Field="Name"
+                        Sortable="true" Filter="true"></BlazorAgGridColumn>
+    <BlazorAgGridColumn HeaderName="ICAO" Field="ICAO"
+                        Sortable="true" Filter="true"></BlazorAgGridColumn>*@
+</BlazorAgGrid>
     @if (SelectedAirport != null)
     {
         <div class="card">

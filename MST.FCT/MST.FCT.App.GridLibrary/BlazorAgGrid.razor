@@ -1,8 +1,12 @@
 ﻿@typeparam TRow
 @inject IJSRuntime JSRuntime
 @implements IDisposable
+@implements IBlazorAgGrid
 
 <div @ref="_gridDivReference" class="ag-theme-balham-dark ag-grid"></div>
+<CascadingValue Value="@this">
+    @ChildContent
+</CascadingValue>
 
 @code{
     private ElementReference _gridDivReference;
@@ -10,18 +14,41 @@
     private bool _inSelectionChangedEvent;
 
     [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
     public IEnumerable<TRow> RowData { get; set; }
     [Parameter]
     public EventCallback<TRow> OnSelectionChanged { get; set; }
+
+    [Parameter]
+    public bool AutoGenerateColumns { get; set; }
+
+    public IList<ColumnDefinition> ColumnDefs { get; } = new List<ColumnDefinition>();
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _componentId, _gridDivReference, DotNetObjectReference.Create(this));
+            if (AutoGenerateColumns)
+            {
+                foreach (var propertyInfo in typeof(TRow).GetProperties())
+                {
+                    ColumnDefs.Add(new ColumnDefinition
+                    {
+                        HeaderName = propertyInfo.Name,
+                        Field = propertyInfo.Name,
+                        Sortable = true,
+                        Filter = true
+                    });
+                }
+            }
+            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize",
+                _componentId, _gridDivReference, DotNetObjectReference.Create(this));
         }
         await JSRuntime.InvokeVoidAsync("blazorAgGrid.setRowData",
             _componentId, RowData);
+        await JSRuntime.InvokeVoidAsync("blazorAgGrid.setColumnDefs",
+            _componentId, ColumnDefs);
     }
 
     protected override bool ShouldRender()
