@@ -2,7 +2,7 @@
 //Global export
     window.blazorAgGrid = {
         gridOptionsByComponentId: {},
-        initialize: function (componentId, gridDiv) {
+        initialize: function (componentId, gridDiv, dotNetObjectRef) {
 
             var columnDefs = [
                 { headerName: "Airport ID", field: "id", sortable: true, filter: true },
@@ -17,7 +17,7 @@
             function onSelectionChanged() {
                 var selectedRows = gridOptions.api.getSelectedRows();
                 if (selectedRows.length === 1) {
-                    console.log(selectedRows[0].firstName);
+                    dotNetObjectRef.invokeMethodAsync("RaiseSelectionChangedAysnc", selectedRows[0]);
                 }
             };
 

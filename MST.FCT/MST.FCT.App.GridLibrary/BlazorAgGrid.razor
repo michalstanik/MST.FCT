@@ -1,4 +1,5 @@
-﻿@inject IJSRuntime JSRuntime
+﻿@typeparam TRow
+@inject IJSRuntime JSRuntime
 @implements IDisposable
 
 <div @ref="_gridDivReference" class="ag-theme-balham-dark ag-grid"></div>
@@ -8,19 +9,38 @@
     private string _componentId = Guid.NewGuid().ToString();
 
     [Parameter]
-    public IEnumerable<object> RowData { get; set; }
+    public IEnumerable<TRow> RowData { get; set; }
+    [Parameter]
+    public EventCallback<TRow> OnSelectionChanged { get; set; }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _componentId, _gridDivReference);
+            await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize", _componentId, _gridDivReference, DotNetObjectReference.Create(this));
         }
-        await JSRuntime.InvokeVoidAsync("blazorAgGrid.setRowData", _componentId, RowData);
+        await JSRuntime.InvokeVoidAsync("blazorAgGrid.setRowData",
+            _componentId, RowData);
+    }
+
+    [JSInvokable]
+    public async Task RaiseSelectionChangedAysnc(TRow row)
+    {
+        if(OnSelectionChanged.HasDelegate)
+        {
+            await OnSelectionChanged.InvokeAsync(row);
+        }
     }
 
     public async void Dispose()
     {
-        await JSRuntime.InvokeVoidAsync("blazorAgGrid.dispose", _componentId);
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("blazorAgGrid.dispose", _componentId);
+        }
+        catch(Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.Message);
+        }
     }
 }

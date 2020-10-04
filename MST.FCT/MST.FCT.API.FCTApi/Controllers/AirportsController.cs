@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FCT.Business.Models.Aviation.Airport;
+using MST.FCT.Business.Models.Aviation.Airport;
 using FCT.Data.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

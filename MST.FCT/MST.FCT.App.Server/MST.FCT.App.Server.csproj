@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FCT.Business.Services\FCT.Business.Services.csproj" />
+    <ProjectReference Include="..\FCT.Business.Models\MST.FCT.Business.Models.csproj" />
+    <ProjectReference Include="..\FCT.Business.Services\MST.FCT.Business.Services.csproj" />
     <ProjectReference Include="..\MST.FCT.App.GridLibrary\MST.FCT.App.GridLibrary.csproj" />
   </ItemGroup>
 

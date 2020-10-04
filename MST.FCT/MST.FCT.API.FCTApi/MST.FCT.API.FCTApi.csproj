@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FCT.Business.Models\FCT.Business.Models.csproj" />
+    <ProjectReference Include="..\FCT.Business.Models\MST.FCT.Business.Models.csproj" />
     <ProjectReference Include="..\FCT.Data\FCT.Data.csproj" />
   </ItemGroup>
   

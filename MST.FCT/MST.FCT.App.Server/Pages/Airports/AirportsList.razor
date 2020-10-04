@@ -1,10 +1,10 @@
 ﻿@page "/airports"
-@inherits AirportsListBase
 @attribute [Authorize]
 @inject IJSRuntime JSRuntime
 
+
 @if (Airports == null)
-{   <h4>Airports</h4>
+{<h4>Airports</h4>
     <div class="sk-bounce sk-primary">
         <div class="sk-bounce-dot"></div>
         <div class="sk-bounce-dot"></div>
@@ -12,12 +12,24 @@
 }
 else
 {
-    <BlazorAgGrid RowData="Airports"></BlazorAgGrid>
+    <BlazorAgGrid TRow="AirportModel"
+                  RowData="Airports"
+                  OnSelectionChanged="GridSelectionChanged">
+    </BlazorAgGrid>
+    @if (SelectedAirport != null)
+    {
+        <div class="card">
+            <div class="card-header">
+                @SelectedAirport.Name /@SelectedAirport.ICAO
+            </div>
+            <div class="card-body">
+                <a class="btn btn-secondary" href="airporedit/@SelectedAirport.Id">edit</a>
+                <a class="btn btn-secondary" href="airportdetail/@SelectedAirport.Id">view</a>
+            </div>
+        </div>}
 }
 
-
-@code {        
-
+@code {
     private ElementReference _gridDivReference;
-
 }
+
