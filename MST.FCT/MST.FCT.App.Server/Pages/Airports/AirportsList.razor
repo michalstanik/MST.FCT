@@ -14,9 +14,9 @@ else
 {
     <div class="card-body">
         <div class="text-light small font-weight-semibold mb-3">Data options:</div>
-
+        <a>@IncludedICCO.ToString()</a>
         <label class="switcher">
-            <input type="checkbox" class="switcher-input" @onselectionchange="IncludeIcao">
+            <input @bind ="IncludedICCO" type="checkbox" class="switcher-input">
             <span class="switcher-indicator">
                 <span class="switcher-yes">
                     <span class="ion ion-md-checkmark"></span>
