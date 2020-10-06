@@ -11,22 +11,31 @@ namespace MST.FCT.App.Server.Pages.Airports
     public partial class AirportsList : ComponentBase
     {
         private bool includedICCO;
+        private List<AirportModel> airports;
 
         [Inject]
         public IAirportDataService AirportDataService { get; set; }
 
-        public List<AirportModel> Airports { get; set; }
+        public List<AirportModel> Airports 
+        { 
+            get => airports;
+            set
+            {
+                airports = value;
+                StateHasChanged();
+            }
+        }
 
 
         public AirportModel SelectedAirport { get; set; }
 
-        public bool IncludedICCO 
+        public bool IncludedICCO
         {
             get => includedICCO;
             set
             {
                 includedICCO = value;
-                //IncludeIcao(value);
+                IncludeIcao(value);
             }
         }
 
@@ -50,8 +59,12 @@ namespace MST.FCT.App.Server.Pages.Airports
             }
             else
             {
-                Airports = (await AirportDataService.GetAllAirports()).ToList();
-                Airports = Airports.Where(c => !string.IsNullOrWhiteSpace(c.IATA)).ToList();
+                if (Airports != null)
+                {
+                    Airports = null;
+                    Airports = (await AirportDataService.GetAllAirports()).ToList();
+                    Airports = Airports.Where(c => !string.IsNullOrWhiteSpace(c.IATA)).ToList();
+                }
             }
         }
     }

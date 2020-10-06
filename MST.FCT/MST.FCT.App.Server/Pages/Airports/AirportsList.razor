@@ -13,10 +13,20 @@
 else
 {
     <div class="card-body">
-        <div class="text-light small font-weight-semibold mb-3">Data options:</div>
-        <a>@IncludedICCO.ToString()</a>
+        @if (IncludedICCO == true)
+        {
+            <div class="text-light small font-weight-semibold mb-3">
+                All @Airports.Count Airports are included (IATA and ICAO)
+            </div>
+        }
+        else
+        {
+            <div class="text-light small font-weight-semibold mb-3">
+                Only @Airports.Count IATA airports are included
+            </div>
+        }
         <label class="switcher">
-            <input @bind ="IncludedICCO" type="checkbox" class="switcher-input">
+            <input @bind="IncludedICCO" type="checkbox" class="switcher-input">
             <span class="switcher-indicator">
                 <span class="switcher-yes">
                     <span class="ion ion-md-checkmark"></span>
@@ -25,7 +35,15 @@ else
                     <span class="ion ion-md-close"></span>
                 </span>
             </span>
-            <span class="switcher-label">Include non ICAO airports</span>
+            @if (IncludedICCO == true)
+            {
+                <span class="switcher-label text-light small font-weight-semibold mb-3">Exclude non IATA airports</span>
+            }
+            else
+            {
+                <span class="switcher-label text-light small font-weight-semibold mb-3">Include non IATA airports</span>
+            }
+
         </label>
     </div>
     <BlazorAgGrid TRow="AirportModel"
