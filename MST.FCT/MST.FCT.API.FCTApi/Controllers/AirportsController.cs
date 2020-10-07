@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MST.Flogging.Core.Attributes;
 
 namespace MST.FCT.API.FCTApi.Controllers
 {
@@ -28,6 +29,7 @@ namespace MST.FCT.API.FCTApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet()]
+        [LogUsage("GetAirports")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<AirportModel>>> GetAirports()
         {

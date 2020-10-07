@@ -1,4 +1,5 @@
-﻿using FCT.Data.Domain.Aviation;
+﻿using FCT.Data.Domain.Admin;
+using FCT.Data.Domain.Aviation;
 using FCT.Data.Domain.Flights;
 using FCT.Data.Domain.Geo;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace FCT.Data
         public DbSet<Flight> Flight { get; set; }
 
         //Admin
+        public DbSet<Log> Log { get; set; }
 
         //Geo
         public DbSet<Continent> Continent { get; set; }

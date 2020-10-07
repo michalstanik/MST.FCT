@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MST.Flogging.Core.Filters;
 
 namespace MST.FCT.API.FCTApi
 {
@@ -44,7 +45,10 @@ namespace MST.FCT.API.FCTApi
                 cfg.UseSqlServer(Configuration.GetConnectionString("FCTConnectionString"));
             });
 
-
+            services.AddMvc(setupAction =>
+            {
+                setupAction.Filters.Add(new TrackPerformanceFilter());
+            });
             services.AddControllers();
         }
 
