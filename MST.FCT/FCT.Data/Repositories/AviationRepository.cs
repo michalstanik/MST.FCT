@@ -3,6 +3,7 @@ using FCT.Data.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FCT.Data.Repositories
@@ -15,6 +16,13 @@ namespace FCT.Data.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        public async Task<Airport> GetAiportByIdAsync(int id)
+        {
+            return await _context.Airport
+                .Include(c => c.Country).Where(c => c.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Airport>> GetAllAirportsAsync()
         {
             return await _context.Airport.Include(c=> c.Country).ToListAsync();

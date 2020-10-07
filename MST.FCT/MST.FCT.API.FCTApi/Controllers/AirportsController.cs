@@ -21,7 +21,7 @@ namespace MST.FCT.API.FCTApi.Controllers
         public AirportsController(IAviationRepository repository, IMapper mapper)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper)) ;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         /// <summary>
@@ -36,6 +36,18 @@ namespace MST.FCT.API.FCTApi.Controllers
             var airportsFromRepo = await _repository.GetAllAirportsAsync();
 
             return Ok(_mapper.Map<List<AirportModel>>(airportsFromRepo));
+        }
+
+        [HttpGet("{id}")]
+        [LogUsage("GetAirport")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<AirportModel>> GetAirport(int id)
+        {
+            var airportFromRepo = await _repository.GetAiportByIdAsync(id);
+
+            if (airportFromRepo == null) return NotFound();
+
+            return Ok(_mapper.Map<AirportModel>(airportFromRepo));
         }
     }
 }

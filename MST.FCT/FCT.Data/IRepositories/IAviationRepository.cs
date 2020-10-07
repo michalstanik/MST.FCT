@@ -6,6 +6,7 @@ namespace FCT.Data.IRepositories
 {
     public interface IAviationRepository
     {
+        Task<Airport> GetAiportByIdAsync(int id);
         Task<IEnumerable<Airport>> GetAllAirportsAsync();
     }
 }
