@@ -38,6 +38,11 @@ namespace MST.FCT.API.FCTApi.Controllers
             return Ok(_mapper.Map<List<AirportModel>>(airportsFromRepo));
         }
 
+        /// <summary>
+        /// Get an Airport based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [LogUsage("GetAirport")]
         [ProducesResponseType(StatusCodes.Status200OK)]
