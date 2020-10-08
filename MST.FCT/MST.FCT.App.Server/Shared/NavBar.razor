@@ -1,26 +1,27 @@
-﻿
-<!-- Layout navbar -->
+﻿<!-- Layout navbar -->
 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-navbar-theme container-p-x" id="layout-navbar">
     <!-- Brand -->
     <a asp-page="/Index" class="navbar-brand">Flights & Countries & Travels</a>
 
     @if (!hideToggle)
     {<!-- Sidenav toggle -->
-                <div class="layout-sidenav-toggle navbar-nav align-items-lg-center mr-auto mr-lg-4">
-                    <a class="nav-item nav-link px-0 ml-2" href="javascript:void(0)">
-                        <i class="ion ion-md-menu text-large align-middle"></i>
-                    </a>
-                </div>}
+        <div class="layout-sidenav-toggle navbar-nav align-items-lg-center mr-auto mr-lg-4">
+            <a class="nav-item nav-link px-0 ml-2" href="javascript:void(0)">
+                <i class="ion ion-md-menu text-large align-middle"></i>
+            </a>
+        </div>}
 
     <!-- Navbar toggle -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#layout-navbar-collapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="layout-navbar-collapse">
-        <div class="navbar-nav align-items-lg-center">
-            <div class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://localhost:6001">API</a></div>
-            <div class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://localhost:5001">IDP</a></div>
-            <div class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://github.com/michalstanik/MST.FCT">Source Code</a></div>
+        <div class="navbar-nav align-items-lg-end">
+            <div class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://localhost:6001"><img class="navbar_icons" src="/icons/api-logo.png"/>API</a></div>
+            <div class="nav-item"><a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://localhost:5001"><img class="navbar_icons" src="/icons/idp-logo.png"/>IDP</a></div>
+            <div class="nav-item">
+                <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://github.com/michalstanik/MST.FCT"><img class="navbar_icons" src="/icons/git-hub-logo.jpg"/>Source Code</a>
+            </div>
         </div>
     </div>
 </nav>
