@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MST.Core.Helpers.Configuration.Interfaces;
+using MST.FCT.App.Server.Helpers;
 using MST.FCT.App.Server.Services;
 using System;
 
@@ -25,6 +27,9 @@ namespace MST.FCT.App.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureRootConfiguration(Configuration);
+            var rootConfiguration = services.BuildServiceProvider().GetService<IRootConfiguration>();
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
