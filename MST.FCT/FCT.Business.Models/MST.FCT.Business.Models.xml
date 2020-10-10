@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MST.FCT.Business.Models</name>
+    </assembly>
+    <members>
+        <member name="T:MST.FCT.Business.Models.Aviation.Airport.AirportModel">
+            <summary>
+            Airport Base Model with Id
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportModel.Id">
+            <summary>
+            The Id for a Trip
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -49,11 +49,7 @@ namespace IDP
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 180,
-                    RedirectUris =
-                    {
-                        "https://localhost:6001/api/oauth2-redirect.html"
-
-                    },
+                    RedirectUris = { "https://localhost:6001/api/oauth2-redirect.html" },
                     AllowedScopes = new []
                     {
                         "fctapi"

@@ -1,7 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <DocFile Include="bin\**\**\MST.FCT.API.FCTApi.xml" />
+      <DocFile Include="bin\**\**\MST.FCT.Business.Models.xml" />
+      <DocFile Include="bin\**\**\LoadData\airports.json" />
+      <DocFile Include="bin\**\**\LoadData\countries.json" />
+      <DocFile Include="bin\**\**\LoadData\WorldHeritage.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>MST.FCT.API.FCTApi.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

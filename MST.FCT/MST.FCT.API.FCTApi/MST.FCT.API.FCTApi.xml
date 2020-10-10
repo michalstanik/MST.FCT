@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MST.FCT.API.FCTApi</name>
+    </assembly>
+    <members>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.GetAirports">
+            <summary>
+            Get a list of all Airports
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.GetAirport(System.Int32)">
+            <summary>
+            Get an Airport based on Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Helpers.StartupHelpers.ConfigureRootConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configuration root configuration
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
