@@ -43,6 +43,7 @@
     <ProjectReference Include="..\FCT.Business.Models\MST.FCT.Business.Models.csproj" />
     <ProjectReference Include="..\FCT.Data\FCT.Data.csproj" />
     <ProjectReference Include="..\MST.Core.Helpers\MST.Core.Helpers.csproj" />
+    <ProjectReference Include="..\MST.FCT.Business.Polices\MST.FCT.Business.Polices.csproj" />
     <ProjectReference Include="..\MST.Logging.Core\MST.Flogging.Core.csproj" />
   </ItemGroup>
   

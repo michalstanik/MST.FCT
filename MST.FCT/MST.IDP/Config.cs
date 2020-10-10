@@ -15,7 +15,8 @@ namespace IDP
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResource("country", new [] { "country" })
+                new IdentityResource("country", new [] { "country" }),
+                new IdentityResource("roles", "Roles", new[] {"role"})
             };
 
         public static IEnumerable<ApiResource> Apis =>
@@ -23,7 +24,7 @@ namespace IDP
             {
                 new ApiResource("fctapi",
                     "FCT: Flights Countries Travels API",
-                    new [] { "country" })
+                    new [] { "country", "roles" })
             };
 
         public static IEnumerable<Client> Clients =>
@@ -40,7 +41,7 @@ namespace IDP
                     RedirectUris = { "https://localhost:7001/signin-oidc" },
                     PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "email", "fctapi", "country" }
+                    AllowedScopes = { "openid", "profile", "email", "fctapi", "country", "roles" }
                 },
                  new Client
                  {

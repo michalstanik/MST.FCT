@@ -54,6 +54,7 @@ namespace MST.FCT.App.Server
                 options.Scope.Add("email");
                 options.Scope.Add("fctapi");
                 options.Scope.Add("offline_access");
+                options.Scope.Add("roles");
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
             });

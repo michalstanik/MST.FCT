@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MST.Core.Helpers.Configuration.Interfaces;
 using MST.FCT.API.FCTApi.Helpers;
+using MST.FCT.Business.Polices;
 using MST.Flogging.Core.Filters;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,13 @@ namespace MST.FCT.API.FCTApi
             var requireAuthenticatedUserPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
+
+            services.AddAuthorization(authorizationOptions =>
+            {
+                authorizationOptions.AddPolicy(
+                    AviationPolices.CanManageAirportsDictonary,
+                    AviationPolices.CanManageAirportsDictonaryPolicy());
+            });
 
             // register an IHttpContextAccessor so we can access the current HttpContext in services by injecting it
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

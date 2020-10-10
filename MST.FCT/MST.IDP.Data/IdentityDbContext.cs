@@ -63,6 +63,13 @@ namespace MST.IDP.Data
                  UserId = new Guid("A98AAB29-5807-4487-94F8-08D857FDD95F"),
                  Type = "country",
                  Value = "pl"
+             },
+             new UserClaim()
+             {
+                 Id = Guid.NewGuid(),
+                 UserId = new Guid("A98AAB29-5807-4487-94F8-08D857FDD95F"),
+                 Type = "role",
+                 Value = "admin_aviation"
              });
         }
 
