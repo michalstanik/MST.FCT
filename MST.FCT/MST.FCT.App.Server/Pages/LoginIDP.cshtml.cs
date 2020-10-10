@@ -7,17 +7,21 @@ namespace MST.FCT.App.Server.Pages
 {
     public class LoginIDPModel : PageModel
     {
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string redirectUri)
         {
-            if (!HttpContext.User.Identity.IsAuthenticated)
+            if (string.IsNullOrWhiteSpace(redirectUri))
             {
-                await HttpContext.ChallengeAsync(OpenIdConnectDefaults.AuthenticationScheme);
+                redirectUri = Url.Content("~/");
             }
-            else
+
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                // redirect to the root
-                Response.Redirect(Url.Content("~/").ToString());
+                Response.Redirect(redirectUri);
             }
+
+            await HttpContext.ChallengeAsync(
+               OpenIdConnectDefaults.AuthenticationScheme,
+               new AuthenticationProperties { RedirectUri = redirectUri });
         }
     }
 }

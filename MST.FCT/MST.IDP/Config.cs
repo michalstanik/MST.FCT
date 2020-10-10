@@ -33,12 +33,13 @@ namespace IDP
                 {
                     ClientId = "fctserver",
                     ClientName = "FCT: Flights Countries Travels App",
-                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    RequirePkce = true,
+                    AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = { new Secret("108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0".Sha256()) },
                     RedirectUris = { "https://localhost:7001/signin-oidc" },
                     PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
-                    AllowOfflineAccess = true,
-                    RequireConsent = false,
+                    //AllowOfflineAccess = true,
+                    //RequireConsent = true,
                     AllowedScopes = { "openid", "profile", "email", "fctapi", "country" }
                 }
             };

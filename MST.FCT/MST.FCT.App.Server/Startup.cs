@@ -44,18 +44,17 @@ namespace MST.FCT.App.Server
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme,
             options =>
             {
+                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.Authority = "https://localhost:5001";
                 options.ClientId = "fctserver";
                 options.ClientSecret = "108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0";
-                options.ResponseType = "code id_token";
+                options.ResponseType = "code";
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("fctapi");
-                 //options.CallbackPath = ...
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
-
             });
 
             services.AddHttpClient<IAirportDataService, AirportDataService>(client =>

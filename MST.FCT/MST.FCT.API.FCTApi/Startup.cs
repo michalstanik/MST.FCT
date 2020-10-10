@@ -3,9 +3,12 @@ using FCT.Data;
 using FCT.Data.IRepositories;
 using FCT.Data.Repositories;
 using FCT.Data.Seeders;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +29,11 @@ namespace MST.FCT.API.FCTApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var requireAuthenticatedUserPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+
             // register an IHttpContextAccessor so we can access the current HttpContext in services by injecting it
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -45,11 +53,23 @@ namespace MST.FCT.API.FCTApi
                 cfg.UseSqlServer(Configuration.GetConnectionString("FCTConnectionString"));
             });
 
-            services.AddMvc(setupAction =>
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+
+            services.AddControllers(setupAction =>
             {
                 setupAction.Filters.Add(new TrackPerformanceFilter());
+                setupAction.Filters.Add(new AuthorizeFilter(requireAuthenticatedUserPolicy));
             });
-            services.AddControllers();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            .AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "https://localhost:5001/";
+                options.ApiName = "fctapi";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +81,8 @@ namespace MST.FCT.API.FCTApi
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
