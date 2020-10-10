@@ -1,7 +1,29 @@
-﻿<CascadingAuthenticationState>
+﻿@inject MST.FCT.App.Server.Services.TokenProvider TokenProvider
+
+@code {
+    [Parameter]
+    public MST.FCT.App.Server.Services.InitialApplicationState InitialState { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        TokenProvider.XsrfToken = InitialState.XsrfToken;
+        TokenProvider.AccessToken = InitialState.AccessToken;
+        TokenProvider.RefreshToken = InitialState.RefreshToken;
+        TokenProvider.ExpiresAt = InitialState.ExpiresAt;
+
+        return base.OnInitializedAsync();
+    }
+}
+
+<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly">
         <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    <h1>Sorry, you're not authorized to view this page.</h1>
+                    <p>You may want to try logging in (as someone with the necessary authorization).</p>
+                </NotAuthorized>
+            </AuthorizeRouteView>
         </Found>
         <NotFound>
             <LayoutView Layout="@typeof(MainLayout)">

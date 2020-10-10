@@ -53,6 +53,7 @@ namespace MST.FCT.App.Server
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
                 options.Scope.Add("fctapi");
+                options.Scope.Add("offline_access");
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
             });
@@ -61,6 +62,10 @@ namespace MST.FCT.App.Server
             {
                 client.BaseAddress = new Uri("https://localhost:6001/");
             });
+
+
+            services.AddScoped<TokenProvider>();
+            services.AddScoped<TokenManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
