@@ -13,7 +13,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using MST.Core.Helpers.Configuration.Interfaces;
+using MST.FCT.API.FCTApi.Helpers;
 using MST.Flogging.Core.Filters;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace MST.FCT.API.FCTApi
 {
@@ -29,10 +36,12 @@ namespace MST.FCT.API.FCTApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureRootConfiguration(Configuration);
+            var rootConfiguration = services.BuildServiceProvider().GetService<IRootConfiguration>();
+
             var requireAuthenticatedUserPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
-
 
             // register an IHttpContextAccessor so we can access the current HttpContext in services by injecting it
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -57,6 +66,55 @@ namespace MST.FCT.API.FCTApi
             {
                 options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("FCTOpenAPISpecification",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "FCT API",
+                        Version = "1"
+                    });
+
+                //setupAction.OperationFilter<TripOperationFilter>();
+                //setupAction.OperationFilter<RegionOperationFilter>();
+                //setupAction.OperationFilter<FlightOperationFilter>();
+
+                setupAction.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = rootConfiguration.AuthConfiguration.STSApiAuthorizeUrl,
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { rootConfiguration.AuthConfiguration.STSApiName,
+                                  rootConfiguration.AuthConfiguration.STSApiDescription
+                                },
+                            }
+                        }
+                    }
+                });
+
+                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                        },
+                        new[] { rootConfiguration.AuthConfiguration.STSApiName }
+                    }
+                });
+                //Use of reflection to cobime a XML document with assembly path
+                //var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlCommentFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+                //var xmlBussinessModelsPath = Path.Combine(AppContext.BaseDirectory, "MCB.Business.Models.xml");
+
+                //setupAction.IncludeXmlComments(xmlCommentFullPath);
+                //setupAction.IncludeXmlComments(xmlBussinessModelsPath);
+            });
 
             services.AddControllers(setupAction =>
             {
@@ -75,12 +133,30 @@ namespace MST.FCT.API.FCTApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var confScope = app.ApplicationServices.CreateScope();
+            var rootConfiguration = confScope.ServiceProvider.GetService<IRootConfiguration>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();
+
+            #region SwagerUI
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint("/swagger/FCTOpenAPISpecification/swagger.json", "FCT API");
+                setupAction.RoutePrefix = "api";
+
+                setupAction.OAuthClientId(rootConfiguration.AuthConfiguration.STSOAuthClientId);
+            });
+            # endregion SwagerUI
 
             app.UseAuthentication();
 

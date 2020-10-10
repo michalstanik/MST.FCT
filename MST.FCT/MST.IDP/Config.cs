@@ -41,6 +41,23 @@ namespace IDP
                     PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "email", "fctapi", "country" }
+                },
+                 new Client
+                 {
+                    ClientId = "fct_api_swagger",
+                    ClientName = "Swagger UI for FCT",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    AccessTokenLifetime = 180,
+                    RedirectUris =
+                    {
+                        "https://localhost:6001/api/oauth2-redirect.html"
+
+                    },
+                    AllowedScopes = new []
+                    {
+                        "fctapi"
+                    }
                 }
             };
 
