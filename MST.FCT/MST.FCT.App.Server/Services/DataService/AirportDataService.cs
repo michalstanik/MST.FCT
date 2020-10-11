@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 
-namespace MST.FCT.App.Server.Services
+namespace MST.FCT.App.Server.Services.DataService
 {
     public class AirportDataService : IAirportDataService
     {
