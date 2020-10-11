@@ -11,6 +11,7 @@ namespace MST.FCT.App.GridLibrary
         [Parameter] public string Field { get; set; }
         [Parameter] public bool Sortable { get; set; }
         [Parameter] public bool Filter { get; set; }
+        [Parameter] public string HtmlStyle { get; set; }
 
         protected override void OnParametersSet()
         {

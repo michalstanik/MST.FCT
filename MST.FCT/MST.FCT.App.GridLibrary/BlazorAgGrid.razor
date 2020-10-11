@@ -42,6 +42,7 @@
                     });
                 }
             }
+
             await JSRuntime.InvokeVoidAsync("blazorAgGrid.initialize",
                 _componentId, _gridDivReference, DotNetObjectReference.Create(this));
         }

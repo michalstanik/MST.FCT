@@ -52,6 +52,8 @@ else
                   OnSelectionChanged="GridSelectionChanged">
         <BlazorAgGridColumn HeaderName="Name" Field="Name"
                             Sortable="true" Filter="true"></BlazorAgGridColumn>
+        <BlazorAgGridColumn HeaderName="Country Code" Field="CountryAlpha3Code"
+                            Sortable="false" Filter="false"></BlazorAgGridColumn>
         <BlazorAgGridColumn HeaderName="Country" Field="CountryName"
                             Sortable="true" Filter="true"></BlazorAgGridColumn>
         <BlazorAgGridColumn HeaderName="ICAO" Field="Icao"
