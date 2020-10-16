@@ -19,6 +19,7 @@ namespace MST.FCT.App.GridLibrary
             _columnDef.Field = Field;
             _columnDef.Sortable = Sortable;
             _columnDef.Filter = Filter;
+            _columnDef.HtmlStyle = HtmlStyle;
         }
 
         [CascadingParameter]

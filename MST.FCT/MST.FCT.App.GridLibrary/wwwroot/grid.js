@@ -27,6 +27,7 @@
             this.gridOptionsByComponentId[componentId].api.setRowData(rowData);
         },
         setColumnDefs: function (componentId, columnDefs) {
+
             this.gridOptionsByComponentId[componentId].api.setColumnDefs(columnDefs);
         },
         dispose: function (componentId) {

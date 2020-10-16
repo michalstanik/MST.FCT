@@ -12,40 +12,41 @@
 }
 else
 {
-    <div class="card-body">
+<div class="card-body">
+    @if (IncludedICCO == true)
+    {
+        <div class="text-light small font-weight-semibold mb-3">
+            All @Airports.Count Airports are included (IATA and ICAO)
+        </div>
+    }
+    else
+    {
+        <div class="text-light small font-weight-semibold mb-3">
+            Only @Airports.Count IATA airports are included
+        </div>
+    }
+    <label class="switcher">
+        <input @bind="IncludedICCO" type="checkbox" class="switcher-input">
+        <span class="switcher-indicator">
+            <span class="switcher-yes">
+                <span class="ion ion-md-checkmark"></span>
+            </span>
+            <span class="switcher-no">
+                <span class="ion ion-md-close"></span>
+            </span>
+        </span>
         @if (IncludedICCO == true)
         {
-            <div class="text-light small font-weight-semibold mb-3">
-                All @Airports.Count Airports are included (IATA and ICAO)
-            </div>
+            <span class="switcher-label text-light small font-weight-semibold mb-3">Exclude non IATA airports</span>
         }
         else
         {
-            <div class="text-light small font-weight-semibold mb-3">
-                Only @Airports.Count IATA airports are included
-            </div>
+            <span class="switcher-label text-light small font-weight-semibold mb-3">Include non IATA airports</span>
         }
-        <label class="switcher">
-            <input @bind="IncludedICCO" type="checkbox" class="switcher-input">
-            <span class="switcher-indicator">
-                <span class="switcher-yes">
-                    <span class="ion ion-md-checkmark"></span>
-                </span>
-                <span class="switcher-no">
-                    <span class="ion ion-md-close"></span>
-                </span>
-            </span>
-            @if (IncludedICCO == true)
-            {
-                <span class="switcher-label text-light small font-weight-semibold mb-3">Exclude non IATA airports</span>
-            }
-            else
-            {
-                <span class="switcher-label text-light small font-weight-semibold mb-3">Include non IATA airports</span>
-            }
 
-        </label>
-    </div>
+    </label>
+    <button @onclick="@QuickAddAirport" class="btn-facebook">Add</button>
+</div>
     <BlazorAgGrid TRow="AirportModel"
                   AutoGenerateColumns="false"
                   RowData="Airports"
@@ -53,7 +54,8 @@ else
         <BlazorAgGridColumn HeaderName="Name" Field="Name"
                             Sortable="true" Filter="true"></BlazorAgGridColumn>
         <BlazorAgGridColumn HeaderName="Country Code" Field="CountryAlpha3Code"
-                            Sortable="false" Filter="false"></BlazorAgGridColumn>
+                            Sortable="false" Filter="false" HtmlStyle="<H1>$<H1>">
+        </BlazorAgGridColumn>
         <BlazorAgGridColumn HeaderName="Country" Field="CountryName"
                             Sortable="true" Filter="true"></BlazorAgGridColumn>
         <BlazorAgGridColumn HeaderName="ICAO" Field="Icao"
@@ -74,6 +76,7 @@ else
         </div>}
 }
 
+<AddAirportDialog @ref="AddAirportDialog"></AddAirportDialog>
 @code {
     private ElementReference _gridDivReference;
 }

@@ -16,8 +16,8 @@ namespace MST.FCT.App.Server.Pages.Airports
         [Inject]
         public IAirportDataService AirportDataService { get; set; }
 
-        public List<AirportModel> Airports 
-        { 
+        public List<AirportModel> Airports
+        {
             get => airports;
             set
             {
@@ -28,6 +28,8 @@ namespace MST.FCT.App.Server.Pages.Airports
 
 
         public AirportModel SelectedAirport { get; set; }
+
+        protected AddAirportDialog AddAirportDialog { get; set; }
 
         public bool IncludedICCO
         {
@@ -48,6 +50,12 @@ namespace MST.FCT.App.Server.Pages.Airports
         private void GridSelectionChanged(AirportModel airport)
         {
             SelectedAirport = airport;
+        }
+
+        protected void QuickAddAirport()
+        {
+            AddAirportDialog.Show();
+
         }
 
         private async void IncludeIcao(bool includeICCAO)
