@@ -12,6 +12,7 @@ using MST.Core.Helpers.Configuration.Interfaces;
 using MST.FCT.App.Server.Helpers;
 using MST.FCT.App.Server.Services;
 using MST.FCT.App.Server.Services.DataService;
+using MST.FCT.Business.Services;
 using System;
 
 namespace MST.FCT.App.Server
@@ -64,6 +65,10 @@ namespace MST.FCT.App.Server
             });
 
             services.AddHttpClient<IAirportDataService, AirportDataService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:6001/");
+            });
+            services.AddHttpClient<ICountryDataService, CountryDataService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:6001/");
             });

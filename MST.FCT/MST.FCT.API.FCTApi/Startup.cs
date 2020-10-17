@@ -63,6 +63,7 @@ namespace MST.FCT.API.FCTApi
 
             #region Repositories
             services.AddScoped<IAviationRepository, AviationRepository>();
+            services.AddScoped<IGeoRepository, GeoRepository>();
             # endregion Repositories
 
             services.AddDbContext<FCTContext>(cfg =>

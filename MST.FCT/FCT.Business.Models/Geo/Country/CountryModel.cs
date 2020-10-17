@@ -9,5 +9,6 @@ namespace MST.FCT.Business.Models.Geo.Country
     {
         public int Id { get; set; }
         public string RegionName { get; set; }
+        public string RegionContinentName { get; set; }
     }
 }
