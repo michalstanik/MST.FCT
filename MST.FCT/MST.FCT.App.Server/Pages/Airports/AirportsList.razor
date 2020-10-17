@@ -3,51 +3,52 @@
 @inject IJSRuntime JSRuntime
 @inject IModalService Modal
 
+<button @onclick="@(() => Modal.Show<AddAirportDialog>("Add New Airport"))" class="btn-facebook">Add New Airport</button>
 
-@if (Airports == null)
-{<h4>Airports</h4>
-    <div class="sk-bounce sk-primary">
+@if (Airports == null) 
+{ 
+    <div class="sk-bounce sk-primary" id="center-loader">
         <div class="sk-bounce-dot"></div>
         <div class="sk-bounce-dot"></div>
     </div>
 }
 else
 {
-<div class="card-body">
-    @if (IncludedICCO == true)
-    {
-        <div class="text-light small font-weight-semibold mb-3">
-            All @Airports.Count Airports are included (IATA and ICAO)
-        </div>
-    }
-    else
-    {
-        <div class="text-light small font-weight-semibold mb-3">
-            Only @Airports.Count IATA airports are included
-        </div>
-    }
-    <label class="switcher">
-        <input @bind="IncludedICCO" type="checkbox" class="switcher-input">
-        <span class="switcher-indicator">
-            <span class="switcher-yes">
-                <span class="ion ion-md-checkmark"></span>
-            </span>
-            <span class="switcher-no">
-                <span class="ion ion-md-close"></span>
-            </span>
-        </span>
+    <div class="card-body">
         @if (IncludedICCO == true)
         {
-            <span class="switcher-label text-light small font-weight-semibold mb-3">Exclude non IATA airports</span>
+            <div class="text-light small font-weight-semibold mb-3">
+                All @Airports.Count Airports are included (IATA and ICAO)
+            </div>
         }
         else
         {
-            <span class="switcher-label text-light small font-weight-semibold mb-3">Include non IATA airports</span>
+            <div class="text-light small font-weight-semibold mb-3">
+                Only @Airports.Count IATA airports are included
+            </div>
         }
+        <label class="switcher">
+            <input @bind="IncludedICCO" type="checkbox" class="switcher-input">
+            <span class="switcher-indicator">
+                <span class="switcher-yes">
+                    <span class="ion ion-md-checkmark"></span>
+                </span>
+                <span class="switcher-no">
+                    <span class="ion ion-md-close"></span>
+                </span>
+            </span>
+            @if (IncludedICCO == true)
+            {
+                <span class="switcher-label text-light small font-weight-semibold mb-3">Exclude non IATA airports</span>
+            }
+            else
+            {
+                <span class="switcher-label text-light small font-weight-semibold mb-3">Include non IATA airports</span>
+            }
 
-    </label>
-    <button @onclick="@(() => Modal.Show<AddAirportDialog>("Add new Airport"))" class="btn-facebook">Add</button>
-</div>
+        </label>
+
+    </div>
     <BlazorAgGrid TRow="AirportModel"
                   AutoGenerateColumns="false"
                   RowData="Airports"

@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
 using MST.FCT.App.Server.Services.DataService;
+using MST.FCT.Business.Models.Aviation.Airport;
 using MST.FCT.Business.Models.Geo.Country;
 using MST.FCT.Business.Services;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace MST.FCT.App.Server.Pages.Airports
         public ICountryDataService CountryDataService { get; set; }
 
         public List<CountryModel> Countries { get; set; }
+
+        public AirportModel Airport { get; set; } = new AirportModel();
 
         public bool ShowDialog { get; set; }
 
