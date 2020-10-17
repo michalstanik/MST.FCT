@@ -4,6 +4,26 @@
         <name>MST.FCT.Business.Models</name>
     </assembly>
     <members>
+        <member name="T:MST.FCT.Business.Models.Aviation.Airport.AirportForCreationModel">
+            <summary>
+            Airport Base Model used for creation
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportForCreationModel.Name">
+            <summary>
+            Name of the Airport - Limited to 50 length
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportForCreationModel.ICAO">
+            <summary>
+            ICAO code - 4 letters code
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportForCreationModel.Country">
+            <summary>
+            Id for a Cuntry entity
+            </summary>
+        </member>
         <member name="T:MST.FCT.Business.Models.Aviation.Airport.AirportModel">
             <summary>
             Airport Base Model with Id
@@ -12,6 +32,26 @@
         <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportModel.Id">
             <summary>
             The Id for a Trip
+            </summary>
+        </member>
+        <member name="T:MST.FCT.Business.Models.Geo.Base.CountryAbstractBase">
+            <summary>
+            Base model for Country
+            </summary>
+        </member>
+        <member name="T:MST.FCT.Business.Models.Geo.Country.CountryModel">
+            <summary>
+            Country Model
+            </summary>
+        </member>
+        <member name="T:FCT.Business.Models.Aviation.Base.AirportAbstractBase">
+            <summary>
+            Airport base fields
+            </summary>
+        </member>
+        <member name="P:FCT.Business.Models.Aviation.Base.AirportAbstractBase.Name">
+            <summary>
+            Name of the Airport
             </summary>
         </member>
     </members>

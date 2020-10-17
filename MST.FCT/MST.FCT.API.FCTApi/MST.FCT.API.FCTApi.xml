@@ -17,6 +17,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.CreateAirport(MST.FCT.Business.Models.Aviation.Airport.AirportForCreationModel)">
+            <summary>
+            Create new Airport
+            </summary>
+            <param name="airport"></param>
+            <returns></returns>
+        </member>
         <member name="M:MST.FCT.API.FCTApi.Helpers.StartupHelpers.ConfigureRootConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Configuration root configuration
@@ -24,6 +31,16 @@
             <param name="services"></param>
             <param name="configuration"></param>
             <returns></returns>
+        </member>
+        <member name="T:MST.FCT.API.FCTApi.Profiles.AviationProfile">
+            <summary>
+            AutoMapper for Aviation
+            </summary>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Profiles.AviationProfile.#ctor">
+            <summary>
+            AutoMapper for Aviation - Constructor
+            </summary>
         </member>
     </members>
 </doc>

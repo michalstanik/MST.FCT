@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MST.Flogging.Core.Attributes;
+using FCT.Data.Domain.Aviation;
 
 namespace MST.FCT.API.FCTApi.Controllers
 {
@@ -53,6 +54,30 @@ namespace MST.FCT.API.FCTApi.Controllers
             if (airportFromRepo == null) return NotFound();
 
             return Ok(_mapper.Map<AirportModel>(airportFromRepo));
+        }
+
+        /// <summary>
+        /// Create new Airport
+        /// </summary>
+        /// <param name="airport"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> CreateAirport([FromBody] AirportForCreationModel airport)
+        {
+            if (airport == null)
+                return BadRequest();
+
+            if (airport.Name == string.Empty)
+            {
+                ModelState.AddModelError("Name", "The name shouldn't be empty");
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var createdAirport = await _repository.AddAirportAsync(_mapper.Map<Airport>(airport));
+
+            return Created("airport", createdAirport);
         }
     }
 }

@@ -11,5 +11,7 @@ namespace MST.FCT.Business.Models.Aviation.Airport
         /// The Id for a Trip
         /// </summary>
         public int Id { get; set; }
+        public string CountryAlpha3Code { get; set; }
+        public string CountryName { get; set; }
     }
 }

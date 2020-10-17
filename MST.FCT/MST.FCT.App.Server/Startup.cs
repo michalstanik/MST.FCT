@@ -1,3 +1,4 @@
+using Blazored.Modal;
 using FCT.Business.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -33,6 +34,8 @@ namespace MST.FCT.App.Server
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddBlazoredModal();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

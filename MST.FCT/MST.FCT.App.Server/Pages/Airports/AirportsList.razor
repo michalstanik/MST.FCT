@@ -1,6 +1,7 @@
 ﻿@page "/airports"
 @attribute [Authorize]
 @inject IJSRuntime JSRuntime
+@inject IModalService Modal
 
 
 @if (Airports == null)
@@ -45,7 +46,7 @@ else
         }
 
     </label>
-    <button @onclick="@QuickAddAirport" class="btn-facebook">Add</button>
+    <button @onclick="@(() => Modal.Show<AddAirportDialog>("Add new Airport"))" class="btn-facebook">Add</button>
 </div>
     <BlazorAgGrid TRow="AirportModel"
                   AutoGenerateColumns="false"
@@ -76,7 +77,6 @@ else
         </div>}
 }
 
-<AddAirportDialog @ref="AddAirportDialog"></AddAirportDialog>
 @code {
     private ElementReference _gridDivReference;
 }
