@@ -4,9 +4,15 @@
 @inject IModalService Modal
 
 <button @onclick="@(() => Modal.Show<AddAirportDialog>("Add New Airport"))" class="btn-facebook">Add New Airport</button>
+@if (SelectedAirport != null)
+{
+    <button class="btn-facebook" href="airportdetail/@SelectedAirport.Id">View: @SelectedAirport.ICAO</button>
+    <button class="btn-facebook" href="airporedit/@SelectedAirport.Id">Edit: @SelectedAirport.ICAO</button>
+    <button class="btn-facebook" href="airportdetail/@SelectedAirport.Id">Delete: @SelectedAirport.ICAO</button>
+}
 
-@if (Airports == null) 
-{ 
+@if (Airports == null)
+{
     <div class="sk-bounce sk-primary" id="center-loader">
         <div class="sk-bounce-dot"></div>
         <div class="sk-bounce-dot"></div>
@@ -75,7 +81,8 @@ else
                 <a class="btn btn-secondary" href="airporedit/@SelectedAirport.Id">edit</a>
                 <a class="btn btn-secondary" href="airportdetail/@SelectedAirport.Id">view</a>
             </div>
-        </div>}
+        </div>
+    }
 }
 
 @code {

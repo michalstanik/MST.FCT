@@ -54,7 +54,6 @@ namespace MST.FCT.App.Server.Pages.Airports
 
         protected void QuickAddAirport()
         {
-            AddAirportDialog.Show();
 
         }
 
@@ -63,6 +62,7 @@ namespace MST.FCT.App.Server.Pages.Airports
             if (includeICCAO)
             {
                 Airports = null;
+                SelectedAirport = null;
                 Airports = (await AirportDataService.GetAllAirports()).ToList();
             }
             else

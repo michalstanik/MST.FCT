@@ -7,5 +7,6 @@ namespace FCT.Business.Services
     public interface IAirportDataService
     {
         Task<IEnumerable<AirportModel>> GetAllAirports();
+        Task<AirportModel> AddAirport(AirportModel airport);
     }
 }

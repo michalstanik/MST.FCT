@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using System.Text;
 
 namespace MST.FCT.App.Server.Services.DataService
 {
@@ -17,6 +18,23 @@ namespace MST.FCT.App.Server.Services.DataService
         {
             _httpClient = httpClient;
             _tokenManager = tokenManager;
+        }
+
+        public async Task<AirportModel> AddAirport(AirportModel airport)
+        {
+            _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());
+
+            var employeeJson =
+                new StringContent(JsonSerializer.Serialize(airport), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("api/airports", employeeJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<AirportModel>(await response.Content.ReadAsStreamAsync());
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<AirportModel>> GetAllAirports()
