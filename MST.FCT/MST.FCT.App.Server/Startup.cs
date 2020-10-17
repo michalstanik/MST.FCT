@@ -1,4 +1,5 @@
 using Blazored.Modal;
+using Blazored.Toast;
 using FCT.Business.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -37,6 +38,7 @@ namespace MST.FCT.App.Server
             services.AddServerSideBlazor();
 
             services.AddBlazoredModal();
+            services.AddBlazoredToast();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

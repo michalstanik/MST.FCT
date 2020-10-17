@@ -1,4 +1,5 @@
 ﻿using Blazored.Modal;
+using Blazored.Toast.Services;
 using FCT.Business.Services;
 using Microsoft.AspNetCore.Components;
 using MST.FCT.Business.Models.Aviation.Airport;
@@ -15,6 +16,8 @@ namespace MST.FCT.App.Server.Pages.Airports
         [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
 
         [Inject]
+        public IToastService ToastService { get; set; }
+        [Inject]
         public ICountryDataService CountryDataService { get; set; }
         [Inject]
         public IAirportDataService AirportDataService { get; set; }
@@ -29,7 +32,12 @@ namespace MST.FCT.App.Server.Pages.Airports
         }
         protected async Task HandleValidSubmit()
         {
-            await AirportDataService.AddAirport(Airport);
+            var response = await AirportDataService.AddAirport(Airport);
+            if(response != null)
+            {
+                await BlazoredModal.Close();
+                ToastService.ShowSuccess($"New Airport {response.ICAO} was created");
+            }
 
             //await CloseEventCallback.InvokeAsync(true);
             StateHasChanged();

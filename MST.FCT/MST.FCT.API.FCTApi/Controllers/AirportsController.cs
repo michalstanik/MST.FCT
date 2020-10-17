@@ -77,7 +77,7 @@ namespace MST.FCT.API.FCTApi.Controllers
 
             var createdAirport = await _repository.AddAirportAsync(_mapper.Map<Airport>(airport));
 
-            return Created("airport", createdAirport);
+            return Created("airports", createdAirport);
         }
     }
 }
