@@ -79,5 +79,23 @@ namespace MST.FCT.API.FCTApi.Controllers
 
             return Created("airports", createdAirport);
         }
+        /// <summary>
+        /// Delete the airport
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteAirport(int id)
+        {
+            if (id == 0) return BadRequest();
+
+            var airportToDelete = await _repository.GetAiportByIdAsync(id);
+            
+            if (airportToDelete == null) return NotFound();
+
+            await _repository.DeleteAirportAsync(airportToDelete.Id);
+
+            return NoContent();
+        }
     }
 }

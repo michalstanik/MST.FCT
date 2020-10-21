@@ -24,6 +24,15 @@ namespace FCT.Data.Repositories
             return addedEntity.Entity;
         }
 
+        public async Task DeleteAirportAsync(int id)
+        {
+            var foundAirport = _context.Airport.FirstOrDefault(e => e.Id == id);
+            if (foundAirport == null) return;
+
+            _context.Airport.Remove(foundAirport);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Airport> GetAiportByIdAsync(int id)
         {
             return await _context.Airport

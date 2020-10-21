@@ -6,9 +6,9 @@
 <button @onclick="@(() => Modal.Show<AddAirportDialog>("Add New Airport"))" class="btn-facebook">Add New Airport</button>
 @if (SelectedAirport != null)
 {
-    <button class="btn-facebook" href="airportdetail/@SelectedAirport.Id">View: @SelectedAirport.ICAO</button>
-    <button class="btn-facebook" href="airporedit/@SelectedAirport.Id">Edit: @SelectedAirport.ICAO</button>
-    <button class="btn-facebook" href="airportdetail/@SelectedAirport.Id">Delete: @SelectedAirport.ICAO</button>
+    <button class="btn-facebook" href="airportdetail/@SelectedAirport.Id">View Airport: @SelectedAirport.ICAO</button>
+    <button class="btn-facebook" href="airporedit/@SelectedAirport.Id">Edit Airport: @SelectedAirport.ICAO</button>
+    <button class="btn-facebook" href="airportdetail/@SelectedAirport.Id">Delete Airport: @SelectedAirport.ICAO</button>
 }
 
 @if (Airports == null)

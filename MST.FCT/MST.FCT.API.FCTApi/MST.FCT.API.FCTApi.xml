@@ -24,6 +24,13 @@
             <param name="airport"></param>
             <returns></returns>
         </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.DeleteAirport(System.Int32)">
+            <summary>
+            Delete the airport
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:MST.FCT.API.FCTApi.Controllers.CountriesController">
             <summary>
             API Controller for Countries

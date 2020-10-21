@@ -8,6 +8,7 @@ namespace FCT.Data.IRepositories
     {
         Task<Airport> GetAiportByIdAsync(int id);
         Task<IEnumerable<Airport>> GetAllAirportsAsync();
-        Task<Airport> AddAirportAsync(Airport airport); 
+        Task<Airport> AddAirportAsync(Airport airport);
+        Task DeleteAirportAsync(int id);
     }
 }
