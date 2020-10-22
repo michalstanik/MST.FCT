@@ -156,6 +156,7 @@ namespace MST.FCT.API.FCTApi
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
             .AddIdentityServerAuthentication(options =>
             {
+                //TODO: Move url to the config file 
                 options.Authority = "https://localhost:5001/";
                 options.ApiName = "fctapi";
             });

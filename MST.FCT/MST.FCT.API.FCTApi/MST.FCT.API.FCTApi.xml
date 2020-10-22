@@ -17,6 +17,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.GetAirportWithFlights(System.Int32)">
+            <summary>
+            Get an Airport based on Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.CreateAirport(MST.FCT.Business.Models.Aviation.Airport.AirportForCreationModel)">
             <summary>
             Create new Airport
@@ -63,6 +70,18 @@
             <param name="services"></param>
             <param name="configuration"></param>
             <returns></returns>
+        </member>
+        <member name="T:MST.FCT.API.FCTApi.OperationFilters.AirportsOperationFilters">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.OperationFilters.AirportsOperationFilters.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
         </member>
         <member name="T:MST.FCT.API.FCTApi.Profiles.AviationProfile">
             <summary>

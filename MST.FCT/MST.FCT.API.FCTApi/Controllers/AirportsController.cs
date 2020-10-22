@@ -67,6 +67,25 @@ namespace MST.FCT.API.FCTApi.Controllers
         }
 
         /// <summary>
+        /// Get an Airport based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        [LogUsage("GetAirportWithFlights")]
+        [Produces(AirportRequestHeaders.AirportWithFlights)]
+        [RequestHeaderMatchesMediaType("Accept", AirportRequestHeaders.AirportWithFlights)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<ActionResult<AirportModel>> GetAirportWithFlights(int id)
+        {
+            var airportFromRepo = await _repository.GetAiportByIdAsync(id);
+
+            if (airportFromRepo == null) return NotFound();
+
+            return Ok(_mapper.Map<AirportWithFlightsModel>(airportFromRepo));
+        }
+
+        /// <summary>
         /// Create new Airport
         /// </summary>
         /// <param name="airport"></param>
