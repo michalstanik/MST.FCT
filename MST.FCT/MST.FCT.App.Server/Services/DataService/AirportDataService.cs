@@ -37,6 +37,14 @@ namespace MST.FCT.App.Server.Services.DataService
             return null;
         }
 
+        public async Task<AirportModel> GetAirportById(int id)
+        {
+            _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());
+
+            return await JsonSerializer.DeserializeAsync<AirportModel>
+                (await _httpClient.GetStreamAsync($"api/airports/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
         public async Task<IEnumerable<AirportModel>> GetAllAirports()
         {
             _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());

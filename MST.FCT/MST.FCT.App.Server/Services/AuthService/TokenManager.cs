@@ -40,6 +40,7 @@ namespace MST.FCT.App.Server.Services
             var refreshResponse = await idpClient.RequestRefreshTokenAsync(
                new RefreshTokenRequest
                {
+                   //TODO: Fix issue with 404 for expiration
                    Address = discoveryReponse.TokenEndpoint,
                    ClientId = "fctserver",
                    ClientSecret = "108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0",

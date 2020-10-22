@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using Blazored.Modal;
+using Blazored.Modal.Services;
 
 namespace MST.FCT.App.Server.Pages.Airports
 {
@@ -15,6 +17,7 @@ namespace MST.FCT.App.Server.Pages.Airports
 
         [Inject]
         public IAirportDataService AirportDataService { get; set; }
+        [CascadingParameter] public IModalService Modal { get; set; }
 
         public List<AirportModel> Airports
         {
@@ -30,6 +33,8 @@ namespace MST.FCT.App.Server.Pages.Airports
         public AirportModel SelectedAirport { get; set; }
 
         protected AddAirportDialog AddAirportDialog { get; set; }
+
+        protected DeleteAirportDialog DeleteAirportDialog { get; set; }
 
         public bool IncludedICCO
         {
@@ -74,6 +79,14 @@ namespace MST.FCT.App.Server.Pages.Airports
                     Airports = Airports.Where(c => !string.IsNullOrWhiteSpace(c.IATA)).ToList();
                 }
             }
+        }
+
+        private void ShowDeleteAirportModal(int airportId)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(DeleteAirportDialog.AirportId), airportId);
+
+            Modal.Show<DeleteAirportDialog>("Delete Airport", parameters);
         }
     }
 }
