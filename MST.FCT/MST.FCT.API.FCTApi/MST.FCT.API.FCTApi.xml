@@ -4,6 +4,18 @@
         <name>MST.FCT.API.FCTApi</name>
     </assembly>
     <members>
+        <member name="T:MST.FCT.API.FCTApi.Controllers.AirportsController">
+            <summary>
+            API Controller for Airports
+            </summary>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.#ctor(FCT.Data.IRepositories.IAviationRepository,AutoMapper.IMapper)">
+            <summary>
+            AirportsController Constructor
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
         <member name="M:MST.FCT.API.FCTApi.Controllers.AirportsController.GetAirports">
             <summary>
             Get a list of all Airports

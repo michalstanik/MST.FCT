@@ -13,6 +13,9 @@ using MST.FCT.Business.Services.RequestHeaders;
 
 namespace MST.FCT.API.FCTApi.Controllers
 {
+    /// <summary>
+    /// API Controller for Airports
+    /// </summary>
     [Route("api/airports/")]
     [Produces("application/json")]
     [ApiController]
@@ -21,6 +24,11 @@ namespace MST.FCT.API.FCTApi.Controllers
         private readonly IAviationRepository _repository;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// AirportsController Constructor
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="mapper"></param>
         public AirportsController(IAviationRepository repository, IMapper mapper)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));

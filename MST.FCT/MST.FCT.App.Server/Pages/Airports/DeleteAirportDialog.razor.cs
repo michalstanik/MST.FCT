@@ -15,12 +15,12 @@ namespace MST.FCT.App.Server.Pages.Airports
 
         [Parameter] public int AirportId { get; set; }
 
-        AirportModel Airport { get; set; }
+        AirportWithFlightsModel Airport { get; set; }
 
 
         protected override async Task OnInitializedAsync()
         {
-            Airport = await AirportDataService.GetAirportById(AirportId);
+            Airport = await AirportDataService.GetAirportWithFlightsById(AirportId);
         }
 
     }

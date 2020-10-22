@@ -41,15 +41,17 @@ namespace MST.FCT.App.Server.Services.DataService
 
         public async Task<AirportModel> GetAirportById(int id)
         {
-            _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());
-
-            var request = new HttpRequestMessage(HttpMethod.Get, $"api/airports/{id}");
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(AirportRequestHeaders.Airport));
-
-            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
+            HttpResponseMessage response = await GetAirportForHeader(id, AirportRequestHeaders.Airport);
 
             return await JsonSerializer.DeserializeAsync<AirportModel>
+                (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<AirportWithFlightsModel> GetAirportWithFlightsById(int id)
+        {
+            HttpResponseMessage response = await GetAirportForHeader(id, AirportRequestHeaders.AirportWithFlights);
+
+            return await JsonSerializer.DeserializeAsync<AirportWithFlightsModel>
                 (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
@@ -65,6 +67,18 @@ namespace MST.FCT.App.Server.Services.DataService
 
             return await JsonSerializer.DeserializeAsync<IEnumerable<AirportModel>>
                 (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+        private async Task<HttpResponseMessage> GetAirportForHeader(int id, string header)
+        {
+            _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"api/airports/{id}");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(header));
+
+            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            response.EnsureSuccessStatusCode();
+            return response;
         }
     }
 }

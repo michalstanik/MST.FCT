@@ -9,5 +9,6 @@ namespace FCT.Business.Services
         Task<IEnumerable<AirportModel>> GetAllAirports();
         Task<AirportModel> AddAirport(AirportModel airport);
         Task<AirportModel> GetAirportById(int id);
+        Task<AirportWithFlightsModel> GetAirportWithFlightsById(int id);
     }
 }
