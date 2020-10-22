@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MST.Flogging.Core.Attributes;
 using FCT.Data.Domain.Aviation;
+using MST.Core.Helpers.Attributes;
+using MST.FCT.Business.Services.RequestHeaders;
 
 namespace MST.FCT.API.FCTApi.Controllers
 {
@@ -32,6 +34,10 @@ namespace MST.FCT.API.FCTApi.Controllers
         [HttpGet()]
         [LogUsage("GetAirports")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Produces(AirportRequestHeaders.Airport)]
+        [RequestHeaderMatchesMediaType("Accept",
+            "application/json",
+            AirportRequestHeaders.Airport)]
         public async Task<ActionResult<List<AirportModel>>> GetAirports()
         {
             var airportsFromRepo = await _repository.GetAllAirportsAsync();

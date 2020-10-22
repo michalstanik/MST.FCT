@@ -26,11 +26,13 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
     <PackageReference Include="Serilog.Enrichers.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
@@ -41,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FCT.Business.Models\MST.FCT.Business.Models.csproj" />
+    <ProjectReference Include="..\FCT.Business.Services\MST.FCT.Business.Services.csproj" />
     <ProjectReference Include="..\FCT.Data\FCT.Data.csproj" />
     <ProjectReference Include="..\MST.Core.Helpers\MST.Core.Helpers.csproj" />
     <ProjectReference Include="..\MST.FCT.Business.Polices\MST.FCT.Business.Polices.csproj" />

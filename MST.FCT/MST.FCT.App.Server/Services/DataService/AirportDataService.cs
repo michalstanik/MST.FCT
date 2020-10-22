@@ -6,6 +6,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using System.Text;
+using System.Net.Http.Headers;
+using MST.FCT.Business.Services.RequestHeaders;
 
 namespace MST.FCT.App.Server.Services.DataService
 {
@@ -41,6 +43,7 @@ namespace MST.FCT.App.Server.Services.DataService
         {
             _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());
 
+           
             return await JsonSerializer.DeserializeAsync<AirportModel>
                 (await _httpClient.GetStreamAsync($"api/airports/{id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
@@ -49,8 +52,14 @@ namespace MST.FCT.App.Server.Services.DataService
         {
             _httpClient.SetBearerToken(await _tokenManager.RetrieveAccessTokenAsync());
 
+            var request = new HttpRequestMessage(HttpMethod.Get, $"api/airports");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(AirportRequestHeaders.Airport));
+
+            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            response.EnsureSuccessStatusCode();
+
             return await JsonSerializer.DeserializeAsync<IEnumerable<AirportModel>>
-                (await _httpClient.GetStreamAsync($"api/airports"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
     }
 }

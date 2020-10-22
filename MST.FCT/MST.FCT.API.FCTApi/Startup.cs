@@ -4,11 +4,13 @@ using FCT.Data.IRepositories;
 using FCT.Data.Repositories;
 using FCT.Data.Seeders;
 using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Mvc.Formatters.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +23,9 @@ using MST.Flogging.Core.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using MST.FCT.Business.Services.RequestHeaders;
 
 namespace MST.FCT.API.FCTApi
 {
@@ -129,6 +133,24 @@ namespace MST.FCT.API.FCTApi
             {
                 setupAction.Filters.Add(new TrackPerformanceFilter());
                 setupAction.Filters.Add(new AuthorizeFilter(requireAuthenticatedUserPolicy));
+
+                setupAction.ReturnHttpNotAcceptable = true;
+
+                var jsonOutputFormatter = setupAction.OutputFormatters.OfType<SystemTextJsonOutputFormatter>().FirstOrDefault();
+
+                if (jsonOutputFormatter != null)
+                {
+                    //Airports
+                    jsonOutputFormatter.SupportedMediaTypes.Add(AirportRequestHeaders.Airport);
+                }
+                var jsonInputFormatter = setupAction.InputFormatters.OfType<SystemTextJsonInputFormatter>().FirstOrDefault();
+                if (jsonInputFormatter != null)
+                {
+                    if (jsonInputFormatter.SupportedMediaTypes.Contains("text/json"))
+                    {
+                        jsonInputFormatter.SupportedMediaTypes.Remove("text/json");
+                    }
+                }
             });
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)

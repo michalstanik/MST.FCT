@@ -34,6 +34,26 @@
             The Id for a Trip
             </summary>
         </member>
+        <member name="T:MST.FCT.Business.Models.Aviation.Airport.AirportWithFlightsModel">
+            <summary>
+            Airport Model with list of all inbound and outbound flights
+            </summary>
+        </member>
+        <member name="M:MST.FCT.Business.Models.Aviation.Airport.AirportWithFlightsModel.#ctor">
+            <summary>
+            Airport Model with list of all Arrival and Departure Flights
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportWithFlightsModel.ArrivalFlights">
+            <summary>
+            List of all Arrival Flights
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Airport.AirportWithFlightsModel.DepartureFlights">
+            <summary>
+            List of all Departure Flights
+            </summary>
+        </member>
         <member name="T:MST.FCT.Business.Models.Geo.Base.CountryAbstractBase">
             <summary>
             Base model for Country

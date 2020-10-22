@@ -17,6 +17,7 @@ namespace MST.FCT.App.Server.Pages.Airports
 
         AirportModel Airport { get; set; }
 
+
         protected override async Task OnInitializedAsync()
         {
             Airport = await AirportDataService.GetAirportById(AirportId);
