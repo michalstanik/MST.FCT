@@ -53,6 +53,10 @@ namespace MST.FCT.API.FCTApi.Controllers
         [HttpGet("{id}")]
         [LogUsage("GetAirport")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Produces(AirportRequestHeaders.Airport)]
+        [RequestHeaderMatchesMediaType("Accept",
+            "application/json",
+            AirportRequestHeaders.Airport)]
         public async Task<ActionResult<AirportModel>> GetAirport(int id)
         {
             var airportFromRepo = await _repository.GetAiportByIdAsync(id);
