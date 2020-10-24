@@ -4,7 +4,6 @@ using FCT.Data.IRepositories;
 using FCT.Data.Repositories;
 using FCT.Data.Seeders;
 using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Mvc.Formatters.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +25,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using MST.FCT.Business.Services.RequestHeaders;
+using MST.Core.Helpers.Services;
 
 namespace MST.FCT.API.FCTApi
 {
@@ -68,7 +68,10 @@ namespace MST.FCT.API.FCTApi
             #region Repositories
             services.AddScoped<IAviationRepository, AviationRepository>();
             services.AddScoped<IGeoRepository, GeoRepository>();
-            # endregion Repositories
+            #endregion Repositories
+
+            //UserInfoService
+            services.AddScoped<IUserInfoService, UserInfoService>();
 
             services.AddDbContext<FCTContext>(cfg =>
             {

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MST.Core.Helpers.Configuration.Interfaces;
+using MST.Core.Helpers.Services;
 using MST.FCT.App.Server.Helpers;
 using MST.FCT.App.Server.Services;
 using MST.FCT.App.Server.Services.DataService;
@@ -75,7 +76,8 @@ namespace MST.FCT.App.Server
                 client.BaseAddress = new Uri("https://localhost:6001/");
             });
 
-
+            //UserInfoService
+            services.AddScoped<IUserInfoService, UserInfoService>();
             services.AddScoped<TokenProvider>();
             services.AddScoped<TokenManager>();
         }

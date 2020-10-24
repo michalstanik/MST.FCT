@@ -34,13 +34,14 @@ namespace IDP
                 {
                     ClientId = "fctserver",
                     ClientName = "FCT: Flights Countries Travels App",
+                    AllowOfflineAccess = true,
                     RequirePkce = true,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
                     RequireConsent = false,
                     AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = { new Secret("108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0".Sha256()) },
                     RedirectUris = { "https://localhost:7001/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
-                    AllowOfflineAccess = true,
+                    PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },           
                     AllowedScopes = { "openid", "profile", "email", "fctapi", "country", "roles" }
                 },
                  new Client
@@ -49,6 +50,7 @@ namespace IDP
                     ClientName = "Swagger UI for FCT",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
                     AccessTokenLifetime = 180,
                     RedirectUris = { "https://localhost:6001/api/oauth2-redirect.html" },
                     AllowedScopes = new []
