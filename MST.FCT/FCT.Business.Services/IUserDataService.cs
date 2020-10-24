@@ -9,7 +9,7 @@ namespace MST.FCT.Business.Services
 {
     public interface IUserDataService
     {
-        Task<UserForCreationModel> AddUser(UserForCreationModel airport);
+        Task<UserForCreationModel> AddUser(UserForCreationModel user);
         Task<UserModel> GetUserById(string id);
     }
 }

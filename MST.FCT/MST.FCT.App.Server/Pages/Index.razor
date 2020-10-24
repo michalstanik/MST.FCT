@@ -2,4 +2,11 @@
 
 <h1>Flights Countries Travels</h1>
 
-Welcome to FCT App.
+@if (!IsRegisteredUser)
+{
+    <a>Welcome to FCT App.</a>
+}
+else
+{
+    <a>User Id: @User.Id</a>
+}

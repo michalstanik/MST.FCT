@@ -54,7 +54,6 @@ namespace MST.FCT.App.Server.Pages.Airports
             IncludedICCO = false;
             Airports = (await AirportDataService.GetAllAirports()).ToList();
             Airports = Airports.Where(c => !string.IsNullOrWhiteSpace(c.IATA)).ToList();
-            var UserId = UserInfoService.UserId;
         }
         private void GridSelectionChanged(AirportModel airport)
         {

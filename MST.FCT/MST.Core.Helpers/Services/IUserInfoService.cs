@@ -7,5 +7,7 @@
         string LastName { get; set; }
         string Role { get; set; }
         string Country { get; set; }
+
+        bool IsUserAuthenticated { get; set; }
     }
 }

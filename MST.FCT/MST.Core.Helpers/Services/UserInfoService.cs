@@ -13,6 +13,7 @@ namespace MST.Core.Helpers.Services
         public string LastName { get; set; }
         public string Role { get; set; }
         public string Country { get; set; }
+        public bool IsUserAuthenticated { get; set; }
 
         public UserInfoService(IHttpContextAccessor httpContextAccessor)
         {
@@ -25,6 +26,10 @@ namespace MST.Core.Helpers.Services
             if (currentContext == null || !currentContext.User.Identity.IsAuthenticated)
             {
                 return;
+            }
+            else
+            {
+                IsUserAuthenticated = true;
             }
 
             UserId = currentContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;

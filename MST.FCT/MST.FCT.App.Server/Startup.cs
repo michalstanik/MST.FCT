@@ -1,3 +1,4 @@
+using AutoMapper;
 using Blazored.Modal;
 using Blazored.Toast;
 using FCT.Business.Services;
@@ -85,6 +86,7 @@ namespace MST.FCT.App.Server
             services.AddScoped<IUserInfoService, UserInfoService>();
             services.AddScoped<TokenProvider>();
             services.AddScoped<TokenManager>();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

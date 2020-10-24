@@ -41,6 +41,10 @@ namespace MST.FCT.App.Server.Services.DataService
         public async Task<UserModel> GetUserById(string id)
         {
             HttpResponseMessage response = await GetUserForHeader(id, UserRequestHeaders.User);
+            if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new UserModel();
+            }
 
             return await JsonSerializer.DeserializeAsync<UserModel>
                 (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
@@ -54,7 +58,7 @@ namespace MST.FCT.App.Server.Services.DataService
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(header));
 
             var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
             return response;
         }
     }

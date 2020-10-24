@@ -98,7 +98,7 @@
             <summary>
             Creat new user
             </summary>
-            <param name="airport"></param>
+            <param name="user"></param>
             <returns></returns>
         </member>
         <member name="M:MST.FCT.API.FCTApi.Helpers.StartupHelpers.ConfigureRootConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
@@ -129,6 +129,16 @@
         <member name="M:MST.FCT.API.FCTApi.Profiles.AviationProfile.#ctor">
             <summary>
             AutoMapper for Aviation - Constructor
+            </summary>
+        </member>
+        <member name="T:MST.FCT.API.FCTApi.Profiles.UserProfile">
+            <summary>
+            Automapper profile for User mappings
+            </summary>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Profiles.UserProfile.#ctor">
+            <summary>
+            Defoult constructor
             </summary>
         </member>
     </members>

@@ -56,7 +56,7 @@ namespace MST.FCT.API.FCTApi.Controllers
         /// <summary>
         /// Creat new user
         /// </summary>
-        /// <param name="airport"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> CreateUser([FromBody] UserForCreationModel user)
@@ -74,7 +74,7 @@ namespace MST.FCT.API.FCTApi.Controllers
 
             var createdUser = await _repository.AddUserAsync(_mapper.Map<TUser>(user));
 
-            return Created("users", createdUser);
+            return Created("users", _mapper.Map<UserForCreationModel>(createdUser));
         }
     }
 }
