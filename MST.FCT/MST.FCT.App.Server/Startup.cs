@@ -63,6 +63,7 @@ namespace MST.FCT.App.Server
                 options.Scope.Add("fctapi");
                 options.Scope.Add("offline_access");
                 options.Scope.Add("roles");
+                options.Scope.Add("country");
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
             });
@@ -72,6 +73,10 @@ namespace MST.FCT.App.Server
                 client.BaseAddress = new Uri("https://localhost:6001/");
             });
             services.AddHttpClient<ICountryDataService, CountryDataService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:6001/");
+            });
+            services.AddHttpClient<IUserDataService, UserDataService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:6001/");
             });

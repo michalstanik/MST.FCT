@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System;
 using Blazored.Modal;
 using Blazored.Modal.Services;
+using MST.Core.Helpers.Services;
 
 namespace MST.FCT.App.Server.Pages.Airports
 {
@@ -17,6 +18,8 @@ namespace MST.FCT.App.Server.Pages.Airports
 
         [Inject]
         public IAirportDataService AirportDataService { get; set; }
+        [Inject]
+        public IUserInfoService UserInfoService { get; set; }
         [CascadingParameter] public IModalService Modal { get; set; }
 
         public List<AirportModel> Airports
@@ -51,6 +54,7 @@ namespace MST.FCT.App.Server.Pages.Airports
             IncludedICCO = false;
             Airports = (await AirportDataService.GetAllAirports()).ToList();
             Airports = Airports.Where(c => !string.IsNullOrWhiteSpace(c.IATA)).ToList();
+            var UserId = UserInfoService.UserId;
         }
         private void GridSelectionChanged(AirportModel airport)
         {

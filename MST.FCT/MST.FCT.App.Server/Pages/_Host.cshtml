@@ -103,6 +103,11 @@
             initialTokenState.ExpiresAt = DateTimeOffset.UtcNow;
         }
 
+        if(HttpContext.User.Identity.IsAuthenticated)
+        {
+            var UserId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        }
+
     }
     <app>
         <component type="typeof(App)" render-mode="ServerPrerendered"

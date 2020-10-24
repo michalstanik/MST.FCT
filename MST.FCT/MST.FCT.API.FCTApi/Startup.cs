@@ -68,6 +68,7 @@ namespace MST.FCT.API.FCTApi
             #region Repositories
             services.AddScoped<IAviationRepository, AviationRepository>();
             services.AddScoped<IGeoRepository, GeoRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             #endregion Repositories
 
             //UserInfoService
@@ -145,6 +146,9 @@ namespace MST.FCT.API.FCTApi
                 {
                     //Airports
                     jsonOutputFormatter.SupportedMediaTypes.Add(AirportRequestHeaders.Airport);
+
+                    //Users
+                    jsonOutputFormatter.SupportedMediaTypes.Add(UserRequestHeaders.User);
                 }
                 var jsonInputFormatter = setupAction.InputFormatters.OfType<SystemTextJsonInputFormatter>().FirstOrDefault();
                 if (jsonInputFormatter != null)

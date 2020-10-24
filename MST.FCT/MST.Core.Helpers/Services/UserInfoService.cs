@@ -27,13 +27,13 @@ namespace MST.Core.Helpers.Services
                 return;
             }
 
-            UserId = currentContext.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            UserId = currentContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
             FirstName = currentContext.User.Claims.FirstOrDefault(c => c.Type == "given_name")?.Value;
 
             LastName = currentContext.User.Claims.FirstOrDefault(c => c.Type == "family_name")?.Value;
 
-            Role = currentContext.User.Claims.FirstOrDefault(c => c.Type == "role")?.Value;
+            Role = currentContext.User.Claims.FirstOrDefault(c => c.Type == "roles")?.Value;
 
             Country = currentContext.User.Claims.FirstOrDefault(c => c.Type == "country")?.Value;
         }

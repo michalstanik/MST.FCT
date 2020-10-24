@@ -1,4 +1,5 @@
 ﻿using FCT.Data.Domain.Aviation;
+using FCT.Data.Domain.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ namespace FCT.Data.Domain.Flights
     {
         public Flight()
         {
-            //UserFlights = new List<UserFlight>();
+            UserFlights = new List<UserFlight>();
         }
         public int Id { get; set; }
         public string FlightNumber { get; set; }
@@ -50,16 +51,16 @@ namespace FCT.Data.Domain.Flights
             Scheduled
         }
 
-        //public List<UserFlight> UserFlights { get; set; }
+        public List<UserFlight> UserFlights { get; set; }
 
-        //public IEnumerable<TUser> Users()
-        //{
-        //    var users = new List<TUser>();
-        //    foreach (var join in UserFlights)
-        //    {
-        //        users.Add(join.TUser);
-        //    }
-        //    return users;
-        //}
+        public IEnumerable<TUser> Users()
+        {
+            var users = new List<TUser>();
+            foreach (var join in UserFlights)
+            {
+                users.Add(join.TUser);
+            }
+            return users;
+        }
     }
 }

@@ -75,6 +75,32 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:MST.FCT.API.FCTApi.Controllers.UsersController">
+            <summary>
+            API Controller for Users
+            </summary>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.#ctor(FCT.Data.IRepositories.IUserRepository,AutoMapper.IMapper)">
+            <summary>
+            Constructor for UserController
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.GetUser(System.String)">
+            <summary>
+            Get User by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.CreateUser(MST.FCT.Business.Models.User.User.UserForCreationModel)">
+            <summary>
+            Creat new user
+            </summary>
+            <param name="airport"></param>
+            <returns></returns>
+        </member>
         <member name="M:MST.FCT.API.FCTApi.Helpers.StartupHelpers.ConfigureRootConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Configuration root configuration

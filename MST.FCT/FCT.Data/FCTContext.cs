@@ -2,6 +2,7 @@
 using FCT.Data.Domain.Aviation;
 using FCT.Data.Domain.Flights;
 using FCT.Data.Domain.Geo;
+using FCT.Data.Domain.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace FCT.Data
@@ -32,6 +33,10 @@ namespace FCT.Data
         public DbSet<Region> Region { get; set; }
         public DbSet<Country> Country { get; set; }
 
+        //User
+        public DbSet<TUser> TUser { get; set; }
+        public DbSet<UserFlight> UserFlight { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
@@ -42,6 +47,9 @@ namespace FCT.Data
         {
             //Flight
             modelBuilder.Entity<Flight>().Property(f => f.FlightTypeAssessment).HasConversion<string>();
+
+            //UserFLigts
+            modelBuilder.Entity<UserFlight>().HasKey(uf => new { uf.FlightId, uf.TUserId });
         }
     }
 }

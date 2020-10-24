@@ -64,6 +64,21 @@
             Country Model
             </summary>
         </member>
+        <member name="T:MST.FCT.Business.Models.User.User.UserModel">
+            <summary>
+            Base Model for User
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserModel.Id">
+            <summary>
+            Id for user
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserModel.LastLoginTime">
+            <summary>
+            Last login time in to app
+            </summary>
+        </member>
         <member name="T:FCT.Business.Models.Aviation.Base.AirportAbstractBase">
             <summary>
             Airport base fields
