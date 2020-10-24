@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore;
-using Serilog.Enrichers.AspnetcoreHttpcontext;
 using Microsoft.AspNetCore.Hosting;
-using Serilog;
-using System;
-using MST.Flogging.Core;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 using Microsoft.Extensions.Hosting;
+using MST.Flogging.Core;
+using Serilog;
+using Serilog.Enrichers.AspnetcoreHttpcontext;
+using System;
+using System.IO;
 
 namespace MST.FCT.API.FCTApi
 {

@@ -41,7 +41,7 @@ namespace FCT.Data.Repositories
 
         public async Task<IEnumerable<Airport>> GetAllAirportsAsync()
         {
-            return await _context.Airport.Include(c=> c.Country).ToListAsync();
+            return await _context.Airport.Include(c => c.Country).ToListAsync();
         }
     }
 }

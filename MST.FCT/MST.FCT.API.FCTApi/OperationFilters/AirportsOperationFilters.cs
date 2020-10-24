@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using MST.FCT.Business.Models.Aviation.Airport;
 using MST.FCT.Business.Services.RequestHeaders;
 using Swashbuckle.AspNetCore.SwaggerGen;

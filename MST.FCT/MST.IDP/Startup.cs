@@ -31,9 +31,9 @@ namespace IDP
             services.ConfigureRootConfiguration(Configuration);
 
             //TODO: Solve ASP0000 warning from .NET.Core 3.0
-            #pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+#pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
             var rootConfiguration = services.BuildServiceProvider().GetService<IRootConfiguration>();
-            #pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+#pragma warning restore ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
 
             services.AddControllersWithViews();
 

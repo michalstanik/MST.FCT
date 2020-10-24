@@ -28,7 +28,7 @@ namespace FCT.Data.Seeders.Dictionaries
                 var items = JsonConvert.DeserializeObject<Dictionary<string, AirportModel>>(json, settings);
 
                 var airportsList = new List<Airport>();
-                
+
                 foreach (var item in items)
                 {
                     var countryCode = item.Value.country;

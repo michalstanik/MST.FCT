@@ -13,7 +13,7 @@ namespace FCT.Business.Models.Aviation.Base
         [Required]
         public string Name { get; set; }
         public string City { get; set; }
-        public string State { get;set; }
+        public string State { get; set; }
         public string IATA { get; set; }
         public string ICAO { get; set; }
     }

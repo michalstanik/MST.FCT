@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components;
 using MST.Core.Helpers.Services;
 using MST.FCT.Business.Models.User.User;
 using MST.FCT.Business.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace MST.FCT.App.Server.Pages
@@ -38,7 +37,7 @@ namespace MST.FCT.App.Server.Pages
 
         private void UpdateLastLoginOnUser()
         {
-           
+
         }
 
         private async Task CreateNewUserForApp()

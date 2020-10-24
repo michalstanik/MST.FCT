@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Serilog;
-using Serilog.Enrichers.AspnetcoreHttpcontext;
 using Serilog.Filters;
 using Serilog.Sinks.MSSqlServer;
 using System;
@@ -25,8 +24,8 @@ namespace MST.Flogging.Core
         /// <param name="config">IConfiguration settings -- generally read this from appsettings.json</param>
         [Obsolete]
         public static void WithSimpleConfiguration(this LoggerConfiguration loggerConfig,
-           // IServiceProvider provider, 
-            string applicationName, 
+            // IServiceProvider provider, 
+            string applicationName,
             IConfiguration config)
         {
             var name = Assembly.GetExecutingAssembly().GetName();
@@ -34,7 +33,7 @@ namespace MST.Flogging.Core
 
             loggerConfig
                 .ReadFrom.Configuration(config) // minimum levels defined per project in json files 
-                //.Enrich.WithAspnetcoreHttpcontext(provider, AddCustomContextDetails)
+                                                //.Enrich.WithAspnetcoreHttpcontext(provider, AddCustomContextDetails)
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithProperty("Assembly", $"{name.Name}")

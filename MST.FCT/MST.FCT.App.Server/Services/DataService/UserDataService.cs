@@ -2,7 +2,6 @@
 using MST.FCT.Business.Models.User.User;
 using MST.FCT.Business.Services;
 using MST.FCT.Business.Services.RequestHeaders;
-using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -41,7 +40,7 @@ namespace MST.FCT.App.Server.Services.DataService
         public async Task<UserModel> GetUserById(string id)
         {
             HttpResponseMessage response = await GetUserForHeader(id, UserRequestHeaders.User);
-            if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 return new UserModel();
             }

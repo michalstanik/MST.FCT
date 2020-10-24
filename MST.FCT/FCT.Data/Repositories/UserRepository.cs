@@ -16,7 +16,7 @@ namespace FCT.Data.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async  Task<TUser> AddUserAsync(TUser user)
+        public async Task<TUser> AddUserAsync(TUser user)
         {
             var addedEntity = _context.TUser.Add(user);
             await _context.SaveChangesAsync();

@@ -10,6 +10,6 @@ namespace MST.FCT.App.Server.Shared
         public NavManu(IRootConfiguration conf)
         {
             _conf = conf;
-        }   
+        }
     }
 }

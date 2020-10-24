@@ -33,7 +33,7 @@ namespace MST.FCT.App.Server.Pages.Airports
         protected async Task HandleValidSubmit()
         {
             var response = await AirportDataService.AddAirport(Airport);
-            if(response != null)
+            if (response != null)
             {
                 await BlazoredModal.Close();
                 ToastService.ShowSuccess($"New Airport {response.ICAO} was created");

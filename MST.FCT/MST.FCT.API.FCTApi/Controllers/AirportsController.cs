@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using MST.FCT.Business.Models.Aviation.Airport;
+using FCT.Data.Domain.Aviation;
 using FCT.Data.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MST.Core.Helpers.Attributes;
+using MST.FCT.Business.Models.Aviation.Airport;
+using MST.FCT.Business.Services.RequestHeaders;
+using MST.Flogging.Core.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MST.Flogging.Core.Attributes;
-using FCT.Data.Domain.Aviation;
-using MST.Core.Helpers.Attributes;
-using MST.FCT.Business.Services.RequestHeaders;
 
 namespace MST.FCT.API.FCTApi.Controllers
 {
@@ -127,7 +127,7 @@ namespace MST.FCT.API.FCTApi.Controllers
             if (id == 0) return BadRequest();
 
             var airportToDelete = await _repository.GetAiportByIdAsync(id);
-            
+
             if (airportToDelete == null) return NotFound();
 
             await _repository.DeleteAirportAsync(airportToDelete.Id);

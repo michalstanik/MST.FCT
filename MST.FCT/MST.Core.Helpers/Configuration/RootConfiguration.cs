@@ -12,8 +12,8 @@ namespace MST.Core.Helpers.Configuration
         public IIntegratedEnv IntegratedEnv { get; set; }
 
         public RootConfiguration(
-            IOptions<AuthConfiguration> authConfiguration, 
-            IOptions<AppConfiguration> appConfiguration, 
+            IOptions<AuthConfiguration> authConfiguration,
+            IOptions<AppConfiguration> appConfiguration,
             IOptions<IntegratedEnv> integConfiguration
             )
         {

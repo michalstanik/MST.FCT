@@ -2,7 +2,6 @@
 using FCT.Data.Domain.User;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FCT.Data.Domain.Flights
 {
