@@ -6,8 +6,6 @@ namespace MST.Core.Helpers.Configuration
     {
         public bool RecreateDB { get; set; }
 
-        public bool DeleteData { get; set; }
-
         public double RemoveLogsOlderThanHours { get; set; }
     }
 }

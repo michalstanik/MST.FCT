@@ -16,7 +16,7 @@ namespace IDP
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
                 new IdentityResource("country", new [] { "country" }),
-                new IdentityResource("roles", "Roles", new[] {"role"})
+                new IdentityResource("role", "Roles", new[] {"role"})
             };
 
         public static IEnumerable<ApiResource> Apis =>
@@ -24,7 +24,7 @@ namespace IDP
             {
                 new ApiResource("fctapi",
                     "FCT: Flights Countries Travels API",
-                    new [] { "country", "roles" })
+                    new [] { "country", "role" })
             };
 
         public static IEnumerable<Client> Clients =>
@@ -36,13 +36,13 @@ namespace IDP
                     ClientName = "FCT: Flights Countries Travels App",
                     AllowOfflineAccess = true,
                     RequirePkce = true,
-                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    AccessTokenLifetime = 1200,
                     RequireConsent = false,
                     AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = { new Secret("108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0".Sha256()) },
                     RedirectUris = { "https://localhost:7001/signin-oidc" },
                     PostLogoutRedirectUris = { "https://localhost:7001/signout-callback-oidc" },
-                    AllowedScopes = { "openid", "profile", "email", "fctapi", "country", "roles" }
+                    AllowedScopes = { "openid", "profile", "email", "fctapi", "country", "role" }
                 },
                  new Client
                  {

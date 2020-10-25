@@ -49,7 +49,9 @@ namespace MST.FCT.App.Server
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => {
+                options.ExpireTimeSpan = new TimeSpan(3, 0, 0);
+            })
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme,
             options =>
             {
@@ -63,7 +65,7 @@ namespace MST.FCT.App.Server
                 options.Scope.Add("email");
                 options.Scope.Add("fctapi");
                 options.Scope.Add("offline_access");
-                options.Scope.Add("roles");
+                options.Scope.Add("role");
                 options.Scope.Add("country");
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;

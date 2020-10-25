@@ -1,6 +1,8 @@
 ﻿@page "/"
-
-<h1>Flights Countries Travels</h1>
+<div>
+    <h2>Flights Countries Travels</h2>
+</div>
+<br />
 
 @if (!IsRegisteredUser)
 {
@@ -8,5 +10,56 @@
 }
 else
 {
-    <a>User Id: @User.Id</a>
+
+    <div class="row no-gutters container-m-nx container-m-ny bg-lighter bg-white container-p-x pb-3 mb-4">
+        <div class="col-6 col-sm-3 col-md pt-3 pr-4">
+            <div class="media align-items-center">
+                <div class="ion ion-logo-twitter text-twitter text-large"></div>
+                <div class="media-body ml-3">
+                    <div class="text-big font-weight-bold line-height-1">25,362</div>
+                    <div class="text-light text-tiny font-weight-semibold line-height-1 mt-1">COUNTRIES</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md pt-3 pr-4">
+            <div class="media align-items-center">
+                <div class="ion ion-logo-googleplus text-google text-large"></div>
+                <div class="media-body ml-3">
+                    <div class="text-big font-weight-bold line-height-1">12,941</div>
+                    <div class="text-light text-tiny font-weight-semibold line-height-1 mt-1">FLIGHTS</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md pt-3 pr-4">
+            <div class="media align-items-center">
+                <div class="ion ion-logo-facebook text-facebook text-large"></div>
+                <div class="media-body ml-3">
+                    <div class="text-big font-weight-bold line-height-1">18,665</div>
+                    <div class="text-light text-tiny font-weight-semibold line-height-1 mt-1">FOLLOWERS</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md pt-3 pr-4">
+            <div class="media align-items-center">
+                <div class="ion ion-logo-pinterest text-pinterest text-large"></div>
+                <div class="media-body ml-3">
+                    <div class="text-big font-weight-bold line-height-1">5,719</div>
+                    <div class="text-light text-tiny font-weight-semibold line-height-1 mt-1">FOLLOWERS</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md pt-3 pr-4">
+            <div class="media align-items-center">
+                <div class="ion ion-logo-instagram text-instagram text-large"></div>
+                <div class="media-body ml-3">
+                    <div class="text-big font-weight-bold line-height-1">8,636</div>
+                    <div class="text-light text-tiny font-weight-semibold line-height-1 mt-1">FOLLOWERS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Head stats -->
+    <div>
+        <a>User Id: @User.Id</a>
+    </div>
 }

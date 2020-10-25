@@ -63,6 +63,7 @@ namespace MST.FCT.API.FCTApi
             #region Seeders
             services.AddTransient<DictionarySeeder>();
             services.AddTransient<EnsureDB>();
+            services.AddTransient<DataSeeder>();
             #endregion Seeders
 
             #region Repositories
@@ -208,14 +209,26 @@ namespace MST.FCT.API.FCTApi
                 endpoints.MapControllers();
             });
 
-            //Seed the database
+            // Seed the database
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var configuration = scope.ServiceProvider.GetService<IRootConfiguration>();
+                var recreateDbOption = configuration.AppConfiguration.RecreateDB;
 
-            //using IServiceScope scope = app.ApplicationServices.CreateScope();
-            //var recreate = scope.ServiceProvider.GetService<EnsureDB>();
-            //var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
+                var dictionarySeeder = scope.ServiceProvider.GetService<DictionarySeeder>();
+                var dataSeeder = scope.ServiceProvider.GetService<DataSeeder>();
+                var recreate = scope.ServiceProvider.GetService<EnsureDB>();
 
-            //recreate.EnsureDeletedAndRecreated();
-            //dictionarySeeder.Seed();
+                recreate.EnsureMigrated();
+                recreate.RemoveLogsOlderThan(configuration.AppConfiguration.RemoveLogsOlderThanHours);
+
+                if (recreateDbOption)
+                {
+                    recreate.EnsureDeletedAndRecreated();
+                    dictionarySeeder.Seed();
+                    dataSeeder.Seed();
+                }
+            }
         }
     }
 }
