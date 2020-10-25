@@ -58,7 +58,7 @@ namespace MST.FCT.API.FCTApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetAirport")]
         [LogUsage("GetAirport")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces(AirportRequestHeaders.Airport)]

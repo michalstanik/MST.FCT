@@ -26,8 +26,6 @@ namespace MST.FCT.API.FCTApi.OperationFilters
                 {AirportRequestHeaders.AirportWithFlights , typeof(AirportWithFlightsModel) }
             };
 
-
-
             switch (operation.OperationId)
             {
                 case "GetAirport":
@@ -38,7 +36,7 @@ namespace MST.FCT.API.FCTApi.OperationFilters
                             mediaType.Key,
                             new OpenApiMediaType()
                             {
-                                //Schema = context.SchemaRegistry.GetOrRegister(mediaType.Value)
+                                Schema = context.SchemaGenerator.GenerateSchema(mediaType.Value, context.SchemaRepository)
                             });
                     }
                     break;

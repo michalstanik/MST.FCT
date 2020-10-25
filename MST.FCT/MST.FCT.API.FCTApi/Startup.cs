@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using MST.Core.Helpers.Configuration.Interfaces;
 using MST.Core.Helpers.Services;
 using MST.FCT.API.FCTApi.Helpers;
+using MST.FCT.API.FCTApi.OperationFilters;
 using MST.FCT.Business.Polices;
 using MST.FCT.Business.Services.RequestHeaders;
 using MST.Flogging.Core.Filters;
@@ -93,9 +94,7 @@ namespace MST.FCT.API.FCTApi
                         Version = "1"
                     });
 
-                //setupAction.OperationFilter<TripOperationFilter>();
-                //setupAction.OperationFilter<RegionOperationFilter>();
-                //setupAction.OperationFilter<FlightOperationFilter>();
+                setupAction.OperationFilter<AirportsOperationFilters>();
 
                 setupAction.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
                 {
