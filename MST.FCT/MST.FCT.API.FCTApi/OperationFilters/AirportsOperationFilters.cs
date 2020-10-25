@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.OpenApi.Models;
 using MST.FCT.Business.Models.Aviation.Airport;
 using MST.FCT.Business.Services.RequestHeaders;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -19,10 +20,13 @@ namespace MST.FCT.API.FCTApi.OperationFilters
         /// <param name="context"></param>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
+
             var mediaTypesGetAirportDictionary = new Dictionary<string, Type>()
             {
                 {AirportRequestHeaders.AirportWithFlights , typeof(AirportWithFlightsModel) }
             };
+
+
 
             switch (operation.OperationId)
             {
@@ -30,12 +34,12 @@ namespace MST.FCT.API.FCTApi.OperationFilters
 
                     foreach (var mediaType in mediaTypesGetAirportDictionary)
                     {
-                        //operation.Responses[StatusCodes.Status200OK.ToString()].Content.Add(
-                        //    mediaType.Key,
-                        //    new OpenApiMediaType()
-                        //    {
-                        //        Schema = context.SchemaGenerator.GenerateSchema(   SchemaRegistry.GetOrRegister(mediaType.Value)
-                        //    });
+                        operation.Responses[StatusCodes.Status200OK.ToString()].Content.Add(
+                            mediaType.Key,
+                            new OpenApiMediaType()
+                            {
+                                //Schema = context.SchemaRegistry.GetOrRegister(mediaType.Value)
+                            });
                     }
                     break;
 

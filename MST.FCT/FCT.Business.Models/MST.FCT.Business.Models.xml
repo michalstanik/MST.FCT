@@ -79,6 +79,26 @@
             Last login time in to app
             </summary>
         </member>
+        <member name="T:MST.FCT.Business.Models.User.User.UserStats">
+            <summary>
+            FCT statistics for a user
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStats.UserModel">
+            <summary>
+            Navigation property to the user
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStats.UserFlights">
+            <summary>
+            Total number of user flights
+            </summary>
+        </member>
+        <member name="T:MST.FCT.Business.Models.User.User.UserWithStatsModel">
+            <summary>
+            Basic User Model with UserStats
+            </summary>
+        </member>
         <member name="T:FCT.Business.Models.Aviation.Base.AirportAbstractBase">
             <summary>
             Airport base fields
