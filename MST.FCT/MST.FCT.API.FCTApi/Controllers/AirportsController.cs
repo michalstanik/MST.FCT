@@ -67,11 +67,7 @@ namespace MST.FCT.API.FCTApi.Controllers
             AirportRequestHeaders.Airport)]
         public async Task<ActionResult<AirportModel>> GetAirport(int id)
         {
-            var airportFromRepo = await _repository.GetAiportByIdAsync(id);
-
-            if (airportFromRepo == null) return NotFound();
-
-            return Ok(_mapper.Map<AirportModel>(airportFromRepo));
+            return await GetSpecificAirport<AirportModel>(id);
         }
 
         /// <summary>
@@ -84,13 +80,9 @@ namespace MST.FCT.API.FCTApi.Controllers
         [Produces(AirportRequestHeaders.AirportWithFlights)]
         [RequestHeaderMatchesMediaType("Accept", AirportRequestHeaders.AirportWithFlights)]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<ActionResult<AirportModel>> GetAirportWithFlights(int id)
+        public async Task<ActionResult<AirportWithFlightsModel>> GetAirportWithFlights(int id)
         {
-            var airportFromRepo = await _repository.GetAiportByIdAsync(id);
-
-            if (airportFromRepo == null) return NotFound();
-
-            return Ok(_mapper.Map<AirportWithFlightsModel>(airportFromRepo));
+            return await GetSpecificAirport<AirportWithFlightsModel>(id,true);
         }
 
         /// <summary>
@@ -133,6 +125,18 @@ namespace MST.FCT.API.FCTApi.Controllers
             await _repository.DeleteAirportAsync(airportToDelete.Id);
 
             return NoContent();
+        }
+
+        private async Task<ActionResult<T>> GetSpecificAirport<T>(int airportId, bool includeFlights = false) where T : class
+        {
+            var airportFromRepo = await _repository.GetAiportByIdAsync(airportId, includeFlights);
+
+            if (airportFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<T>(airportFromRepo));
         }
     }
 }

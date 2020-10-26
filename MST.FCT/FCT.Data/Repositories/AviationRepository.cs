@@ -33,10 +33,16 @@ namespace FCT.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Airport> GetAiportByIdAsync(int id)
+        public async Task<Airport> GetAiportByIdAsync(int id, bool includeFlights = false)
         {
-            return await _context.Airport
-                .Include(c => c.Country).Where(c => c.Id == id).FirstOrDefaultAsync();
+            var airportQyuery = _context.Airport.Include(c => c.Country).Where(c => c.Id == id);
+
+            if (includeFlights)
+            {
+                airportQyuery = airportQyuery.Include(c => c.ArrivalFlights).Include(c => c.DepartureFlights);
+            }
+
+            return await airportQyuery.SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Airport>> GetAllAirportsAsync()
