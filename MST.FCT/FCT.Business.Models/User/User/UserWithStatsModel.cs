@@ -11,6 +11,10 @@ namespace MST.FCT.Business.Models.User.User
     /// </summary>
     public class UserWithStatsModel : UserModel
     {
+        public UserWithStatsModel()
+        {
+            UserStats = new UserStats();
+        }
         public UserStats UserStats { get; set; }
     }
 }

@@ -21,15 +21,19 @@ namespace MST.FCT.API.FCTApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _repository;
+        private readonly IStatsRepository _statsRepository;
         private readonly IMapper _mapper;
+
         /// <summary>
         /// Constructor for UserController
         /// </summary>
         /// <param name="repository"></param>
+        /// <param name="statsRepository"></param>
         /// <param name="mapper"></param>
-        public UsersController(IUserRepository repository, IMapper mapper)
+        public UsersController(IUserRepository repository, IStatsRepository statsRepository, IMapper mapper)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _statsRepository = statsRepository ?? throw new ArgumentNullException(nameof(statsRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
         /// <summary>
@@ -37,7 +41,7 @@ namespace MST.FCT.API.FCTApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         [LogUsage("GetUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces(UserRequestHeaders.User)]
@@ -46,11 +50,38 @@ namespace MST.FCT.API.FCTApi.Controllers
             UserRequestHeaders.User)]
         public async Task<ActionResult<UserModel>> GetUser(string id)
         {
-            var airportFromRepo = await _repository.GetUserByIdAsync(id);
+            var userFromRepo = await _repository.GetUserByIdAsync(id);
 
-            if (airportFromRepo == null) return NotFound();
+            if (userFromRepo == null) return NotFound();
 
-            return Ok(_mapper.Map<UserModel>(airportFromRepo));
+            return Ok(_mapper.Map<UserModel>(userFromRepo));
+        }
+
+        /// <summary>
+        /// Get User by id with Stats
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        [LogUsage("GetUserWithStats")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Produces(UserRequestHeaders.UserWithStats)]
+        [RequestHeaderMatchesMediaType("Accept", UserRequestHeaders.UserWithStats)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<ActionResult<UserWithStatsModel>> GetUsersWithStats(string id)
+        {
+            var userFromRepo = await _repository.GetUserByIdAsync(id);
+
+            if (userFromRepo == null) return NotFound();
+
+            var userWithStats = _mapper.Map<UserWithStatsModel>(userFromRepo);
+
+            userWithStats.UserStats.UserFlightsCount = _statsRepository.GetFlightsCountForUser(id);
+            userWithStats.UserStats.FlightsDistance = _statsRepository.GetFlightsDistanceForUser(id);
+            userWithStats.UserStats.FlightsTime = _statsRepository.GetFlightsTimeForUser(id);
+            userWithStats.UserStats.FlightsTime = _statsRepository.GetFlightsTimeForUser(id);
+
+            return Ok(userWithStats);
         }
 
         /// <summary>

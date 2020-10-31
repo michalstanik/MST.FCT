@@ -89,7 +89,7 @@
             Navigation property to the user
             </summary>
         </member>
-        <member name="P:MST.FCT.Business.Models.User.User.UserStats.UserFlights">
+        <member name="P:MST.FCT.Business.Models.User.User.UserStats.UserFlightsCount">
             <summary>
             Total number of user flights
             </summary>

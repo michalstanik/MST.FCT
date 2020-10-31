@@ -16,6 +16,7 @@ namespace MST.FCT.API.FCTApi.Profiles
         {
             CreateMap<TUser, UserModel>().ReverseMap();
             CreateMap<UserForCreationModel, TUser>().ReverseMap();
+            CreateMap<TUser, UserWithStatsModel>();
         }
     }
 }

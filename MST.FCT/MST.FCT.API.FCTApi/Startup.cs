@@ -71,6 +71,7 @@ namespace MST.FCT.API.FCTApi
             services.AddScoped<IAviationRepository, AviationRepository>();
             services.AddScoped<IGeoRepository, GeoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IStatsRepository, StatsRepository>();
             #endregion Repositories
 
             //UserInfoService
@@ -95,6 +96,7 @@ namespace MST.FCT.API.FCTApi
                     });
 
                 setupAction.OperationFilter<AirportsOperationFilters>();
+                setupAction.OperationFilter<UsersOperationFilters>();
 
                 setupAction.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
                 {
@@ -149,6 +151,7 @@ namespace MST.FCT.API.FCTApi
 
                     //Users
                     jsonOutputFormatter.SupportedMediaTypes.Add(UserRequestHeaders.User);
+                    jsonOutputFormatter.SupportedMediaTypes.Add(UserRequestHeaders.UserWithStats);
                 }
                 var jsonInputFormatter = setupAction.InputFormatters.OfType<SystemTextJsonInputFormatter>().FirstOrDefault();
                 if (jsonInputFormatter != null)

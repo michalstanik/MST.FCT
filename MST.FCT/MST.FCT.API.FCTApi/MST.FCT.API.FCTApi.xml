@@ -80,16 +80,24 @@
             API Controller for Users
             </summary>
         </member>
-        <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.#ctor(FCT.Data.IRepositories.IUserRepository,AutoMapper.IMapper)">
+        <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.#ctor(FCT.Data.IRepositories.IUserRepository,FCT.Data.IRepositories.IStatsRepository,AutoMapper.IMapper)">
             <summary>
             Constructor for UserController
             </summary>
             <param name="repository"></param>
+            <param name="statsRepository"></param>
             <param name="mapper"></param>
         </member>
         <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.GetUser(System.String)">
             <summary>
             Get User by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MST.FCT.API.FCTApi.Controllers.UsersController.GetUsersWithStats(System.String)">
+            <summary>
+            Get User by id with Stats
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -120,6 +128,11 @@
             </summary>
             <param name="operation"></param>
             <param name="context"></param>
+        </member>
+        <member name="T:MST.FCT.API.FCTApi.OperationFilters.UsersOperationFilters">
+            <summary>
+            Operation filters for Users
+            </summary>
         </member>
         <member name="T:MST.FCT.API.FCTApi.Profiles.AviationProfile">
             <summary>

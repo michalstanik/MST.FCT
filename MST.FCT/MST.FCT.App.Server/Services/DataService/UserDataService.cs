@@ -1,4 +1,5 @@
 ﻿using IdentityModel.Client;
+using MST.FCT.App.Server.Helpers;
 using MST.FCT.Business.Models.User.User;
 using MST.FCT.Business.Services;
 using MST.FCT.Business.Services.RequestHeaders;
@@ -46,6 +47,18 @@ namespace MST.FCT.App.Server.Services.DataService
             }
 
             return await JsonSerializer.DeserializeAsync<UserModel>
+                (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+
+        public async Task<UserWithStatsModel> GetUserByIdWithStats(string id)
+        {
+            HttpResponseMessage response = await GetUserForHeader(id, UserRequestHeaders.UserWithStats);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new UserWithStatsModel();
+            }
+
+            return await JsonSerializer.DeserializeAsync<UserWithStatsModel>
                 (await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 

@@ -16,14 +16,14 @@ namespace MST.FCT.App.Server.Pages
         [Inject]
         IMapper Mapper { get; set; }
         public bool IsRegisteredUser { get; set; }
-        public UserModel User { get; set; } = new UserModel();
+        public UserWithStatsModel User { get; set; } = new UserWithStatsModel();
 
         protected override async Task OnInitializedAsync()
         {
             if (UserInfoService.IsUserAuthenticated)
             {
                 IsRegisteredUser = true;
-                User = await UserDataService.GetUserById(UserInfoService.UserId);
+                User = await UserDataService.GetUserByIdWithStats(UserInfoService.UserId);
                 if (User.Id == null)
                 {
                     await CreateNewUserForApp();
@@ -52,7 +52,7 @@ namespace MST.FCT.App.Server.Pages
             var createduser = await UserDataService.AddUser(newUser);
             if (createduser != null)
             {
-                User = Mapper.Map<UserModel>(createduser);
+                User = Mapper.Map<UserWithStatsModel>(createduser);
             }
         }
     }

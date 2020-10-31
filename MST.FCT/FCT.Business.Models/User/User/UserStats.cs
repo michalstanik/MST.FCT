@@ -1,4 +1,6 @@
-﻿namespace MST.FCT.Business.Models.User.User
+﻿using System;
+
+namespace MST.FCT.Business.Models.User.User
 {
     /// <summary>
     /// FCT statistics for a user
@@ -12,6 +14,9 @@
         /// <summary>
         /// Total number of user flights
         /// </summary>
-        public int UserFlights { get; set; }        
+        public int UserFlightsCount { get; set; }       
+        public long FlightsDistance { get; set; }
+        public long FlightsTime { get; set; }
+        public TimeSpan FlightTimeSpan { get; set; }
     }
 }

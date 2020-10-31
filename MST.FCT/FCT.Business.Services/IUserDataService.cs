@@ -7,5 +7,6 @@ namespace MST.FCT.Business.Services
     {
         Task<UserForCreationModel> AddUser(UserForCreationModel user);
         Task<UserModel> GetUserById(string id);
+        Task<UserWithStatsModel> GetUserByIdWithStats(string id);
     }
 }
