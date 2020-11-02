@@ -8,5 +8,6 @@ namespace FCT.Data.IRepositories
         long GetFlightsDistanceForUser(string userId);
         long GetFlightsTimeForUser(string userId);
         TimeSpan GetFlightsTimeSpanForUser(string userId);
+        int GetAirportsCountForUser(string userId);
     }
 }

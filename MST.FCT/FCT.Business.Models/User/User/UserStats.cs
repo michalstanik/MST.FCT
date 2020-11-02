@@ -18,5 +18,7 @@ namespace MST.FCT.Business.Models.User.User
         public long FlightsDistance { get; set; }
         public long FlightsTime { get; set; }
         public TimeSpan FlightTimeSpan { get; set; }
+        public int AirportsCount { get; set; }
+        public int AirportsCountryCount { get; set; }
     }
 }

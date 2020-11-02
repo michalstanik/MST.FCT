@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FCT.Data.Repositories
 {
@@ -14,6 +12,21 @@ namespace FCT.Data.Repositories
         public StatsRepository(FCTContext context)
         {
             _context = context;
+        }
+
+        public int GetAirportsCountForUser(string userId)
+        {
+            var departureAirports = _context.UserFlight.Where(u => u.TUserId == userId)
+                 .Select(t => t.Flight)
+                 .Select(t => t.DepartureAirport.ICAO).Distinct().ToList();
+
+            var arrivalAirports = _context.UserFlight.Where(u => u.TUserId == userId)
+                .Select(t => t.Flight)
+                .Select(t => t.ArrivalAirport.ICAO).Distinct().ToList();
+
+            departureAirports.AddRange(arrivalAirports);
+
+            return departureAirports.Distinct().Count();
         }
 
         public int GetFlightsCountForUser(string userId)
@@ -29,15 +42,15 @@ namespace FCT.Data.Repositories
         public long GetFlightsTimeForUser(string userId)
         {
             var userFlights = _context.UserFlight.Where(u => u.TUserId == userId).Select(t => t.Flight).ToList();
-            
+
             long totalTime = 0;
-
-            foreach (var flight in userFlights)
+            foreach (var flightTime in from flight in userFlights
+                                       let flightTime = flight.ArrivialDate - flight.DepartureDate
+                                       select flightTime)
             {
-                var flightTime = flight.ArrivialDate - flight.DepartureDate;
-
                 totalTime += flightTime.GetValueOrDefault().Hours;
             }
+
             return totalTime;
         }
 
