@@ -81,6 +81,7 @@ namespace MST.FCT.API.FCTApi.Controllers
             userWithStats.UserStats.FlightsTime = _statsRepository.GetFlightsTimeForUser(id);
             userWithStats.UserStats.FlightsTime = _statsRepository.GetFlightsTimeForUser(id);
             userWithStats.UserStats.AirportsCount = _statsRepository.GetAirportsCountForUser(id);
+            userWithStats.UserStats.AirportsCountryCount = _statsRepository.GetAirportsCountryCountForUser(id);
 
             return Ok(userWithStats);
         }

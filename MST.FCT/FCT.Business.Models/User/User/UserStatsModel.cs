@@ -5,7 +5,7 @@ namespace MST.FCT.Business.Models.User.User
     /// <summary>
     /// FCT statistics for a user
     /// </summary>
-    public class UserStats
+    public class UserStatsModel
     {
         /// <summary>
         /// Navigation property to the user
@@ -20,5 +20,6 @@ namespace MST.FCT.Business.Models.User.User
         public TimeSpan FlightTimeSpan { get; set; }
         public int AirportsCount { get; set; }
         public int AirportsCountryCount { get; set; }
+        public int AirplaneModelCount { get; set; }
     }
 }

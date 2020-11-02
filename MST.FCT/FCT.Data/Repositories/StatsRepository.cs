@@ -29,6 +29,21 @@ namespace FCT.Data.Repositories
             return departureAirports.Distinct().Count();
         }
 
+        public int GetAirportsCountryCountForUser(string userId)
+        {
+            var departureAirportsCountries = _context.UserFlight.Where(u => u.TUserId == userId)
+                .Select(t => t.Flight)
+                .Select(t => t.DepartureAirport.CountryId).Distinct().ToList();
+
+            var arrivalAirportsCountries = _context.UserFlight.Where(u => u.TUserId == userId)
+                .Select(t => t.Flight)
+                .Select(t => t.ArrivalAirport.CountryId).Distinct().ToList();
+
+            departureAirportsCountries.AddRange(arrivalAirportsCountries);
+
+            return departureAirportsCountries.Distinct().Count();
+        }
+
         public int GetFlightsCountForUser(string userId)
         {
             return _context.UserFlight.Where(u => u.TUserId == userId).Select(t => t.Flight).Distinct().Count();

@@ -79,17 +79,17 @@
             Last login time in to app
             </summary>
         </member>
-        <member name="T:MST.FCT.Business.Models.User.User.UserStats">
+        <member name="T:MST.FCT.Business.Models.User.User.UserStatsModel">
             <summary>
             FCT statistics for a user
             </summary>
         </member>
-        <member name="P:MST.FCT.Business.Models.User.User.UserStats.UserModel">
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.UserModel">
             <summary>
             Navigation property to the user
             </summary>
         </member>
-        <member name="P:MST.FCT.Business.Models.User.User.UserStats.UserFlightsCount">
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.UserFlightsCount">
             <summary>
             Total number of user flights
             </summary>

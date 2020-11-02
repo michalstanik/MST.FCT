@@ -13,8 +13,8 @@ namespace MST.FCT.Business.Models.User.User
     {
         public UserWithStatsModel()
         {
-            UserStats = new UserStats();
+            UserStats = new UserStatsModel();
         }
-        public UserStats UserStats { get; set; }
+        public UserStatsModel UserStats { get; set; }
     }
 }
