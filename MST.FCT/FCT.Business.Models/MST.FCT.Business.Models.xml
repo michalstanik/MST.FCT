@@ -94,6 +94,37 @@
             Total number of user flights
             </summary>
         </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.FlightsDistance">
+            <summary>
+            Total distance of Usr flights in km
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.FlightsTime">
+            <summary>
+            Total flight time for user in hours
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.FlightTimeSpan">
+            <summary>
+            Total flight time for user in TimeSpan
+            Not used in current implementation
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.AirportsCount">
+            <summary>
+            Visited uniqe airport count for user
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.AirportsCountryCount">
+            <summary>
+            Visited uniqe countries associated with airports for user
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.User.User.UserStatsModel.AirplaneModelCount">
+            <summary>
+            Uniqge Airplane model count
+            </summary>
+        </member>
         <member name="T:MST.FCT.Business.Models.User.User.UserWithStatsModel">
             <summary>
             Basic User Model with UserStats
