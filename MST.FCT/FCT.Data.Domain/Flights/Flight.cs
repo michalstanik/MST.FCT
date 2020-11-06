@@ -30,7 +30,6 @@ namespace FCT.Data.Domain.Flights
         //public Flight CombinedNextFlight { get; set; }
 
         public long? Distance { get; set; }
-        public long? FlightTime { get; set; }
 
         public int? AircraftId { get; set; }
         public Aircraft Aircraft { get; set; }

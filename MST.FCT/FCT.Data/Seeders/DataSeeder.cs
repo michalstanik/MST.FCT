@@ -60,7 +60,6 @@ namespace FCT.Data.Seeders
                     ArrivialDate = new DateTime(2015,8,29,6,0,0),
                     ScheduleArrivialDate = new DateTime(2015,8,29,6,0,0),
                     Distance = 1775,
-                    FlightTime = 2,
                     FlightTypeAssessment = Flight.FlightType.Charter,
                     UserFlights = new List<UserFlight>()
                     {
@@ -79,7 +78,6 @@ namespace FCT.Data.Seeders
                     ArrivialDate = new DateTime(2015,9,05,12,0,0),
                     ScheduleArrivialDate = new DateTime(2015,9,05,12,0,0),
                     Distance = 1775,
-                    FlightTime = 2,
                     FlightTypeAssessment = Flight.FlightType.Charter,
                     UserFlights = new List<UserFlight>()
                     {
