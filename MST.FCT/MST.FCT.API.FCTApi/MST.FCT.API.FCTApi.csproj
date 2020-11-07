@@ -6,6 +6,8 @@
       <DocFile Include="bin\**\**\LoadData\airports.json" />
       <DocFile Include="bin\**\**\LoadData\countries.json" />
       <DocFile Include="bin\**\**\LoadData\WorldHeritage.xml" />
+      <DocFile Include="bin\**\**\LoadData\timezone.csv" />
+      <DocFile Include="bin\**\**\LoadData\zone.csv" />
     </ItemGroup>
     <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
   </Target>
@@ -21,6 +23,9 @@
     <Content Include="..\FCT.Data\LoadData\countries.json" Link="LoadData\countries.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\FCT.Data\LoadData\WorldHeritage.xml" Link="LoadData\WorldHeritage.xml" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="..\FCT.Data\LoadData\airports.json" Link="LoadData\airports.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\FCT.Data\LoadData\zone.csv" Link="LoadData\zone.csv" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\FCT.Data\LoadData\timezone.csv" Link="LoadData\timezone.csv" CopyToOutputDirectory="PreserveNewest" />
+
   </ItemGroup>
 
   <ItemGroup>

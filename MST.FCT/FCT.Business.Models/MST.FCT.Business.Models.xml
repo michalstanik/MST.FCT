@@ -54,6 +54,16 @@
             List of all Departure Flights
             </summary>
         </member>
+        <member name="T:MST.FCT.Business.Models.Aviation.Flight.FlightModel">
+            <summary>
+            Main Flight Model with Id
+            </summary>
+        </member>
+        <member name="P:MST.FCT.Business.Models.Aviation.Flight.FlightModel.Id">
+            <summary>
+            Id of Flight
+            </summary>
+        </member>
         <member name="T:MST.FCT.Business.Models.Geo.Base.CountryAbstractBase">
             <summary>
             Base model for Country

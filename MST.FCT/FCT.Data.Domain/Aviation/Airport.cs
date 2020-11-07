@@ -28,6 +28,8 @@ namespace FCT.Data.Domain.Aviation
         public int? CountryId { get; set; }
         public Country Country { get; set; }
 
+        public string TimeZone { get; set; }
+
         [InverseProperty("ArrivalAirport")]
         public List<Flight> ArrivalFlights { get; set; }
 

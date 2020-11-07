@@ -72,6 +72,7 @@ namespace MST.FCT.API.FCTApi
             services.AddScoped<IGeoRepository, GeoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStatsRepository, StatsRepository>();
+            services.AddScoped<IFlightRepository, FlightRepository>();
             #endregion Repositories
 
             //UserInfoService

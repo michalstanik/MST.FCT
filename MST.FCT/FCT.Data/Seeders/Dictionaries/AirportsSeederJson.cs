@@ -43,7 +43,8 @@ namespace FCT.Data.Seeders.Dictionaries
                         ICAO = item.Value.icao,
                         Latitude = item.Value.lat,
                         Longitude = item.Value.lon,
-                        Elevation = item.Value.elevation
+                        Elevation = item.Value.elevation,
+                        TimeZone = item.Value.tz
                     };
                     airportsList.Add(airport);
                 }
