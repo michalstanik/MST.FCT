@@ -8,6 +8,7 @@ namespace FCT.Data.Domain.Geo
         public Country()
         {
             Airports = new List<Airport>();
+            Zones = new List<Zone>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -23,5 +24,6 @@ namespace FCT.Data.Domain.Geo
         public double Longitude { get; set; }
 
         public List<Airport> Airports { get; }
+        public List<Zone> Zones { get; set; }
     }
 }

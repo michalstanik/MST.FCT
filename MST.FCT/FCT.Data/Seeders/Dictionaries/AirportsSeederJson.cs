@@ -1,4 +1,5 @@
 ﻿using FCT.Data.Domain.Aviation;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,10 @@ namespace FCT.Data.Seeders.Dictionaries
 {
     public static class AirportsSeederJson
     {
-        public static void SeedAirports(FCTContext _context)
+        public static void SeedAirports(FCTContext _context, ILogger<DictionarySeeder> logger)
         {
+            logger.LogInformation("Start Airports Seeder", DateTime.Now);
+
             if (_context.Airport.Any()) return;
 
             var countriesFilePath = Path.Combine(AppContext.BaseDirectory, "LoadData\\airports.json");
@@ -27,6 +30,7 @@ namespace FCT.Data.Seeders.Dictionaries
                 string json = r.ReadToEnd();
                 var items = JsonConvert.DeserializeObject<Dictionary<string, AirportModel>>(json, settings);
 
+                var zones = _context.Zone.ToList();
                 var airportsList = new List<Airport>();
 
                 foreach (var item in items)
@@ -44,13 +48,15 @@ namespace FCT.Data.Seeders.Dictionaries
                         Latitude = item.Value.lat,
                         Longitude = item.Value.lon,
                         Elevation = item.Value.elevation,
-                        TimeZone = item.Value.tz
+                        TimeZone = item.Value.tz,
+                        Zone = zones.Where(c => c.ZoneName == item.Value.tz).FirstOrDefault()
                     };
                     airportsList.Add(airport);
                 }
                 _context.Airport.AddRange(airportsList);
                 _context.SaveChanges();
             }
+            logger.LogInformation("Finished Airports Seeder", DateTime.Now);
         }
     }
 }

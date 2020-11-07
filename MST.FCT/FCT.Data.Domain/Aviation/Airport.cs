@@ -30,6 +30,13 @@ namespace FCT.Data.Domain.Aviation
 
         public string TimeZone { get; set; }
 
+        /// <summary>
+        /// Navgiation Property to Zone
+        /// </summary>
+        public int? ZoneId { get; set; }
+
+        public Zone Zone { get; set; }
+
         [InverseProperty("ArrivalAirport")]
         public List<Flight> ArrivalFlights { get; set; }
 

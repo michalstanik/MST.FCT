@@ -32,6 +32,8 @@ namespace FCT.Data
         public DbSet<Continent> Continent { get; set; }
         public DbSet<Region> Region { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<Zone> Zone { get; set; }
+        public DbSet<TimeZone> TimeZone { get; set;}
 
         //User
         public DbSet<TUser> TUser { get; set; }

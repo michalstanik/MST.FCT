@@ -4,14 +4,16 @@ using FCT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FCT.Data.Migrations
 {
     [DbContext(typeof(FCTContext))]
-    partial class FCTContextModelSnapshot : ModelSnapshot
+    [Migration("20201107175644_AddZoneEntity")]
+    partial class AddZoneEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,7 +200,7 @@ namespace FCT.Data.Migrations
                     b.Property<string>("TimeZone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ZoneId")
+                    b.Property<int>("ZoneId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -355,35 +357,6 @@ namespace FCT.Data.Migrations
                     b.ToTable("Region");
                 });
 
-            modelBuilder.Entity("FCT.Data.Domain.Geo.TimeZone", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Dst")
-                        .HasColumnType("int");
-
-                    b.Property<long>("GMTOffset")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TimeStart")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("ZoneId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ZoneId");
-
-                    b.ToTable("TimeZone");
-                });
-
             modelBuilder.Entity("FCT.Data.Domain.Geo.Zone", b =>
                 {
                     b.Property<int>("Id")
@@ -395,9 +368,6 @@ namespace FCT.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ZoneId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZoneName")
@@ -487,7 +457,9 @@ namespace FCT.Data.Migrations
 
                     b.HasOne("FCT.Data.Domain.Geo.Zone", "Zone")
                         .WithMany()
-                        .HasForeignKey("ZoneId");
+                        .HasForeignKey("ZoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FCT.Data.Domain.Flights.Flight", b =>
@@ -521,15 +493,6 @@ namespace FCT.Data.Migrations
                     b.HasOne("FCT.Data.Domain.Geo.Continent", "Continent")
                         .WithMany("Regions")
                         .HasForeignKey("ContinentId");
-                });
-
-            modelBuilder.Entity("FCT.Data.Domain.Geo.TimeZone", b =>
-                {
-                    b.HasOne("FCT.Data.Domain.Geo.Zone", "Zone")
-                        .WithMany("TimeZones")
-                        .HasForeignKey("ZoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("FCT.Data.Domain.Geo.Zone", b =>

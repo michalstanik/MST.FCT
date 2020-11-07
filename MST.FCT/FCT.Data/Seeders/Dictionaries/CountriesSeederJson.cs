@@ -1,4 +1,5 @@
 ﻿using FCT.Data.Domain.Geo;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,10 @@ namespace FCT.Data.Seeders.Dictionaries
 {
     public static class CountriesSeederJson
     {
-        public static void SeedCountries(FCTContext _context)
+        public static void SeedCountries(FCTContext _context, ILogger<DictionarySeeder> logger)
         {
+            logger.LogInformation("Start Countries Seeder", DateTime.Now);
+
             if (_context.Country.Any()) return;
 
             var countriesFilePath = Path.Combine(AppContext.BaseDirectory, "LoadData\\countries.json");
@@ -69,10 +72,10 @@ namespace FCT.Data.Seeders.Dictionaries
                         Longitude = item.latlng.LastOrDefault()
                     };
                     _context.Add(newCountry);
-                    _context.SaveChanges();
+                    _context.SaveChanges();                   
                 }
             }
-
+            logger.LogInformation("Finished Countries Seeder", DateTime.Now);
         }
     }
 }
