@@ -13,7 +13,7 @@ namespace FCT.Data.Seeders.Dictionaries
     {
         public static void SeedAirports(FCTContext _context, ILogger<DictionarySeeder> logger)
         {
-            logger.LogInformation("Start Airports Seeder", DateTime.Now);
+            logger.LogInformation("DB Seeder: Airports", DateTime.Now);
 
             if (_context.Airport.Any()) return;
 
@@ -56,7 +56,6 @@ namespace FCT.Data.Seeders.Dictionaries
                 _context.Airport.AddRange(airportsList);
                 _context.SaveChanges();
             }
-            logger.LogInformation("Finished Airports Seeder", DateTime.Now);
         }
     }
 }

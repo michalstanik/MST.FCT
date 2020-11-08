@@ -36,6 +36,8 @@ namespace FCT.Data.Seeders
             _createdCountries = _context.Country.ToList();
             _createdAirports = _context.Airport.ToList();
 
+            _logger.LogInformation("DB Seeder: START");
+
             //Created in DataSeeder
             _logger.LogInformation("DB Seeder: Users");
             _createdUsers = CreateUsers();
@@ -57,6 +59,8 @@ namespace FCT.Data.Seeders
             
             _logger.LogInformation("DB Seeder: Fligts");
             _createdFlights = CreateFlights();
+
+            _logger.LogInformation("DB Seeder: END");
         }
 
         private List<Flight> CreateFlights()

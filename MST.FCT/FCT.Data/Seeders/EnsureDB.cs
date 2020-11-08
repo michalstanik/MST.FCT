@@ -19,6 +19,11 @@ namespace FCT.Data.Seeders
         public void EnsureMigrated()
         {
             _logger.LogInformation("Migrate Database started");
+            var migrations = _context.Database.GetAppliedMigrations();
+            foreach (var item in migrations)
+            {
+                _logger.LogInformation($"Applying Migration: {item}");
+            }
             _context.Database.Migrate();
         }
 
