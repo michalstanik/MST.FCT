@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
@@ -7,23 +8,33 @@ namespace FCT.Data.Seeders
     public class EnsureDB
     {
         private readonly FCTContext _context;
+        private readonly ILogger<EnsureDB> _logger;
 
-        public EnsureDB(FCTContext context) => _context = context;
+        public EnsureDB(FCTContext context, ILogger<EnsureDB> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
 
         public void EnsureMigrated()
         {
+            _logger.LogInformation("Migrate Database started");
             _context.Database.Migrate();
         }
 
         public void EnsureDeletedAndRecreated()
         {
+            _logger.LogInformation("DROP Database started");
             _context.Database.EnsureDeleted();
+            _logger.LogInformation("Migrate Database started");
             _context.Database.Migrate();
         }
 
         public void EnsureCreatedAndMigrated()
         {
+            _logger.LogInformation("Database creation started");
             _context.Database.EnsureCreated();
+            _logger.LogInformation("Migrate Database started");
             _context.Database.Migrate();
         }
         public void RemoveLogsOlderThan(double hours)

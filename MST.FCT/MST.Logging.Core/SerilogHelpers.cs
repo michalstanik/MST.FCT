@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Filters;
 using Serilog.Sinks.MSSqlServer;
+using Serilog.Sinks.SystemConsole.Themes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,9 @@ namespace MST.Flogging.Core
            .WriteTo.Logger(lc => lc
                  .Filter.ByExcluding(Matching.WithProperty("ElapsedMilliseconds"))
                  .Filter.ByExcluding(Matching.WithProperty("UsageName"))
+                .WriteTo.Console(
+                        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}",
+                        theme: AnsiConsoleTheme.Code)
                  .WriteTo.MSSqlServer(
                      connectionString: connectionString,
                      tableName: "Log",

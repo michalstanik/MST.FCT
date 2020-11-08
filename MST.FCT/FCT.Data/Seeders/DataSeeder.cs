@@ -2,6 +2,7 @@
 using FCT.Data.Domain.Flights;
 using FCT.Data.Domain.Geo;
 using FCT.Data.Domain.User;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace FCT.Data.Seeders
     public class DataSeeder
     {
         private readonly FCTContext _context;
-
+        private readonly ILogger<DataSeeder> _logger;
         private List<AircraftModel> _createdAircraftModels;
         private List<AircraftFactory> _createdAircraftFactories;
         private List<Country> _createdCountries;
@@ -22,9 +23,10 @@ namespace FCT.Data.Seeders
         private List<Flight> _createdFlights;
         private List<TUser> _createdUsers;
 
-        public DataSeeder(FCTContext context)
+        public DataSeeder(FCTContext context, ILogger<DataSeeder> logger)
         {
             _context = context;
+            _logger = logger;
         }
         public void Seed()
         {
@@ -35,12 +37,19 @@ namespace FCT.Data.Seeders
             _createdAirports = _context.Airport.ToList();
 
             //Created in DataSeeder
+            _logger.LogInformation("DB Seeder: Users");
             _createdUsers = CreateUsers();
+            _logger.LogInformation("DB Seeder: Airline Alliances");
             _createdAirlineAlliances = CreateAirlineAlliance();
+            _logger.LogInformation("DB Seeder: Airlines");
             _createdAirlines = CreateAirlines();
+            _logger.LogInformation("DB Seeder: Aircraft Factories");
             _createdAircraftFactories = CreateAircraftFactories();
+            _logger.LogInformation("DB Seeder: Aircraft Models");
             _createdAircraftModels = CreateAircraftModel();
+            _logger.LogInformation("DB Seeder: Aircrafts");
             _createdAircrafts = CreateAircrafts();
+            _logger.LogInformation("DB Seeder: Fligts");
             _createdFlights = CreateFlights();
         }
 

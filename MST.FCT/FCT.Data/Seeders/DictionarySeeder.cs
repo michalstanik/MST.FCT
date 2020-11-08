@@ -19,7 +19,8 @@ namespace FCT.Data.Seeders
             _context.Database.Migrate();
 
             CountriesSeederJson.SeedCountries(_context, _logger);
-            TimeZoneSeederCSV.SeedZones(_context, _logger);    
+            TimeZoneSeederCSV.SeedZones(_context, _logger);
+            //TimeZoneSeederCSV.SeedTimeZones(_context, _logger);
             AirportsSeederJson.SeedAirports(_context, _logger);
         }
     }

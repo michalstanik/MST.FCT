@@ -20,6 +20,7 @@ namespace FCT.Data.Domain.Geo
         public int CountryId {get;set;}
         public Country Country { get; set; }
         public string ZoneName { get; set; }
+        public string GenericZoneName { get; set; }
 
         public List<TimeZone> TimeZones { get; set; }
     }

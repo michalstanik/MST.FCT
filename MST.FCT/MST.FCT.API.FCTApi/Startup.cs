@@ -80,7 +80,8 @@ namespace MST.FCT.API.FCTApi
 
             services.AddDbContext<FCTContext>(cfg =>
             {
-                cfg.UseSqlServer(Configuration.GetConnectionString("FCTConnectionString"));
+                cfg.UseSqlServer(Configuration.GetConnectionString("FCTConnectionString"),
+                     sqlServerOptions => sqlServerOptions.CommandTimeout(3600));
             });
 
             services.AddCors(options =>
