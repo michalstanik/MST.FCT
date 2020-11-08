@@ -34,6 +34,7 @@ namespace FCT.Data
         public DbSet<Country> Country { get; set; }
         public DbSet<Zone> Zone { get; set; }
         public DbSet<TimeZone> TimeZone { get; set;}
+        public DbSet<ZoneTimeZone> ZoneTimeZone { get; set; }
 
         //User
         public DbSet<TUser> TUser { get; set; }
@@ -52,6 +53,9 @@ namespace FCT.Data
 
             //UserFLigts
             modelBuilder.Entity<UserFlight>().HasKey(uf => new { uf.FlightId, uf.TUserId });
+
+            //ZoneTimeZone
+            modelBuilder.Entity<ZoneTimeZone>().HasKey(ut => new { ut.ZoneId, ut.TimeZoneId });
         }
     }
 }

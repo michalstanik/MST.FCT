@@ -7,11 +7,10 @@ namespace FCT.Data.Domain.Geo
     {
         public Zone()
         {
-            TimeZones = new List<TimeZone>();
+            TimeZones = new List<ZoneTimeZone>();
         }
 
         public int Id { get; set; }
-        public int ZoneId { get; set; }
         public string CountryCode { get; set; }
 
         /// <summary>
@@ -22,6 +21,6 @@ namespace FCT.Data.Domain.Geo
         public string ZoneName { get; set; }
         public string GenericZoneName { get; set; }
 
-        public List<TimeZone> TimeZones { get; set; }
+        public List<ZoneTimeZone> TimeZones { get; set; }
     }
 }

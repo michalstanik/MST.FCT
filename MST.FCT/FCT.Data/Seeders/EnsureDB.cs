@@ -26,13 +26,13 @@ namespace FCT.Data.Seeders
         {
             _logger.LogInformation("DROP Database started");
             _context.Database.EnsureDeleted();
-            _logger.LogInformation("Migrate Database started");
+            _logger.LogInformation("CREATE Database started");
             _context.Database.Migrate();
         }
 
         public void EnsureCreatedAndMigrated()
         {
-            _logger.LogInformation("Database creation started");
+            _logger.LogInformation("CREATE Database started");
             _context.Database.EnsureCreated();
             _logger.LogInformation("Migrate Database started");
             _context.Database.Migrate();

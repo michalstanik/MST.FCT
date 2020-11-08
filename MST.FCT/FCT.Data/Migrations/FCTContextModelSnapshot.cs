@@ -365,21 +365,19 @@ namespace FCT.Data.Migrations
                     b.Property<string>("Abbreviation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Dst")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("GMTOffset")
+                    b.Property<bool>("IsDst")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Offset")
                         .HasColumnType("bigint");
-
-                    b.Property<long>("TimeStart")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("ZoneId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ZoneId");
 
                     b.ToTable("TimeZone");
                 });
@@ -400,9 +398,6 @@ namespace FCT.Data.Migrations
                     b.Property<string>("GenericZoneName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ZoneId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ZoneName")
                         .HasColumnType("nvarchar(max)");
 
@@ -411,6 +406,21 @@ namespace FCT.Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Zone");
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Geo.ZoneTimeZone", b =>
+                {
+                    b.Property<int>("ZoneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimeZoneId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ZoneId", "TimeZoneId");
+
+                    b.HasIndex("TimeZoneId");
+
+                    b.ToTable("ZoneTimeZone");
                 });
 
             modelBuilder.Entity("FCT.Data.Domain.User.TUser", b =>
@@ -526,20 +536,26 @@ namespace FCT.Data.Migrations
                         .HasForeignKey("ContinentId");
                 });
 
-            modelBuilder.Entity("FCT.Data.Domain.Geo.TimeZone", b =>
-                {
-                    b.HasOne("FCT.Data.Domain.Geo.Zone", "Zone")
-                        .WithMany("TimeZones")
-                        .HasForeignKey("ZoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FCT.Data.Domain.Geo.Zone", b =>
                 {
                     b.HasOne("FCT.Data.Domain.Geo.Country", "Country")
                         .WithMany("Zones")
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FCT.Data.Domain.Geo.ZoneTimeZone", b =>
+                {
+                    b.HasOne("FCT.Data.Domain.Geo.TimeZone", "TimeZone")
+                        .WithMany("Zones")
+                        .HasForeignKey("TimeZoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FCT.Data.Domain.Geo.Zone", "Zone")
+                        .WithMany("TimeZones")
+                        .HasForeignKey("ZoneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

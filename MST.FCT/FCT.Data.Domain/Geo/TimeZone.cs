@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FCT.Data.Domain.Geo
 {
     public class TimeZone
     {
-        public int Id { get; set; }
-        public string Abbreviation { get; set; }
-        public long TimeStart { get; set; }
-        public long GMTOffset { get; set; }
-        public int Dst { get; set; }
+        public TimeZone()
+        {
+            Zones = new List<ZoneTimeZone>();
+        }
 
-        /// <summary>
-        /// Navigation properties to Zone
-        /// </summary>
-        public int ZoneId { get; set; }
-        public Zone Zone { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Abbreviation { get; set; }
+        public long Offset { get; set; }
+        public bool IsDst { get; set; }
+        public string  Description { get; set; }
+
+        public List<ZoneTimeZone> Zones { get; set; }
     }
 }

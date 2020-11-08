@@ -1,18 +1,16 @@
-﻿using CsvHelper.Configuration.Attributes;
+﻿using System.Collections.Generic;
 
 namespace FCT.Data.Seeders.Models
 {
     public class TimeZoneModel
     {
-        [Index(0)]
-        public int Id { get; set; }
-        [Index(1)]
-        public string Abbreviation { get; set; }
-        [Index(2)]
-        public long TimeStart { get; set; }
-        [Index(3)]
-        public long GMTOffset { get; set; }
-        [Index(4)]
-        public int Dst { get; set; }
+#pragma warning disable IDE1006 // Naming Styles
+        public string value { get; set; }
+        public string abbr { get; set; }
+        public long offset { get; set; }
+        public bool isdst { get; set; }
+        public string text { get; set; }
+        public List<string> utc { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
     }
 }

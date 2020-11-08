@@ -13,7 +13,7 @@ namespace FCT.Data.Seeders.Dictionaries
     {
         public static void SeedCountries(FCTContext _context, ILogger<DictionarySeeder> logger)
         {
-            logger.LogInformation("Start Countries Seeder", DateTime.Now);
+            logger.LogInformation("DB Seeder: Countries", DateTime.Now);
 
             if (_context.Country.Any()) return;
 
@@ -75,7 +75,6 @@ namespace FCT.Data.Seeders.Dictionaries
                     _context.SaveChanges();                   
                 }
             }
-            logger.LogInformation("Finished Countries Seeder", DateTime.Now);
         }
     }
 }

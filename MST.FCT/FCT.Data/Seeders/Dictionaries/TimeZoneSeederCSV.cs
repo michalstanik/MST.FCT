@@ -2,6 +2,7 @@
 using FCT.Data.Domain.Geo;
 using FCT.Data.Seeders.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,7 +17,7 @@ namespace FCT.Data.Seeders.Dictionaries
 
         public static void SeedZones(FCTContext _context, ILogger<DictionarySeeder> logger)
         {
-            logger.LogInformation("Start Zone Seeder", DateTime.Now);
+            logger.LogInformation("DB Seeder: Zones", DateTime.Now);
 
             if (_context.Zone.Any()) return;
 
@@ -36,56 +37,68 @@ namespace FCT.Data.Seeders.Dictionaries
                 {
                     zoneList.Add(new Zone()
                     {
-                        ZoneId = record.Id,
                         CountryCode = record.CountryCode,
                         ZoneName = record.ZoneName,
                         GenericZoneName = TZNames.GetNamesForTimeZone(record.ZoneName, "en-US").Generic,
-                        Country = _createdCountries.Where(c => c.Alpha2Code == record.CountryCode).FirstOrDefault() 
+                        Country = _createdCountries.Where(c => c.Alpha2Code == record.CountryCode).FirstOrDefault()
                     });
                 }
 
                 _context.AddRange(zoneList);
                 _context.SaveChanges();
             }
-
-            logger.LogInformation("Finished Zone Seeder", DateTime.Now);
         }
 
         public static void SeedTimeZones(FCTContext _context, ILogger<DictionarySeeder> logger)
         {
-            logger.LogInformation("Start TimeZone Seeder", DateTime.Now);
+            logger.LogInformation("DB Seeder: TimeZones", DateTime.Now);
 
             if (_context.TimeZone.Any()) return;
 
-            var zonesFilePath = Path.Combine(AppContext.BaseDirectory, "LoadData\\timezone.csv");
+            var zones = _context.Zone.ToList();
 
-            var _createdZones = _context.Zone.ToList();
-            var zoneList = new List<Domain.Geo.TimeZone>();
+            var timeZonesFilePath = Path.Combine(AppContext.BaseDirectory, "LoadData\\timezones.json");
 
-
-            using (var reader = new StreamReader(zonesFilePath))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            using (StreamReader r = new StreamReader(timeZonesFilePath))
             {
-                csv.Configuration.HasHeaderRecord = false;
-                var records = csv.GetRecords<TimeZoneModel>();
-
-                foreach (var record in records)
+                var settings = new JsonSerializerSettings
                 {
-                    zoneList.Add(new Domain.Geo.TimeZone()
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
+
+                string json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<TimeZoneModel>>(json, settings);
+
+                var timeZones = new List<Domain.Geo.TimeZone>();
+                var zoneTimeZones = new List<ZoneTimeZone>();
+
+                foreach (var item in items)
+                {
+                    var timeZone = new Domain.Geo.TimeZone()
                     {
-                        ZoneId = _createdZones.Where(c => c.ZoneId == record.Id).Select(i => i.Id).FirstOrDefault(),
-                        Abbreviation = record.Abbreviation,
-                        TimeStart = record.TimeStart,
-                        GMTOffset = record.GMTOffset,
-                        Dst = record.Dst
-                    });
+                        Name = item.value,
+                        Abbreviation = item.abbr,
+                        IsDst = item.isdst,
+                        Description = item.text,
+                        Offset = item.offset
+                    };
+
+                    foreach (var ztz in item.utc)
+                    {
+                        var zone = zones.Where(z => z.ZoneName == ztz).FirstOrDefault();
+                        if (zone != null)
+                        {
+                            timeZone.Zones.Add(new ZoneTimeZone() { TimeZone = timeZone, Zone = zone });
+                        }
+                    }
+
+                    timeZones.Add(timeZone);
                 }
-
-                _context.AddRange(zoneList);
+                _context.TimeZone.AddRange(timeZones);
                 _context.SaveChanges();
-            }
 
-            logger.LogInformation("Finished TimeZone Seeder", DateTime.Now);
+            }
         }
     }
 }
