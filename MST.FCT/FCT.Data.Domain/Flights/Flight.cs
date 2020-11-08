@@ -42,11 +42,18 @@ namespace FCT.Data.Domain.Flights
         public Airline Airline { get; set; }
 
         public FlightType FlightTypeAssessment { get; set; }
+        public FlightPurpose FlightPurposeAssessment { get; set; }
 
         public enum FlightType
         {
             Charter,
             Scheduled
+        }
+
+        public enum FlightPurpose
+        {
+            Business, 
+            Private
         }
 
         public List<UserFlight> UserFlights { get; set; }

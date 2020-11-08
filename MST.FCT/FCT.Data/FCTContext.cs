@@ -50,6 +50,7 @@ namespace FCT.Data
         {
             //Flight
             modelBuilder.Entity<Flight>().Property(f => f.FlightTypeAssessment).HasConversion<string>();
+            modelBuilder.Entity<Flight>().Property(f => f.FlightPurposeAssessment).HasConversion<string>();
 
             //UserFLigts
             modelBuilder.Entity<UserFlight>().HasKey(uf => new { uf.FlightId, uf.TUserId });

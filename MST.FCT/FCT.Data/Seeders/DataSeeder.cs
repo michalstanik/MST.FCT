@@ -39,16 +39,22 @@ namespace FCT.Data.Seeders
             //Created in DataSeeder
             _logger.LogInformation("DB Seeder: Users");
             _createdUsers = CreateUsers();
+            
             _logger.LogInformation("DB Seeder: Airline Alliances");
             _createdAirlineAlliances = CreateAirlineAlliance();
+            
             _logger.LogInformation("DB Seeder: Airlines");
             _createdAirlines = CreateAirlines();
+            
             _logger.LogInformation("DB Seeder: Aircraft Factories");
             _createdAircraftFactories = CreateAircraftFactories();
+            
             _logger.LogInformation("DB Seeder: Aircraft Models");
             _createdAircraftModels = CreateAircraftModel();
+            
             _logger.LogInformation("DB Seeder: Aircrafts");
             _createdAircrafts = CreateAircrafts();
+            
             _logger.LogInformation("DB Seeder: Fligts");
             _createdFlights = CreateFlights();
         }
@@ -70,6 +76,7 @@ namespace FCT.Data.Seeders
                     ScheduleArrivialDate = new DateTime(2015,8,29,6,0,0),
                     Distance = 1775,
                     FlightTypeAssessment = Flight.FlightType.Charter,
+                    FlightPurposeAssessment = Flight.FlightPurpose.Private,
                     UserFlights = new List<UserFlight>()
                     {
                         new UserFlight() { TUser = GetUser("Michal") }
@@ -88,6 +95,26 @@ namespace FCT.Data.Seeders
                     ScheduleArrivialDate = new DateTime(2015,9,05,12,0,0),
                     Distance = 1775,
                     FlightTypeAssessment = Flight.FlightType.Charter,
+                    FlightPurposeAssessment = Flight.FlightPurpose.Private,
+                    UserFlights = new List<UserFlight>()
+                    {
+                        new UserFlight() { TUser = GetUser("Michal") }
+                    }
+                },
+                new Flight()
+                {
+                    FlightNumber = "W6 1441",
+                    Aircraft = null,
+                    Airline = GetAirline("WZZ"),
+                    DepartureAirport = GetAirport("WAW"),
+                    DepartureDate = new DateTime(2016,9,22,12,20,0),
+                    ScheduleDepartureDate = new DateTime(2016,9,22,12,20,0),
+                    ArrivalAirport = GetAirport("FCO"),
+                    ArrivialDate = new DateTime(2016,9,22,14,45,0),
+                    ScheduleArrivialDate = new DateTime(2016,9,22,14,45,0),
+                    Distance = 1327,
+                    FlightTypeAssessment = Flight.FlightType.Scheduled,
+                    FlightPurposeAssessment = Flight.FlightPurpose.Private,
                     UserFlights = new List<UserFlight>()
                     {
                         new UserFlight() { TUser = GetUser("Michal") }
