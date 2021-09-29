@@ -47,7 +47,7 @@
     "core-js": "~3.6.4",
     "cropper": "~4.1.0",
     "custom-event-polyfill": "^1.0.7",
-    "datatables.net": "~1.10.16",
+    "datatables.net": "~1.11.3",
     "datatables.net-bs4": "~1.10.16",
     "dragula": "~3.7.2",
     "dropzone": "~5.7.0",
